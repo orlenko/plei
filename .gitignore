@@ -1,4 +1,19 @@
+<<<<<<< HEAD
 *.log
 *.pot
 *.pyc
 local_settings.py
+=======
+*.pyc
+*.pyo
+*.db
+.DS_Store
+.coverage
+.idea/
+local_settings.py
+Mezzanine.egg-info/
+build/
+docs/build/
+dist/
+mezzanine/project_template/static/
+>>>>>>> 3415151a889ecc1ba14f0da26cb040f9621e3ed6
