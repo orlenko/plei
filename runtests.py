@@ -4,11 +4,11 @@ def runtests():
     import os, sys, shutil, atexit
     from mezzanine.utils.importing import path_for_import
 
-    os.environ["DJANGO_SETTINGS_MODULE"] = "project_template.settings"
-    mezz_path = path_for_import("mezzanine")
-    sys.path.insert(0, mezz_path)
+    os.environ["DJANGO_SETTINGS_MODULE"] = "pleiapp.settings"
+    parent_path = path_for_import(".")
+    sys.path.insert(0, parent_path)
 
-    project_path = os.path.join(mezz_path, "project_template")
+    project_path = os.path.join(parent_path, "pleiapp")
     local_settings_path = os.path.join(project_path, "local_settings.py")
     if not os.path.exists(local_settings_path):
         shutil.copy(local_settings_path + ".template", local_settings_path)
