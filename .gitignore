@@ -1,6 +1,7 @@
 *.pyc
 *.pyo
 *.db
+*.pcl
 .DS_Store
 .coverage
 .idea/
