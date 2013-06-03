@@ -62,26 +62,31 @@ env.locale = conf.get("LOCALE", "en_US.UTF-8")
 # also run.
 
 templates = {
-    "nginx": {
-        "local_path": "deploy/nginx.conf",
-        "remote_path": "/etc/nginx/sites-enabled/%(proj_name)s.conf",
-        "reload_command": "service nginx restart",
+#     "nginx": {
+#         "local_path": "deploy/nginx.conf",
+#         "remote_path": "/etc/nginx/sites-enabled/%(proj_name)s.conf",
+#         "reload_command": "service nginx restart",
+#     },
+    "apache": {
+        "local_path": "deploy/apache.conf",
+        "remote_path": "/etc/apache2/sites-enabled/%(proj_name)s",
+        "reload_command": "service apache2 restart",
     },
-    "supervisor": {
-        "local_path": "deploy/supervisor.conf",
-        "remote_path": "/etc/supervisor/conf.d/%(proj_name)s.conf",
-        "reload_command": "supervisorctl reload",
-    },
-    "cron": {
-        "local_path": "deploy/crontab",
-        "remote_path": "/etc/cron.d/%(proj_name)s",
-        "owner": "root",
-        "mode": "600",
-    },
-    "gunicorn": {
-        "local_path": "deploy/gunicorn.conf.py",
-        "remote_path": "%(proj_path)s/gunicorn.conf.py",
-    },
+#     "supervisor": {
+#         "local_path": "deploy/supervisor.conf",
+#         "remote_path": "/etc/supervisor/conf.d/%(proj_name)s.conf",
+#         "reload_command": "supervisorctl reload",
+#     },
+#     "cron": {
+#         "local_path": "deploy/crontab",
+#         "remote_path": "/etc/cron.d/%(proj_name)s",
+#         "owner": "root",
+#         "mode": "600",
+#     },
+#     "gunicorn": {
+#         "local_path": "deploy/gunicorn.conf.py",
+#         "remote_path": "%(proj_path)s/gunicorn.conf.py",
+#     },
     "settings": {
         "local_path": "deploy/live_settings.py",
         "remote_path": "%(proj_path)s/local_settings.py",
@@ -259,20 +264,39 @@ def pip(packages):
         return sudo("pip install %s" % packages)
 
 
-def postgres(command):
-    """
-    Runs the given command as the postgres user.
-    """
-    show = not command.startswith("psql")
-    return run("sudo -u root sudo -u postgres %s" % command, show=show)
+# def postgres(command):
+#     """
+#     Runs the given command as the postgres user.
+#     """
+#     show = not command.startswith("psql")
+#     return run("sudo -u root sudo -u postgres %s" % command, show=show)
 
+
+def mysql(command):
+    """
+    Runs the given command as the mysql user.
+    """
+    show = not command.startswith("mysql")
+    return run("sudo -u root %s" % command, show=show)
+
+#
+# @task
+# def psql(sql, show=True):
+#     """
+#     Runs SQL against the project's database.
+#     """
+#     out = postgres('psql -c "%s"' % sql)
+#     if show:
+#         print_command(sql)
+#     return out
 
 @task
-def psql(sql, show=True):
+def run_sql(sql, show=True):
     """
     Runs SQL against the project's database.
     """
-    out = postgres('psql -c "%s"' % sql)
+    out = mysql("mysql -u %s -p%s -e '%s' %s"
+        % (env.proj_name, env.db_pass, sql, env.proj_name))
     if show:
         print_command(sql)
     return out
@@ -283,7 +307,8 @@ def backup(filename):
     """
     Backs up the database.
     """
-    return postgres("pg_dump -Fc %s > %s" % (env.proj_name, filename))
+    return mysql("mysqldump -u %s -p%s %s | gzip > %s"
+        % (env.proj_name, env.db_pass, env.proj_name, filename))
 
 
 @task
@@ -291,7 +316,7 @@ def restore(filename):
     """
     Restores the database.
     """
-    return postgres("pg_restore -c -d %s %s" % (env.proj_name, filename))
+    return mysql("mysql -u %s -p%s <" % (env.proj_name, env.db_pass, filename))
 
 
 @task
@@ -340,8 +365,8 @@ def install():
             sudo("update-locale %s" % locale)
             run("exit")
     sudo("apt-get update -y -q")
-    apt("nginx libjpeg-dev python-dev python-setuptools git-core "
-        "postgresql libpq-dev memcached supervisor")
+    apt("mysql-server libjpeg-dev python-dev python-setuptools git-core git "
+        "memcached")
     sudo("easy_install pip")
     sudo("pip install virtualenv mercurial")
 
@@ -370,34 +395,36 @@ def create():
         run("%s clone %s %s" % (vcs, env.repo_url, env.proj_path))
 
     # Create DB and DB user.
-    pw = db_pass()
-    user_sql_args = (env.proj_name, pw.replace("'", "\'"))
-    user_sql = "CREATE USER %s WITH ENCRYPTED PASSWORD '%s';" % user_sql_args
-    psql(user_sql, show=False)
-    shadowed = "*" * len(pw)
-    print_command(user_sql.replace("'%s'" % pw, "'%s'" % shadowed))
-    psql("CREATE DATABASE %s WITH OWNER %s ENCODING = 'UTF8' "
-         "LC_CTYPE = '%s' LC_COLLATE = '%s' TEMPLATE template0;" %
-         (env.proj_name, env.proj_name, env.locale, env.locale))
+    #pw = db_pass()
+    #try:
+    #    mysql("mysql -u %s -p%s -e 'CREATE DATABASE %s'"
+    #          % (env.proj_name, env.db_pass, env.proj_name))
+    #except:
+    #    pass
+    #user_sql = "GRANT USAGE ON *.* TO %s@localhost IDENTIFIED BY \'%s\'" % (env.proj_name, env.db_pass)
+    #run_sql(user_sql, show=False)
+    #print_command(user_sql.replace(env.db_pass, '********'))
+    #run_sql("GRANT ALL PRIVILEGES ON %s.* TO %s@localhost" % (env.proj_name, env.proj_name),
+    #        show=True)
 
     # Set up SSL certificate.
-    conf_path = "/etc/nginx/conf"
-    if not exists(conf_path):
-        sudo("mkdir %s" % conf_path)
-    with cd(conf_path):
-        crt_file = env.proj_name + ".crt"
-        key_file = env.proj_name + ".key"
-        if not exists(crt_file) and not exists(key_file):
-            try:
-                crt_local, = glob(join("deploy", "*.crt"))
-                key_local, = glob(join("deploy", "*.key"))
-            except ValueError:
-                parts = (crt_file, key_file, env.live_host)
-                sudo("openssl req -new -x509 -nodes -out %s -keyout %s "
-                     "-subj '/CN=%s' -days 3650" % parts)
-            else:
-                upload_template(crt_local, crt_file, use_sudo=True)
-                upload_template(key_local, key_file, use_sudo=True)
+#     conf_path = "/etc/nginx/conf"
+#     if not exists(conf_path):
+#         sudo("mkdir %s" % conf_path)
+#     with cd(conf_path):
+#         crt_file = env.proj_name + ".crt"
+#         key_file = env.proj_name + ".key"
+#         if not exists(crt_file) and not exists(key_file):
+#             try:
+#                 crt_local, = glob(join("deploy", "*.crt"))
+#                 key_local, = glob(join("deploy", "*.key"))
+#             except ValueError:
+#                 parts = (crt_file, key_file, env.live_host)
+#                 sudo("openssl req -new -x509 -nodes -out %s -keyout %s "
+#                      "-subj '/CN=%s' -days 3650" % parts)
+#             else:
+#                 upload_template(crt_local, crt_file, use_sudo=True)
+#                 upload_template(key_local, key_file, use_sudo=True)
 
     # Set up project.
     upload_template_and_reload("settings")
@@ -439,8 +466,11 @@ def remove():
         remote_path = template["remote_path"]
         if exists(remote_path):
             sudo("rm %s" % remote_path)
-    psql("DROP DATABASE %s;" % env.proj_name)
-    psql("DROP USER %s;" % env.proj_name)
+    #try:
+        #run_sql("DROP DATABASE %s;" % env.proj_name)
+        #run_sql("DROP USER %s@localhost;" % env.proj_name)
+    #except:
+    #    pass
 
 
 ##############
