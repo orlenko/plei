@@ -2,7 +2,7 @@
 DATABASES = {
     "default": {
         # Ends with "postgresql_psycopg2", "mysql", "sqlite3" or "oracle".
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "ENGINE": "django.db.backends.mysql",
         # DB name or path to database file if using sqlite3.
         "NAME": "%(proj_name)s",
         # Not used with sqlite3.
