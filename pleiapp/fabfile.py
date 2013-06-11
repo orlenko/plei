@@ -12,6 +12,7 @@ from fabric.contrib.files import exists, upload_template
 from fabric.colors import yellow, green, blue, red
 
 
+print 'wat'
 ################
 # Config setup #
 ################
@@ -545,6 +546,13 @@ def rollback():
             run("tar -xf %s" % join(env.proj_path, "last.tar"))
         restore("last.db")
     restart()
+
+
+@task
+@log_call
+def test_connection():
+    '''Tests connection to the deployment servers'''
+    sudo('pwd')
 
 
 @task

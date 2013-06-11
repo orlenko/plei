@@ -14,7 +14,7 @@ class Migration(SchemaMigration):
             ('value', self.gf('django.db.models.fields.CharField')(max_length=2000)),
             ('name', self.gf('django.db.models.fields.CharField')(max_length=50)),
         ))
-        db.send_create_signal('conf', ['Setting'])
+	db.send_create_signal('conf', ['Setting'])
 
 
     def backwards(self, orm):

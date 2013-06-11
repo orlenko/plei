@@ -236,8 +236,9 @@ INSTALLED_APPS = (
     "mezzanine.pages",
     "mezzanine.galleries",
     "mezzanine.twitter",
-    #"mezzanine.accounts",
-    #"mezzanine.mobile",
+    "mezzanine.accounts",
+    "mezzanine.mobile",
+    "pleiapp",
 )
 
 # List of processors used by RequestContext to populate the context.
@@ -319,6 +320,10 @@ DEBUG_TOOLBAR_CONFIG = {"INTERCEPT_REDIRECTS": False}
 #     "DB_PASS": "", # Live database password
 #     "ADMIN_PASS": "", # Live admin user password
 # }
+
+
+ALLOWED_HOSTS = ['*']
+FILEBROWSER_MAX_UPLOAD_SIZE = 1024 * 1024 * 1024 * 10
 
 
 ##################
