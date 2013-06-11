@@ -23,7 +23,7 @@ class Category(models.Model):
     name = models.CharField(_('Name'), max_length=255)
 
 
-class ContentTypeResource(Page, RichText, Ownable):
+class Resource(Page, RichText, Ownable):
     '''Resource content type.
 
     Inherited fields:
