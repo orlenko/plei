@@ -1,6 +1,6 @@
 from django.contrib import admin
 from mezzanine.pages.admin import PageAdmin
 
-from .models import ContentTypeResource
+from .models import Resource
 
-admin.site.register(ContentTypeResource, PageAdmin)
+admin.site.register(Resource, PageAdmin)
