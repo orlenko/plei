@@ -1,0 +1,24 @@
+
+
+.resources {
+	display: block;
+	border: 1px solid rgba(0,0,0,0.2);
+	padding: 5px;
+	margin: 5px;
+	box-shadow: rgba(0,0,0,0.2) 0 2px 6px;
+	border-radius: 2px;
+}
+
+.resources .resource {
+	display: block;
+	float:left;
+	height: 300px;
+	width: 200px;
+	overflow: hidden;
+	border: 1px solid rgba(0,0,0,0.2);
+	padding: 5px;
+	margin: 5px;
+	box-shadow: rgba(0,0,0,0.2) 0 2px 6px;
+	border-radius: 2px;
+}
+

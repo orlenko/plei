@@ -234,10 +234,10 @@ INSTALLED_APPS = (
     "mezzanine.blog",
     "mezzanine.forms",
     "mezzanine.pages",
-    "mezzanine.galleries",
-    "mezzanine.twitter",
+    #"mezzanine.galleries",
+    #"mezzanine.twitter",
     "mezzanine.accounts",
-    "mezzanine.mobile",
+    #"mezzanine.mobile",
     "pleiapp",
 )
 
