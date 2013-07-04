@@ -8,52 +8,27 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Adding model 'Topic'
-        db.create_table(u'pleiapp_topic', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=255)),
-        ))
-        db.send_create_signal(u'pleiapp', ['Topic'])
-
-        # Adding model 'Type'
-        db.create_table(u'pleiapp_type', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=255)),
-        ))
-        db.send_create_signal(u'pleiapp', ['Type'])
-
-        # Adding model 'Category'
-        db.create_table(u'pleiapp_category', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=255)),
-        ))
-        db.send_create_signal(u'pleiapp', ['Category'])
-
         # Adding model 'Resource'
         db.create_table(u'pleiapp_resource', (
-            (u'page_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['pages.Page'], unique=True, primary_key=True)),
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('keywords_string', self.gf('django.db.models.fields.CharField')(max_length=500, blank=True)),
+            ('site', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['sites.Site'])),
+            ('title', self.gf('django.db.models.fields.CharField')(max_length=500)),
+            ('slug', self.gf('django.db.models.fields.CharField')(max_length=2000, null=True, blank=True)),
+            ('_meta_title', self.gf('django.db.models.fields.CharField')(max_length=500, null=True, blank=True)),
+            ('description', self.gf('django.db.models.fields.TextField')(blank=True)),
+            ('gen_description', self.gf('django.db.models.fields.BooleanField')(default=True)),
+            ('status', self.gf('django.db.models.fields.IntegerField')(default=2)),
+            ('publish_date', self.gf('django.db.models.fields.DateTimeField')(null=True, blank=True)),
+            ('expiry_date', self.gf('django.db.models.fields.DateTimeField')(null=True, blank=True)),
+            ('short_url', self.gf('django.db.models.fields.URLField')(max_length=200, null=True, blank=True)),
+            ('in_sitemap', self.gf('django.db.models.fields.BooleanField')(default=True)),
             ('content', self.gf('mezzanine.core.fields.RichTextField')()),
             ('user', self.gf('django.db.models.fields.related.ForeignKey')(related_name='resources', to=orm['auth.User'])),
+            ('featured_image', self.gf('mezzanine.core.fields.FileField')(max_length=255, null=True, blank=True)),
+            ('keywords', self.gf('mezzanine.generic.fields.KeywordsField')(object_id_field='object_pk', to=orm['generic.AssignedKeyword'], frozen_by_south=True)),
         ))
         db.send_create_signal(u'pleiapp', ['Resource'])
-
-        # Adding M2M table for field types on 'Resource'
-        m2m_table_name = db.shorten_name(u'pleiapp_resource_types')
-        db.create_table(m2m_table_name, (
-            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('resource', models.ForeignKey(orm[u'pleiapp.resource'], null=False)),
-            ('type', models.ForeignKey(orm[u'pleiapp.type'], null=False))
-        ))
-        db.create_unique(m2m_table_name, ['resource_id', 'type_id'])
-
-        # Adding M2M table for field topics on 'Resource'
-        m2m_table_name = db.shorten_name(u'pleiapp_resource_topics')
-        db.create_table(m2m_table_name, (
-            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('resource', models.ForeignKey(orm[u'pleiapp.resource'], null=False)),
-            ('topic', models.ForeignKey(orm[u'pleiapp.topic'], null=False))
-        ))
-        db.create_unique(m2m_table_name, ['resource_id', 'topic_id'])
 
         # Adding M2M table for field categories on 'Resource'
         m2m_table_name = db.shorten_name(u'pleiapp_resource_categories')
@@ -64,28 +39,85 @@ class Migration(SchemaMigration):
         ))
         db.create_unique(m2m_table_name, ['resource_id', 'category_id'])
 
+        # Adding M2M table for field topics on 'Resource'
+        m2m_table_name = db.shorten_name(u'pleiapp_resource_topics')
+        db.create_table(m2m_table_name, (
+            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
+            ('resource', models.ForeignKey(orm[u'pleiapp.resource'], null=False)),
+            ('topic', models.ForeignKey(orm[u'pleiapp.topic'], null=False))
+        ))
+        db.create_unique(m2m_table_name, ['resource_id', 'topic_id'])
+
+        # Adding M2M table for field types on 'Resource'
+        m2m_table_name = db.shorten_name(u'pleiapp_resource_types')
+        db.create_table(m2m_table_name, (
+            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
+            ('resource', models.ForeignKey(orm[u'pleiapp.resource'], null=False)),
+            ('type', models.ForeignKey(orm[u'pleiapp.type'], null=False))
+        ))
+        db.create_unique(m2m_table_name, ['resource_id', 'type_id'])
+
+        # Adding M2M table for field related_resources on 'Resource'
+        m2m_table_name = db.shorten_name(u'pleiapp_resource_related_resources')
+        db.create_table(m2m_table_name, (
+            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
+            ('from_resource', models.ForeignKey(orm[u'pleiapp.resource'], null=False)),
+            ('to_resource', models.ForeignKey(orm[u'pleiapp.resource'], null=False))
+        ))
+        db.create_unique(m2m_table_name, ['from_resource_id', 'to_resource_id'])
+
+        # Adding model 'Category'
+        db.create_table(u'pleiapp_category', (
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('site', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['sites.Site'])),
+            ('title', self.gf('django.db.models.fields.CharField')(max_length=500)),
+            ('slug', self.gf('django.db.models.fields.CharField')(max_length=2000, null=True, blank=True)),
+        ))
+        db.send_create_signal(u'pleiapp', ['Category'])
+
+        # Adding model 'Type'
+        db.create_table(u'pleiapp_type', (
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('site', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['sites.Site'])),
+            ('title', self.gf('django.db.models.fields.CharField')(max_length=500)),
+            ('slug', self.gf('django.db.models.fields.CharField')(max_length=2000, null=True, blank=True)),
+        ))
+        db.send_create_signal(u'pleiapp', ['Type'])
+
+        # Adding model 'Topic'
+        db.create_table(u'pleiapp_topic', (
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('site', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['sites.Site'])),
+            ('title', self.gf('django.db.models.fields.CharField')(max_length=500)),
+            ('slug', self.gf('django.db.models.fields.CharField')(max_length=2000, null=True, blank=True)),
+        ))
+        db.send_create_signal(u'pleiapp', ['Topic'])
+
 
     def backwards(self, orm):
-        # Deleting model 'Topic'
-        db.delete_table(u'pleiapp_topic')
-
-        # Deleting model 'Type'
-        db.delete_table(u'pleiapp_type')
-
-        # Deleting model 'Category'
-        db.delete_table(u'pleiapp_category')
-
         # Deleting model 'Resource'
         db.delete_table(u'pleiapp_resource')
 
-        # Removing M2M table for field types on 'Resource'
-        db.delete_table(db.shorten_name(u'pleiapp_resource_types'))
+        # Removing M2M table for field categories on 'Resource'
+        db.delete_table(db.shorten_name(u'pleiapp_resource_categories'))
 
         # Removing M2M table for field topics on 'Resource'
         db.delete_table(db.shorten_name(u'pleiapp_resource_topics'))
 
-        # Removing M2M table for field categories on 'Resource'
-        db.delete_table(db.shorten_name(u'pleiapp_resource_categories'))
+        # Removing M2M table for field types on 'Resource'
+        db.delete_table(db.shorten_name(u'pleiapp_resource_types'))
+
+        # Removing M2M table for field related_resources on 'Resource'
+        db.delete_table(db.shorten_name(u'pleiapp_resource_related_resources'))
+
+        # Deleting model 'Category'
+        db.delete_table(u'pleiapp_category')
+
+        # Deleting model 'Type'
+        db.delete_table(u'pleiapp_type')
+
+        # Deleting model 'Topic'
+        db.delete_table(u'pleiapp_topic')
 
 
     models = {
@@ -140,52 +172,50 @@ class Migration(SchemaMigration):
             'slug': ('django.db.models.fields.CharField', [], {'max_length': '2000', 'null': 'True', 'blank': 'True'}),
             'title': ('django.db.models.fields.CharField', [], {'max_length': '500'})
         },
-        u'pages.page': {
-            'Meta': {'ordering': "('titles',)", 'object_name': 'Page'},
+        u'pleiapp.category': {
+            'Meta': {'ordering': "('title',)", 'object_name': 'Category'},
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'site': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['sites.Site']"}),
+            'slug': ('django.db.models.fields.CharField', [], {'max_length': '2000', 'null': 'True', 'blank': 'True'}),
+            'title': ('django.db.models.fields.CharField', [], {'max_length': '500'})
+        },
+        u'pleiapp.resource': {
+            'Meta': {'ordering': "('title',)", 'object_name': 'Resource'},
             '_meta_title': ('django.db.models.fields.CharField', [], {'max_length': '500', 'null': 'True', 'blank': 'True'}),
-            '_order': ('django.db.models.fields.IntegerField', [], {'null': 'True'}),
-            'content_model': ('django.db.models.fields.CharField', [], {'max_length': '50', 'null': 'True'}),
+            'categories': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'related_name': "'resources'", 'blank': 'True', 'to': u"orm['pleiapp.Category']"}),
+            'content': ('mezzanine.core.fields.RichTextField', [], {}),
             'description': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
             'expiry_date': ('django.db.models.fields.DateTimeField', [], {'null': 'True', 'blank': 'True'}),
+            'featured_image': ('mezzanine.core.fields.FileField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
             'gen_description': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'in_menus': ('mezzanine.pages.fields.MenusField', [], {'default': '(1, 2, 3)', 'max_length': '100', 'null': 'True', 'blank': 'True'}),
             'in_sitemap': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'keywords': ('mezzanine.generic.fields.KeywordsField', [], {'object_id_field': "'object_pk'", 'to': u"orm['generic.AssignedKeyword']", 'frozen_by_south': 'True'}),
             'keywords_string': ('django.db.models.fields.CharField', [], {'max_length': '500', 'blank': 'True'}),
-            'login_required': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'parent': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'children'", 'null': 'True', 'to': u"orm['pages.Page']"}),
             'publish_date': ('django.db.models.fields.DateTimeField', [], {'null': 'True', 'blank': 'True'}),
+            'related_resources': ('django.db.models.fields.related.ManyToManyField', [], {'related_name': "'related_resources_rel_+'", 'blank': 'True', 'to': u"orm['pleiapp.Resource']"}),
             'short_url': ('django.db.models.fields.URLField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
             'site': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['sites.Site']"}),
             'slug': ('django.db.models.fields.CharField', [], {'max_length': '2000', 'null': 'True', 'blank': 'True'}),
             'status': ('django.db.models.fields.IntegerField', [], {'default': '2'}),
             'title': ('django.db.models.fields.CharField', [], {'max_length': '500'}),
-            'titles': ('django.db.models.fields.CharField', [], {'max_length': '1000', 'null': 'True'})
-        },
-        u'pleiapp.category': {
-            'Meta': {'object_name': 'Category'},
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '255'})
-        },
-        u'pleiapp.resource': {
-            'Meta': {'ordering': "('_order',)", 'object_name': 'Resource', '_ormbases': [u'pages.Page']},
-            'categories': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['pleiapp.Category']", 'symmetrical': 'False'}),
-            'content': ('mezzanine.core.fields.RichTextField', [], {}),
-            u'page_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['pages.Page']", 'unique': 'True', 'primary_key': 'True'}),
-            'topics': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['pleiapp.Topic']", 'symmetrical': 'False'}),
-            'types': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['pleiapp.Type']", 'symmetrical': 'False'}),
+            'topics': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'related_name': "'resources'", 'blank': 'True', 'to': u"orm['pleiapp.Topic']"}),
+            'types': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'related_name': "'resources'", 'blank': 'True', 'to': u"orm['pleiapp.Type']"}),
             'user': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'resources'", 'to': u"orm['auth.User']"})
         },
         u'pleiapp.topic': {
-            'Meta': {'object_name': 'Topic'},
+            'Meta': {'ordering': "('title',)", 'object_name': 'Topic'},
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '255'})
+            'site': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['sites.Site']"}),
+            'slug': ('django.db.models.fields.CharField', [], {'max_length': '2000', 'null': 'True', 'blank': 'True'}),
+            'title': ('django.db.models.fields.CharField', [], {'max_length': '500'})
         },
         u'pleiapp.type': {
-            'Meta': {'object_name': 'Type'},
+            'Meta': {'ordering': "('title',)", 'object_name': 'Type'},
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '255'})
+            'site': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['sites.Site']"}),
+            'slug': ('django.db.models.fields.CharField', [], {'max_length': '2000', 'null': 'True', 'blank': 'True'}),
+            'title': ('django.db.models.fields.CharField', [], {'max_length': '500'})
         },
         u'sites.site': {
             'Meta': {'ordering': "('domain',)", 'object_name': 'Site', 'db_table': "'django_site'"},

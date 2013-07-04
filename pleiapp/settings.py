@@ -12,12 +12,14 @@
 
 # Controls the ordering and grouping of the admin menu.
 #
-# ADMIN_MENU_ORDER = (
-#     ("Content", ("pages.Page", "blog.BlogPost",
-#        "generic.ThreadedComment", ("Media Library", "fb_browse"),)),
-#     ("Site", ("sites.Site", "redirects.Redirect", "conf.Setting")),
-#     ("Users", ("auth.User", "auth.Group",)),
-# )
+
+ADMIN_MENU_ORDER = (
+    ("Content", ("pleiapp.Resource", "pages.Page", "blog.BlogPost",
+       "generic.ThreadedComment", ("Media Library", "fb_browse"),)),
+    ("Site", ("sites.Site", "redirects.Redirect", "conf.Setting")),
+    ("Users", ("auth.User", "auth.Group",)),
+)
+
 
 # A three item sequence, each containing a sequence of template tags
 # used to render the admin dashboard.
@@ -325,6 +327,9 @@ DEBUG_TOOLBAR_CONFIG = {"INTERCEPT_REDIRECTS": False}
 ALLOWED_HOSTS = ['*']
 FILEBROWSER_MAX_UPLOAD_SIZE = 1024 * 1024 * 1024 * 10
 
+
+SITE_TITLE = 'PLEI for Non-Profit'
+SITE_TAGLINE = 'Our mandate is to facilitate and promote the development and distribution of public legal education and information for people in BC.'
 
 ##################
 # LOCAL SETTINGS #

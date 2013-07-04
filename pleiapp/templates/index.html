@@ -1,39 +1,26 @@
 {% extends "base.html" %}
-{% load i18n staticfiles %}
+{% load i18n staticfiles mezzanine_tags %}
 
 {% block meta_title %}{% trans "Home" %}{% endblock %}
-{% block title %}{% trans "Home" %}{% endblock %}
+{% block title %}{% endblock %}
 
 {% block extra_css %}
 	<link rel="stylesheet" href="{% static "css/plei.css" %}">
 {% endblock %}
 
-{% block breadcrumb_menu %}
-<li class="active">{% trans "Home" %}</li>
-{% endblock %}
+{% block breadcrumb_menu %}{% endblock %}
 
 {% block main %}
-<h2>PLEI Staging Site</h2>
-<p>
-    Welcome to PLEI site
-</p>
 
 <div class="resources clearfix">
-	<h3>Resources</h3>
-	{% for resource in resources %}
-		<div class="resource">
+	{% for resource in featured_resources %}
+		<div class="resource resource-{{resource.typename}}">
 			<a href="{{resource.get_absolute_url}}"><h4>{{resource.titles}}</h4></a>
-			<ul>
-				{% for category in resource.categories.all %}
-					<li>{{category.name}}</li>
-				{% endfor %}
-				{% for topic in resource.topics.all %}
-					<li>{{topic.name}}</li>
-				{% endfor %}
-				{% for type in resource.types.all %}
-					<li>{{type.name}}</li>
-				{% endfor %}
-			</ul>
+			{% if resource.featured_image %}
+				<p class="featured-image"><img src="{{ MEDIA_URL }}{% thumbnail resource.featured_image 400 0 %}"/></p>
+			{% endif %}
+			<p class="snippet">{{resource.description}}</p>
+			<p class="viewmore"><a href="{{resource.get_absolute_url}}">View more</a></p>
 		</div>
 	{% endfor %}
 </div>
