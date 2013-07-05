@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ LANGUAGE_CODE }}"{% if LANGUAGE_BIDI %} dir="rtl"{% endif %}>
+<html>
 {% load pages_tags mezzanine_tags i18n future staticfiles plei_tags %}
 <head>
 
@@ -10,31 +10,19 @@
 <title>{% block meta_title %}{% endblock %}{% if settings.SITE_TITLE %} | {{ settings.SITE_TITLE }}{% endif %}</title>
 <link rel="shortcut icon" href="{% static "img/favicon.ico" %}">
 
-{% ifinstalled mezzanine.blog %}
-<link rel="alternate" type="application/rss+xml" title="RSS" href="{% url "blog_post_feed" "rss" %}">
-<link rel="alternate" type="application/atom+xml" title="Atom" href="{% url "blog_post_feed" "atom" %}">
-{% endifinstalled %}
-
 {% compress css %}
-<link rel="stylesheet" href="{% static "css/bootstrap.css" %}">
-<link rel="stylesheet" href="{% static "css/mezzanine.css" %}">
-<link rel="stylesheet" href="{% static "css/bootstrap-responsive.css" %}">
-{% if LANGUAGE_BIDI %}
-<link rel="stylesheet" href="{% static "css/rtl.css" %}">
-{% endif %}
-{% ifinstalled cartridge.shop %}
-<link rel="stylesheet" href="{% static "css/cartridge.css" %}">
-{% if LANGUAGE_BIDI %}
-<link rel="stylesheet" href="{% static "css/cartridge.rtl.css" %}">
-{% endif %}
-{% endifinstalled %}
-{% block extra_css %}{% endblock %}
+	<link rel="stylesheet" href="{% static "css/bootstrap.css" %}">
+	<link rel="stylesheet" href="{% static "css/mezzanine.css" %}">
+	<link rel="stylesheet" href="{% static "css/bootstrap-responsive.css" %}">
+	<link rel="stylesheet" href="{% static "css/plei.css" %}">
+	{% block extra_css %}{% endblock %}
 {% endcompress %}
 
 {% compress js %}
-<script src="{% static "mezzanine/js/"|add:settings.JQUERY_FILENAME %}"></script>
-<script src="{% static "js/bootstrap.js" %}"></script>
-<script src="{% static "js/bootstrap-extras.js" %}"></script>
+	<script src="{% static "mezzanine/js/"|add:settings.JQUERY_FILENAME %}"></script>
+	<script src="{% static "js/bootstrap.js" %}"></script>
+	<script src="{% static "js/bootstrap-extras.js" %}"></script>
+	<script src="{% static "js/plei.js" %}"></script>
 {% block extra_js %}{% endblock %}
 {% endcompress %}
 <!--[if lt IE 9]>
@@ -46,28 +34,21 @@
 </head>
 <body id="{% block body_id %}body{% endblock %}">
 
-<div class="site-header">
-	<h1><a class="brand" href="/">{{ settings.SITE_TITLE }}</a></h1>
-	<p>{{ settings.SITE_TAGLINE }}</p>
+<div class="top">
+	<h1><a href="/">{{ settings.SITE_TITLE }}</a></h1>
+	<div class="tagline-spinner">
+		{% plei_taglines %}
+	</div>
 </div>
 
 <div class="topmenu">
 	<div class="topmenulabel">Browse by:</div>
-	<div class="topmenusection">
-		<h3>Topic</h3>
-		{% plei_tag_menu 'Topic' %}
+	<div class="topmenucontents">
+		{% plei_top_menu %}
+		<div class="search">
+	        {% search_form "all" %}
+	    </div>
 	</div>
-	<div class="topmenusection">
-		<h3>Resource Type</h3>
-		{% plei_tag_menu 'Type' %}
-	</div>
-	<div class="topmenusection">
-		<h3>What You Do</h3>
-		{% plei_tag_menu 'Category' %}
-	</div>
-	<div class="search">
-        {% search_form "all" %}
-    </div>
 </div>
 
 <div class="container">
@@ -92,51 +73,16 @@
 </div>
 
 <div class="container">
-<div class="row">
-
-<div class="span2 left">
-    {% block left_panel %}
-    <div class="panel tree">{% page_menu "pages/menus/tree.html" %}</div>
-    {% endblock %}
-</div>
-
-<div class="span7 middle">
-    {% block main %}{% endblock %}
-</div>
-
-<div class="span3 right">
-    {% nevercache %}
-    {% include "includes/user_panel.html" %}
-    {% endnevercache %}
-    <div class="panel">
-    {% block right_panel %}
-    {% ifinstalled mezzanine.twitter %}
-    {% include "twitter/tweets.html" %}
-    {% endifinstalled %}
-    {% endblock %}
-    </div>
-</div>
-
-</div>
+	<div class="row">
+		{% block centralpart %}
+			{% block main %}
+			{% endblock %}
+		{% endblock %}
+	</div>
 </div>
 
 <footer>
-<div class="container">
-{% page_menu "pages/menus/footer.html" %}
-<p>
-    {% trans "Powered by" %}
-    <a href="http://mezzanine.jupo.org">Mezzanine</a>{% ifinstalled cartridge.shop %},
-    <a href="http://cartridge.jupo.org">Cartridge</a>{% endifinstalled %}
-    {% trans "and" %}
-    <a href="http://www.djangoproject.com">Django</a>
-    <span class="separator">|</span>
-    {% trans "Theme by" %} <a href="http://twitter.github.com/bootstrap/">Bootstrap</a>
-    {% ifinstalled mezzanine.mobile %}
-    <span class="separator">|</span>
-    <a href="{% url "set_device" "mobile" %}?next={{ request.path }}">{% trans "View Mobile Site" %}</a>
-    {% endifinstalled %}
-</p>
-</div>
+footer content
 </footer>
 
 {% include "includes/footer_scripts.html" %}

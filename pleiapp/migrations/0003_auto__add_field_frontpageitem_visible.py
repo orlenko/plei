@@ -8,15 +8,15 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Adding field 'Topic.visible'
-        db.add_column(u'pleiapp_topic', 'visible',
-                      self.gf('django.db.models.fields.NullBooleanField')(default=False, null=True, blank=True),
+        # Adding field 'FrontPageItem.visible'
+        db.add_column(u'pleiapp_frontpageitem', 'visible',
+                      self.gf('django.db.models.fields.NullBooleanField')(default=True, null=True, blank=True),
                       keep_default=False)
 
 
     def backwards(self, orm):
-        # Deleting field 'Topic.visible'
-        db.delete_column(u'pleiapp_topic', 'visible')
+        # Deleting field 'FrontPageItem.visible'
+        db.delete_column(u'pleiapp_frontpageitem', 'visible')
 
 
     models = {
@@ -76,11 +76,79 @@ class Migration(SchemaMigration):
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'site': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['sites.Site']"}),
             'slug': ('django.db.models.fields.CharField', [], {'max_length': '2000', 'null': 'True', 'blank': 'True'}),
-            'title': ('django.db.models.fields.CharField', [], {'max_length': '500'})
+            'title': ('django.db.models.fields.CharField', [], {'max_length': '500'}),
+            'visible': ('django.db.models.fields.NullBooleanField', [], {'default': 'True', 'null': 'True', 'blank': 'True'})
+        },
+        u'pleiapp.dictionary': {
+            'Meta': {'ordering': "('title',)", 'object_name': 'Dictionary'},
+            '_meta_title': ('django.db.models.fields.CharField', [], {'max_length': '500', 'null': 'True', 'blank': 'True'}),
+            'author': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '1024', 'blank': 'True'}),
+            'categories': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'related_name': "'dicts'", 'blank': 'True', 'to': u"orm['pleiapp.Category']"}),
+            'content': ('mezzanine.core.fields.RichTextField', [], {}),
+            'description': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
+            'expiry_date': ('django.db.models.fields.DateTimeField', [], {'null': 'True', 'blank': 'True'}),
+            'featured_image': ('mezzanine.core.fields.FileField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
+            'gen_description': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'in_sitemap': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
+            'keywords': ('mezzanine.generic.fields.KeywordsField', [], {'object_id_field': "'object_pk'", 'to': u"orm['generic.AssignedKeyword']", 'frozen_by_south': 'True'}),
+            'keywords_string': ('django.db.models.fields.CharField', [], {'max_length': '500', 'blank': 'True'}),
+            'publish_date': ('django.db.models.fields.DateTimeField', [], {'null': 'True', 'blank': 'True'}),
+            'related_dictionary': ('django.db.models.fields.related.ManyToManyField', [], {'related_name': "'related_dictionary_rel_+'", 'blank': 'True', 'to': u"orm['pleiapp.Dictionary']"}),
+            'related_faqs': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['pleiapp.Faq']", 'symmetrical': 'False', 'blank': 'True'}),
+            'related_resources': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['pleiapp.Resource']", 'symmetrical': 'False', 'blank': 'True'}),
+            'short_url': ('django.db.models.fields.URLField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
+            'site': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['sites.Site']"}),
+            'slug': ('django.db.models.fields.CharField', [], {'max_length': '2000', 'null': 'True', 'blank': 'True'}),
+            'status': ('django.db.models.fields.IntegerField', [], {'default': '2'}),
+            'title': ('django.db.models.fields.CharField', [], {'max_length': '500'}),
+            'topics': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'related_name': "'dicts'", 'blank': 'True', 'to': u"orm['pleiapp.Topic']"}),
+            'types': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'related_name': "'dicts'", 'blank': 'True', 'to': u"orm['pleiapp.Type']"}),
+            'user': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'dictionarys'", 'to': u"orm['auth.User']"})
+        },
+        u'pleiapp.faq': {
+            'Meta': {'ordering': "('title',)", 'object_name': 'Faq'},
+            '_meta_title': ('django.db.models.fields.CharField', [], {'max_length': '500', 'null': 'True', 'blank': 'True'}),
+            'author': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '1024', 'blank': 'True'}),
+            'categories': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'related_name': "'faqs'", 'blank': 'True', 'to': u"orm['pleiapp.Category']"}),
+            'content': ('mezzanine.core.fields.RichTextField', [], {}),
+            'description': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
+            'expiry_date': ('django.db.models.fields.DateTimeField', [], {'null': 'True', 'blank': 'True'}),
+            'featured_image': ('mezzanine.core.fields.FileField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
+            'gen_description': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'in_sitemap': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
+            'keywords': ('mezzanine.generic.fields.KeywordsField', [], {'object_id_field': "'object_pk'", 'to': u"orm['generic.AssignedKeyword']", 'frozen_by_south': 'True'}),
+            'keywords_string': ('django.db.models.fields.CharField', [], {'max_length': '500', 'blank': 'True'}),
+            'publish_date': ('django.db.models.fields.DateTimeField', [], {'null': 'True', 'blank': 'True'}),
+            'related_dictionary': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['pleiapp.Dictionary']", 'symmetrical': 'False', 'blank': 'True'}),
+            'related_faqs': ('django.db.models.fields.related.ManyToManyField', [], {'related_name': "'related_faqs_rel_+'", 'blank': 'True', 'to': u"orm['pleiapp.Faq']"}),
+            'related_resources': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['pleiapp.Resource']", 'symmetrical': 'False', 'blank': 'True'}),
+            'short_url': ('django.db.models.fields.URLField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
+            'site': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['sites.Site']"}),
+            'slug': ('django.db.models.fields.CharField', [], {'max_length': '2000', 'null': 'True', 'blank': 'True'}),
+            'status': ('django.db.models.fields.IntegerField', [], {'default': '2'}),
+            'title': ('django.db.models.fields.CharField', [], {'max_length': '500'}),
+            'topics': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'related_name': "'faqs'", 'blank': 'True', 'to': u"orm['pleiapp.Topic']"}),
+            'types': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'related_name': "'faqs'", 'blank': 'True', 'to': u"orm['pleiapp.Type']"}),
+            'user': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'faqs'", 'to': u"orm['auth.User']"})
+        },
+        u'pleiapp.frontpageitem': {
+            'Meta': {'object_name': 'FrontPageItem'},
+            'featured_image': ('mezzanine.core.fields.FileField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'item_type': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
+            'order': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
+            'pub_date': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
+            'text': ('django.db.models.fields.TextField', [], {}),
+            'title': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
+            'url': ('django.db.models.fields.URLField', [], {'max_length': '200'}),
+            'visible': ('django.db.models.fields.NullBooleanField', [], {'default': 'True', 'null': 'True', 'blank': 'True'})
         },
         u'pleiapp.resource': {
             'Meta': {'ordering': "('title',)", 'object_name': 'Resource'},
             '_meta_title': ('django.db.models.fields.CharField', [], {'max_length': '500', 'null': 'True', 'blank': 'True'}),
+            'author': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '1024', 'blank': 'True'}),
             'categories': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'related_name': "'resources'", 'blank': 'True', 'to': u"orm['pleiapp.Category']"}),
             'content': ('mezzanine.core.fields.RichTextField', [], {}),
             'description': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
@@ -92,6 +160,8 @@ class Migration(SchemaMigration):
             'keywords': ('mezzanine.generic.fields.KeywordsField', [], {'object_id_field': "'object_pk'", 'to': u"orm['generic.AssignedKeyword']", 'frozen_by_south': 'True'}),
             'keywords_string': ('django.db.models.fields.CharField', [], {'max_length': '500', 'blank': 'True'}),
             'publish_date': ('django.db.models.fields.DateTimeField', [], {'null': 'True', 'blank': 'True'}),
+            'related_dictionary': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['pleiapp.Dictionary']", 'symmetrical': 'False', 'blank': 'True'}),
+            'related_faqs': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['pleiapp.Faq']", 'symmetrical': 'False', 'blank': 'True'}),
             'related_resources': ('django.db.models.fields.related.ManyToManyField', [], {'related_name': "'related_resources_rel_+'", 'blank': 'True', 'to': u"orm['pleiapp.Resource']"}),
             'short_url': ('django.db.models.fields.URLField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
             'site': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['sites.Site']"}),
@@ -102,20 +172,26 @@ class Migration(SchemaMigration):
             'types': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'related_name': "'resources'", 'blank': 'True', 'to': u"orm['pleiapp.Type']"}),
             'user': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'resources'", 'to': u"orm['auth.User']"})
         },
+        u'pleiapp.tagline': {
+            'Meta': {'object_name': 'Tagline'},
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'text': ('django.db.models.fields.TextField', [], {})
+        },
         u'pleiapp.topic': {
             'Meta': {'ordering': "('title',)", 'object_name': 'Topic'},
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'site': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['sites.Site']"}),
             'slug': ('django.db.models.fields.CharField', [], {'max_length': '2000', 'null': 'True', 'blank': 'True'}),
             'title': ('django.db.models.fields.CharField', [], {'max_length': '500'}),
-            'visible': ('django.db.models.fields.NullBooleanField', [], {'default': 'False', 'null': 'True', 'blank': 'True'})
+            'visible': ('django.db.models.fields.NullBooleanField', [], {'default': 'True', 'null': 'True', 'blank': 'True'})
         },
         u'pleiapp.type': {
             'Meta': {'ordering': "('title',)", 'object_name': 'Type'},
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'site': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['sites.Site']"}),
             'slug': ('django.db.models.fields.CharField', [], {'max_length': '2000', 'null': 'True', 'blank': 'True'}),
-            'title': ('django.db.models.fields.CharField', [], {'max_length': '500'})
+            'title': ('django.db.models.fields.CharField', [], {'max_length': '500'}),
+            'visible': ('django.db.models.fields.NullBooleanField', [], {'default': 'True', 'null': 'True', 'blank': 'True'})
         },
         u'sites.site': {
             'Meta': {'ordering': "('domain',)", 'object_name': 'Site', 'db_table': "'django_site'"},

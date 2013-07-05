@@ -1,13 +1,7 @@
 
-from collections import defaultdict
-
-from django.core.exceptions import ImproperlyConfigured
 from django.template import Context, TemplateSyntaxError, Variable
 from django.template.loader import get_template
-from django.utils.translation import ugettext_lazy as _
 
-from mezzanine.pages.models import Page
-from mezzanine.utils.urls import admin_url, home_slug
 from mezzanine import template
 
 from pleiapp import models
@@ -31,4 +25,35 @@ def plei_tag_menu(context, token):
     context["tags"] = model.objects.filter(visible=True).order_by('title')
 
     t = get_template('plei/tag_menu.html')
+    return t.render(Context(context))
+
+
+@register.render_tag
+def plei_top_menu(context, token):
+    topics = models.Topic.objects.filter(visible=True)
+    categories = models.Category.objects.filter(visible=True)
+    types = models.Type.objects.filter(visible=True)
+    context["topics"] = topics
+    context["categories"] = categories
+    context["types"] = types
+    t = get_template('plei/top_menu.html')
+    return t.render(Context(context))
+
+
+@register.render_tag
+def plei_side_menu(context, token):
+    topics = models.Topic.objects.filter(visible=True)
+    categories = models.Category.objects.filter(visible=True)
+    types = models.Type.objects.filter(visible=True)
+    context["topics"] = topics
+    context["categories"] = categories
+    context["types"] = types
+    t = get_template('plei/side_menu.html')
+    return t.render(Context(context))
+
+
+@register.render_tag
+def plei_taglines(context, token):
+    context['taglines'] = models.Tagline.objects.all()
+    t = get_template('plei/taglines.html')
     return t.render(Context(context))

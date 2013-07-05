@@ -5,27 +5,24 @@
 {% block title %}{% endblock %}
 
 {% block extra_css %}
-	<link rel="stylesheet" href="{% static "css/plei.css" %}">
+
 {% endblock %}
 
 {% block breadcrumb_menu %}{% endblock %}
 
-{% block main %}
-
-<div class="resources clearfix">
-	{% for resource in featured_resources %}
-		<div class="resource resource-{{resource.typename}}">
-			<a href="{{resource.get_absolute_url}}"><h4>{{resource.titles}}</h4></a>
-			{% if resource.featured_image %}
-				<p class="featured-image"><img src="{{ MEDIA_URL }}{% thumbnail resource.featured_image 400 0 %}"/></p>
-			{% endif %}
-			<p class="snippet">{{resource.description}}</p>
-			<p class="viewmore"><a href="{{resource.get_absolute_url}}">View more</a></p>
-		</div>
+{% block centralpart %}
+<ul class="front-page-items">
+	{% for item in front_page_items %}
+		<li>
+			<div class="item">
+				<div class="header {{item.item_type}}"><a href="{{item.url}}">{{item.title}}</a></div>
+				{% if item.featured_image %}
+					<div class="image"><img src="{{ MEDIA_URL }}{% thumbnail item.featured_image 300 0 %}"/></div>
+				{% endif %}
+				<div class="text">{{item.text}}</div>
+				<div class="viewmore"><a href="{{item.url}}">View more</a></div>
+			</div>
+		</li>
 	{% endfor %}
-</div>
-
-<ul>
-    <li><a href="/admin/">Log in to the admin interface</a></li>
 </ul>
 {% endblock %}

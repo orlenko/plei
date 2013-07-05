@@ -1,16 +1,34 @@
 
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
-from mezzanine.conf import settings
+import logging
+
+
+log = logging.getLogger('pleiapp.urls')
+
+
 
 
 admin.autodiscover()
 
-# Leading and trailing slahes for urlpatterns based on setup.
-_slashes = (
-    "/" if settings.BLOG_SLUG else "",
-    "/" if settings.APPEND_SLASH else "",
-)
+
+def group_url(group):
+    retval = url('^%s/(?P<slug>.*)/$' % group,
+                 'pleiapp.views.groups.%s' % group,
+                 {},
+                 name=group)
+    log.debug('Adding URL: %s' % retval)
+    return retval
+
+
+def content_url(typename):
+    retval = url('^%s/(?P<slug>.*)/$' % typename,
+               'pleiapp.views.content_types.%s' % typename,
+               {},
+               name=typename)
+    log.debug('Adding URL: %s' % retval)
+    return retval
+
 
 urlpatterns = patterns("",
 
@@ -18,15 +36,13 @@ urlpatterns = patterns("",
     # admin interface, which would be marginally more secure.
     ("^admin/", include(admin.site.urls)),
     url("^$", "pleiapp.views.home.homepage", {}, name="home"),
-    url("^%sresource/category/(?P<category>.*)%s$" % _slashes,
-        "pleiapp.views.resource.resource_list", name="resource_category"),
-    url("^%sresource/type/(?P<type>.*)%s$" % _slashes,
-        "pleiapp.views.resource.resource_list", name="resource_type"),
-    url("^%sresource/topic/(?P<topic>.*)%s$" % _slashes,
-        "pleiapp.views.resource.resource_list", name="resource_topic"),
-    url("^%sresource/(?P<slug>.*)%s$" % _slashes,
-        "pleiapp.views.resource.resource", {}, name="resource"),
 
+    group_url('category'),
+    group_url('resource_type'),
+    group_url('topic'),
+    content_url('resource'),
+    content_url('faq'),
+    content_url('dictionary'),
 
     ("^", include("mezzanine.urls")),
 )

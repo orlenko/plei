@@ -1,0 +1,28 @@
+<ul>
+	<li>
+		<div class="topmenusectionhead">Topic</div>
+		<ul>
+			{% for topic in topics %}
+			<li><a href="{{topic.get_absolute_url}}">{{topic.title}}</a></li>
+			{% endfor %}
+		</ul>
+	</li>
+
+	<li>
+		<div class="topmenusectionhead">Resource Type</div>
+		<ul>
+			{% for restype in types %}
+			<li><a href="{{restype.get_absolute_url}}">{{restype.title}}</a></li>
+			{% endfor %}
+		</ul>
+	</li>
+
+	<li>
+		<div class="topmenusectionhead">What You Do</div>
+		<ul>
+			{% for category in categories %}
+			<li><a href="{{category.get_absolute_url}}">{{category.title}}</a></li>
+			{% endfor %}
+		</ul>
+	</li>
+</ul>

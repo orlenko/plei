@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load i18n staticfiles mezzanine_tags plei_tags %}
+
+
+
+{% block centralpart %}
+	<div class="span10 left">
+	{% block groupcontents %}
+		<div class="group-content">
+			<h2>{{group.title}}</h2>
+			{% if group.resources.count %}
+				<h3>Resources</h3>
+				<ul>
+					{% for res in group.resources.all %}
+						<li>
+							<div class="groupitem resource">
+								<div class="header"><a href="{{res.get_absolute_url}}">{{res.title}}</a></div>
+								{% if res.featured_image %}
+									<div class="image"><img src="{{ MEDIA_URL }}{% thumbnail res.featured_image 300 0 %}" /></div>
+								{% endif %}
+								<div class="text">{{res.content|richtext_filter|truncatewords:20|safe}}</div>
+								<div class="viewmore"><a href="{{res.get_absolute_url}}">View more</a></div>
+							</div>
+						</li>
+					{% endfor %}
+				</ul>
+			{% endif %}
+
+			{% if group.faqs.count %}
+				<h3>FAQ Items</h3>
+				<ul>
+					{% for faq in group.faqs.all %}
+						<li>
+							<div class="groupitem faq">
+								<div class="header"><a href="{{faq.get_absolute_url}}">{{faq.title}}</a></div>
+								{% if faq.featured_image %}
+									<div class="image"><img src="{{ MEDIA_URL }}{% thumbnail faq.featured_image 300 0 %}" /></div>
+								{% endif %}
+								<div class="text">{{faq.content|richtext_filter|truncatewords:20|safe}}</div>
+								<div class="viewmore"><a href="{{faq.get_absolute_url}}">View more</a></div>
+							</div>
+						</li>
+					{% endfor %}
+				</ul>
+			{% endif %}
+
+			{% if group.dicts.count %}
+				<h3>Dictionary Entries</h3>
+				<ul>
+					{% for dict in group.dicts.all %}
+						<li>
+							<div class="groupitem dict">
+								<div class="header"><a href="{{dict.get_absolute_url}}">{{dict.title}}</a></div>
+								{% if dict.featured_image %}
+									<div class="image"><img src="{{ MEDIA_URL }}{% thumbnail dict.featured_image 300 0 %}" /></div>
+								{% endif %}
+								<div class="text">{{dict.content|richtext_filter|truncatewords:20|safe}}</div>
+								<div class="viewmore"><a href="{{dict.get_absolute_url}}">View more</a></div>
+							</div>
+						</li>
+					{% endfor %}
+				</ul>
+			{% endif %}
+		</div>
+	{% endblock %}
+</div>
+<div class="span2 right">
+	{% plei_side_menu %}
+</div>
+{% endblock %}

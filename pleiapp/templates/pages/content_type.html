@@ -1,0 +1,15 @@
+{% extends "pages/page.html" %}
+
+{% load mezzanine_tags %}
+
+{% block breadcrumb_menu %}{% endblock %}
+
+{% block main %}
+
+	{{ block.super }}
+
+	{% editable page.content %}
+		{{ page.content|richtext_filter|safe }}
+	{% endeditable %}
+
+{% endblock %}

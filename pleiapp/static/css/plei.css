@@ -1,5 +1,40 @@
 
 
+/**
+ * Main page structure
+ *
+ * */
+
+.top {
+	background: #C0C0C0;
+	padding: 5px;
+	margin: 5px;
+}
+
+.tagline-spinner:before {
+	content: "Tagline chunks";
+}
+.tagline-spinner {
+	border: 1px solid #ffffe0;
+	padding: 5px;
+	margin: 5px;
+}
+.tagline-spinner ul li {
+	display: inline-block;
+	border: 1px solid silver;
+	padding: 5px;
+	margin: 5px;
+}
+.tagline-spinner:after {
+	content: "End tagline chunks";
+}
+
+footer {
+	min-height: 900px;
+	background-color: #103044;
+	color: white;
+}
+
 .resources {
 	display: block;
 	border: 1px solid rgba(0,0,0,0.2);
@@ -22,3 +57,12 @@
 	border-radius: 2px;
 }
 
+
+
+
+.groupitem {
+	width: 200px;
+	height: 300px;
+	overflow: hidden;
+	/*float:left;*/
+}

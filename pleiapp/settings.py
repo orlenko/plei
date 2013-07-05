@@ -14,7 +14,7 @@
 #
 
 ADMIN_MENU_ORDER = (
-    ("Content", ("pleiapp.Resource", "pages.Page", "blog.BlogPost",
+    ("Content", ("pleiapp.Resource", "pleiapp.Faq", "pleiapp.Dictionary", "pages.Page",
        "generic.ThreadedComment", ("Media Library", "fb_browse"),)),
     ("Site", ("sites.Site", "redirects.Redirect", "conf.Setting")),
     ("Users", ("auth.User", "auth.Group",)),
@@ -329,7 +329,9 @@ FILEBROWSER_MAX_UPLOAD_SIZE = 1024 * 1024 * 1024 * 10
 
 
 SITE_TITLE = 'PLEI for Non-Profit'
-SITE_TAGLINE = 'Our mandate is to facilitate and promote the development and distribution of public legal education and information for people in BC.'
+SITE_TAGLINE = 'Our mandate is to facilitate and promote the development and ' \
+    'distribution of public legal education and information for people in BC.'
+BLOG_SLUG = ''
 
 ##################
 # LOCAL SETTINGS #
