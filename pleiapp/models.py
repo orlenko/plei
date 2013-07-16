@@ -127,13 +127,15 @@ class Dictionary(Displayable, Ownable, RichText, AdminThumbMixin):
 
 
 FRONT_PAGE_ITEM_TYPES = (
-    ('page', 'Page'),
-    ('dictionary', 'Dictionary Definition'),
-    ('calendar', 'Calendar Event'),
-    ('resource', 'Resource'),
-    ('faq', 'FAQ Entry'),
-    ('link', 'External Link'),
+    ('plei', 'PLEI'),
+    ('event', 'Event'),
+    ('project', 'Project'),
+    ('type', 'Type'),
+    ('persona', 'Persona'),
+    ('topic', 'Topic'),
+    ('pls', 'PLS'),
 )
+
 
 class FrontPageItem(models.Model, AdminThumbMixin):
     item_type = models.CharField(max_length=255, choices=FRONT_PAGE_ITEM_TYPES)

@@ -11,18 +11,28 @@
 {% block breadcrumb_menu %}{% endblock %}
 
 {% block centralpart %}
-<ul class="front-page-items">
-	{% for item in front_page_items %}
-		<li>
-			<div class="item">
-				<div class="header {{item.item_type}}"><a href="{{item.url}}">{{item.title}}</a></div>
-				{% if item.featured_image %}
-					<div class="image"><img src="{{ MEDIA_URL }}{% thumbnail item.featured_image 300 0 %}"/></div>
-				{% endif %}
-				<div class="text">{{item.text}}</div>
-				<div class="viewmore"><a href="{{item.url}}">View more</a></div>
-			</div>
-		</li>
-	{% endfor %}
-</ul>
+
+<section id="featured-carousel">
+
+    <div id="featured-slides">
+        <ul>
+			{% for item in front_page_items %}
+				<li>
+					<div class="featured-title title-{{item.item_type}}"><h4>{{item.title}}</h4></div>
+					{% if item.featured_image %}
+						<div class="featured-image"><img src="{{ MEDIA_URL }}{% thumbnail item.featured_image 300 0 %}"/></div>
+					{% endif %}
+					{% if not item.featured_image %}
+						<div class="featured-image"><img src="/static/img/featured-placeholder-image.jpg" alt="PLEI Logo" /></div>
+					{% endif %}
+					<div class="featured-text-wrapper">
+						<div class="featured-text">{{item.text}}</div>
+                		<div class="featured-button"><a href="{{item.url}}"><img src="/static/img/button-readmore.png" alt="Read More" /></a></div>
+                	</div>
+				</li>
+			{% endfor %}
+		</ul>
+	</div>
+</section><!-- end of section #featured-carousel -->
+
 {% endblock %}

@@ -1,28 +1,23 @@
-<ul>
-	<li>
-		<div class="topmenusectionhead">Topic</div>
-		<ul>
-			{% for topic in topics %}
-			<li><a href="{{topic.get_absolute_url}}">{{topic.title}}</a></li>
+<ul id="menu-main-menu" class="menu">
+	<li class="menu-item"><a href="#">Topic<img src="/static/img/main-nav-icon-w-triangle.png" alt="Select" /></a>
+        <ul class="sub-main-nav">
+        	{% for topic in topics %}
+			<li class="menu-item"><a href="{{topic.get_absolute_url}}">{{topic.title}}</a></li>
 			{% endfor %}
-		</ul>
+        </ul>
+    </li>
+	<li class="menu-item"><a href="#">Resource Type<img src="/static/img/main-nav-icon-w-triangle.png" alt="Select" /></a>
+		<ul class="sub-main-nav">
+        	{% for restype in types %}
+			<li class="menu-item"><a href="{{restype.get_absolute_url}}">{{restype.title}}</a></li>
+			{% endfor %}
+        </ul>
 	</li>
-
-	<li>
-		<div class="topmenusectionhead">Resource Type</div>
-		<ul>
-			{% for restype in types %}
-			<li><a href="{{restype.get_absolute_url}}">{{restype.title}}</a></li>
+	<li class="menu-item"><a href="#">What You Do<img src="/static/img/main-nav-icon-w-triangle.png" alt="Select" /></a>
+		<ul class="sub-main-nav">
+        	{% for category in categories %}
+			<li class="menu-item"><a href="{{category.get_absolute_url}}">{{category.title}}</a></li>
 			{% endfor %}
-		</ul>
-	</li>
-
-	<li>
-		<div class="topmenusectionhead">What You Do</div>
-		<ul>
-			{% for category in categories %}
-			<li><a href="{{category.get_absolute_url}}">{{category.title}}</a></li>
-			{% endfor %}
-		</ul>
+        </ul>
 	</li>
 </ul>

@@ -1,7 +1,5 @@
-<ul>
-	{% for tagline in taglines %}
-	<li>
+{% for tagline in taglines %}
+	<div class="edgeLoad-EDGE-181606677" id="Stage_Line{{forloop.counter}}_id">
 		{{tagline.text}}
-	</li>
-	{% endfor %}
-</ul>
+	</div>
+{% endfor %}
