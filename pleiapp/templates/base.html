@@ -1,37 +1,42 @@
 <!doctype html>
-<html>
 {% load pages_tags mezzanine_tags i18n future staticfiles plei_tags %}
+<!--[if !IE]>      <html class="no-js non-ie" lang="en-US"> <![endif]-->
+<!--[if IE 7 ]>    <html class="no-js ie7" lang="en-US"> <![endif]-->
+<!--[if IE 8 ]>    <html class="no-js ie8" lang="en-US"> <![endif]-->
+<!--[if IE 9 ]>    <html class="no-js ie9" lang="en-US"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-js" lang="en-US"> <!--<![endif]-->
 <head>
 
-<meta http-equiv="Content-type" content="text/html; charset=utf-8">
-<meta name="viewport" content="width=device-width">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
 <meta name="keywords" content="{% block meta_keywords %}{% endblock %}">
 <meta name="description" content="{% block meta_description %}{% endblock %}">
 <title>{% block meta_title %}{% endblock %}{% if settings.SITE_TITLE %} | {{ settings.SITE_TITLE }}{% endif %}</title>
 <link rel="shortcut icon" href="{% static "img/favicon.ico" %}">
 
 {% compress css %}
-	<link rel="stylesheet" href="{% static "css/bootstrap.css" %}">
-	<link rel="stylesheet" href="{% static "css/mezzanine.css" %}">
-	<link rel="stylesheet" href="{% static "css/bootstrap-responsive.css" %}">
 	<link rel="stylesheet" href="{% static "css/plei.css" %}">
 	{% block extra_css %}{% endblock %}
 {% endcompress %}
 
 {% compress js %}
-	<script src="{% static "mezzanine/js/"|add:settings.JQUERY_FILENAME %}"></script>
-	<script src="{% static "js/bootstrap.js" %}"></script>
-	<script src="{% static "js/bootstrap-extras.js" %}"></script>
+	<script src="{% static "js/jquery.js" %}"></script>
+	<script src="{% static "js/responsive-modernizr.js" %}"></script>
+	<script src="{% static "js/responsive-scripts.js" %}"></script>
 	<script src="{% static "js/plei.js" %}"></script>
 {% block extra_js %}{% endblock %}
 {% endcompress %}
-<!--[if lt IE 9]>
-<script src="{% static "js/html5shiv.js" %}"></script>
-<![endif]-->
-
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,300italic,700,700italic' rel='stylesheet' type='text/css'>
+<!--Adobe Edge Runtime-->
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="edge_edgePreload.js"></script>
+    <style>
+        .edgeLoad-EDGE-181606677 { visibility:hidden; }
+    </style>
+<!--Adobe Edge Runtime End-->
 {% block extra_head %}{% endblock %}
-
 </head>
+
 <body id="{% block body_id %}body{% endblock %}">
 
 <div class="top">
