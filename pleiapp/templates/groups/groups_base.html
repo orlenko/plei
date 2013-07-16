@@ -4,67 +4,163 @@
 
 
 {% block centralpart %}
-	<div class="span10 left">
-	{% block groupcontents %}
-		<div class="group-content">
-			<h2>{{group.title}}</h2>
-			{% if group.resources.count %}
-				<h3>Resources</h3>
-				<ul>
-					{% for res in group.resources.all %}
-						<li>
-							<div class="groupitem resource">
-								<div class="header"><a href="{{res.get_absolute_url}}">{{res.title}}</a></div>
-								{% if res.featured_image %}
-									<div class="image"><img src="{{ MEDIA_URL }}{% thumbnail res.featured_image 300 0 %}" /></div>
-								{% endif %}
-								<div class="text">{{res.content|richtext_filter|truncatewords:20|safe}}</div>
-								<div class="viewmore"><a href="{{res.get_absolute_url}}">View more</a></div>
-							</div>
-						</li>
-					{% endfor %}
-				</ul>
-			{% endif %}
-
-			{% if group.faqs.count %}
-				<h3>FAQ Items</h3>
-				<ul>
-					{% for faq in group.faqs.all %}
-						<li>
-							<div class="groupitem faq">
-								<div class="header"><a href="{{faq.get_absolute_url}}">{{faq.title}}</a></div>
-								{% if faq.featured_image %}
-									<div class="image"><img src="{{ MEDIA_URL }}{% thumbnail faq.featured_image 300 0 %}" /></div>
-								{% endif %}
-								<div class="text">{{faq.content|richtext_filter|truncatewords:20|safe}}</div>
-								<div class="viewmore"><a href="{{faq.get_absolute_url}}">View more</a></div>
-							</div>
-						</li>
-					{% endfor %}
-				</ul>
-			{% endif %}
-
-			{% if group.dicts.count %}
-				<h3>Dictionary Entries</h3>
-				<ul>
-					{% for dict in group.dicts.all %}
-						<li>
-							<div class="groupitem dict">
-								<div class="header"><a href="{{dict.get_absolute_url}}">{{dict.title}}</a></div>
-								{% if dict.featured_image %}
-									<div class="image"><img src="{{ MEDIA_URL }}{% thumbnail dict.featured_image 300 0 %}" /></div>
-								{% endif %}
-								<div class="text">{{dict.content|richtext_filter|truncatewords:20|safe}}</div>
-								<div class="viewmore"><a href="{{dict.get_absolute_url}}">View more</a></div>
-							</div>
-						</li>
-					{% endfor %}
-				</ul>
-			{% endif %}
+<div id="wrapper" class="clearfix">
+	<section id="content-archive" class="grid col-620">
+		<div class="breadcrumb-list">
+			<span typeof="v:Breadcrumb"><a rel="v:url" property="v:title" href="/">Home</a></span><span class="chevron">&#8250;</span><span class="breadcrumb-current">{{group.title}}</span>
 		</div>
-	{% endblock %}
-</div>
-<div class="span2 right">
-	{% plei_side_menu %}
+		<div class="page">
+			<h1 class="page-icon-faq">{{group.title}}</h1>
+			<ul class="grid col-940 category-list">
+				{% if group.resources.count %}
+				{% for res in group.resources.all %}
+				<li class="grid">
+					<div class="post-entry">
+						<div class="grid col-940 category-image">
+							{% if res.featured_image %}
+							<a href="{{res.get_absolute_url}}" title="{{res.title}}"><img width="172" height="122" src="{{ MEDIA_URL }}{% thumbnail res.featured_image 172 0 %}" class="wp-post-image" alt="law-school" /></a>
+							{% endif %}
+						</div>
+
+						<div class="grid col-940 category-post-title">
+							<h5><a href="{{res.get_absolute_url}}" title="{{res.title}}">{{res.title}}</a></h5>
+						</div>
+
+						<div class="grid col-940 category-text">
+							<p>
+								{{res.content|richtext_filter|truncatewords:20|safe}}
+							</p>
+							<div class="triangle-cat grid col-940">
+								<span class="item-type">???</span>
+								<div class="read-more">
+									<a href="{{res.get_absolute_url}}">more</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</li>
+				{% endfor %}
+				{% endif %}
+
+				{% if group.faqs.count %}
+				{% for res in group.faqs.all %}
+				<li class="grid">
+					<div class="post-entry">
+						<div class="grid col-940 category-image">
+							{% if res.featured_image %}
+							<a href="{{res.get_absolute_url}}" title="{{res.title}}"><img width="172" height="122" src="{{ MEDIA_URL }}{% thumbnail res.featured_image 172 0 %}" class="wp-post-image" alt="law-school" /></a>
+							{% endif %}
+						</div>
+
+						<div class="grid col-940 category-post-title">
+							<h5><a href="{{res.get_absolute_url}}" title="{{res.title}}">{{res.title}}</a></h5>
+						</div>
+
+						<div class="grid col-940 category-text">
+							<p>
+								{{res.content|richtext_filter|truncatewords:20|safe}}
+							</p>
+							<div class="triangle-cat grid col-940">
+								<span class="item-type">???</span>
+								<div class="read-more">
+									<a href="{{res.get_absolute_url}}">more</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</li>
+				{% endfor %}
+				{% endif %}
+
+				{% if group.dicts.count %}
+				{% for res in group.dicts.all %}
+				<li class="grid">
+					<div class="post-entry">
+						<div class="grid col-940 category-image">
+							{% if res.featured_image %}
+							<a href="{{res.get_absolute_url}}" title="{{res.title}}"><img width="172" height="122" src="{{ MEDIA_URL }}{% thumbnail res.featured_image 172 0 %}" class="wp-post-image" alt="law-school" /></a>
+							{% endif %}
+						</div>
+
+						<div class="grid col-940 category-post-title">
+							<h5><a href="{{res.get_absolute_url}}" title="{{res.title}}">{{res.title}}</a></h5>
+						</div>
+
+						<div class="grid col-940 category-text">
+							<p>
+								{{res.content|richtext_filter|truncatewords:20|safe}}
+							</p>
+							<div class="triangle-cat grid col-940">
+								<span class="item-type">???</span>
+								<div class="read-more">
+									<a href="{{res.get_absolute_url}}">more</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</li>
+				{% endfor %}
+				{% endif %}
+			</ul>
+			<div class="navigation">
+				<a href="#">Pagination</a>
+			</div><!-- end of .navigation -->
+		</div>
+	</section>
+
+
+	<section id="share" class="grid col-300 fit">
+    	<!-- AddThis Button BEGIN -->
+		<div class="addthis_toolbox addthis_default_style">
+			<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+			<a class="addthis_button_tweet"></a>
+			<a class="addthis_counter addthis_pill_style"></a>
+		</div>
+		<script type="text/javascript">
+			var addthis_config = {
+				"data_track_addressbar" : true
+			};
+		</script>
+		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-51b625b9399cfa6a"></script>
+		<!-- AddThis Button END -->
+
+		</section>
+
+		<section id="widgets" class="grid col-300 fit">
+
+			<div class="widget-wrapper">
+				<div class="widget-title">
+					Widget Title
+				</div>
+				<ul>
+					<li>
+						test
+					</li>
+					<li>
+						test
+					</li>
+					<li>
+						test
+					</li>
+				</ul>
+			</div>
+
+			<div class="widget-wrapper">
+				<div class="widget-title">
+					Widget Title
+				</div>
+				<ul>
+					<li>
+						test
+					</li>
+					<li>
+						test
+					</li>
+					<li>
+						test
+					</li>
+				</ul>
+			</div>
+		</section><!-- end of #widgets -->
 </div>
 {% endblock %}
