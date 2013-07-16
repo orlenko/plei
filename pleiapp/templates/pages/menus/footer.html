@@ -1,0 +1,17 @@
+{% load i18n future pages_tags %}
+
+{% spaceless %}
+{% if page_branch_in_menu %}
+
+<ul id="menu-footer-menu" class="footer-menu">
+	{% for page in page_branch %}
+	    {% if page.in_menu %}
+	        <li class="menu-item-object-page">
+	        	<a href="{{ page.get_absolute_url }}">{{ page.title }}</a>
+	        </li>
+	    {% endif %}
+	{% endfor %}
+</ul>
+
+{% endif %}
+{% endspaceless %}
