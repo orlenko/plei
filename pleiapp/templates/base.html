@@ -79,137 +79,142 @@
 			{% endblock %}
 		{% endblock %}
 
-		<footer>
-			<div id="footer" class="clearfix">
-				<div id="footer-wrapper">
-					<div id="legal-notice" class="grid col-940">
-						<div class="text-padding">
-							<b>The People’s Law School does not provide legal advice.</b>
-							<br/>We provide public legal education and information,
-							resources, and referral services to the public and community agencies.
-						</div>
-					</div>
-
-					<div id="footer-nav" class="grid col-940">
-						{% page_menu "pages/menus/footer.html" %}
-					</div><!-- end of foote-nav -->
-
-					<div id="colophon-widget" class="grid col-940">
-						<div class="grid col-300">
-
-							<div class="widget-wrapper">
-
-								<div class="widget-title-home">
-									<h4>Connect and Share</h4>
-								</div>
-								<div class="textwidget">
-
-									<div id="social-icon">
-										<a href="https://twitter.com/PLSBC" target="_blank"><img src="/static/img/social-media-icon-tw.png" alt="Our Twitter Page" /></a>
-										<a href="https://www.facebook.com/peopleslawschool" target="_blank"><img src="/static/img/social-media-icon-fb.png" alt="Our Facebook Page" /></a>
-										<a href="http://www.linkedin.com/company/2024453?trk=tyah" target="_blank"><img src="/static/img/social-media-icon-li.png" alt="Our LinkedIn Page" /></a>
-										<a href="http://www.youtube.com/user/plsbc" target="_blank"><img src="/static/img/social-media-icon-yt.png" alt="Our You Tube Page" /></a>
-									</div>
-
-									<div id="social-caption">
-										<p>
-											Let’s Tweet on the Twitterverse!
-										</p>
-										<p>
-											We’re always around for a face to face!
-										</p>
-										<p>
-											To link or not to link - no question - we’re linked!
-										</p>
-										<p>
-											Our channel’s up 24 hours a day, 7 days a week!
-										</p>
-									</div>
-
-								</div>
-
-							</div><!-- end of .widget-wrapper -->
-
-						</div><!-- end of .col-300 -->
-
-						<div class="grid col-300">
-
-							<div class="widget-wrapper">
-
-								<div class="widget-title-home">
-									<h4>Peolple’s Law School</h4>
-								</div>
-								<div class="textwidget center-widget col-940">
-
-									<a href="http://www.publiclegaled.bc.ca/pls_ask"><img src="/static/img/pls-ask-logo-footer.png" alt="Pls Ask Logo" /></a>
-									<p>
-										We’re just a question away. PLS ask us how we can help you or visit our FAQ page for more info.
-									</p>
-									<a href="http://www.publiclegaled.bc.ca/"><img src="/static/img/pls-logo-footer.png" alt="People's Law School Logo" /></a>
-
-								</div>
-
-							</div><!-- end of .widget-wrapper -->
-
-						</div><!-- end of .col-300 -->
-
-						<div class="grid col-300 fit">
-
-							<div class="widget-wrapper">
-
-								<div class="widget-title-home">
-									<h4>Get Involved</h4>
-								</div>
-								<div class="textwidget">
-
-									<div id="getinvolved-icon">
-
-										<a href="http://www.publiclegaled.bc.ca/volunteer"><img src="/static/img/volunteer-icon.png" alt="Volunteer Icon" /></a>
-										<a href="http://www.publiclegaled.bc.ca/donate"><img src="/static/img/donate-icon.png" alt="Donate Icon" /></a>
-
-									</div>
-
-									<div id="getinvolved-caption">
-										<p>
-											Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ut lectus ligula.
-										</p>
-										<p>
-											<a href="http://www.publiclegaled.bc.ca/volunteer"><img src="/static/img/footer-buttons-volunteer.png" alt="Click to Volunteer" /></a>
-										</p>
-										<p>
-											Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-										</p>
-										<p>
-											<a href="http://www.publiclegaled.bc.ca/donate"><img src="/static/img/footer-buttons-donate.png" alt="Click to Donate" /></a>
-										</p>
-									</div>
-
-								</div>
-
-							</div><!-- end of .widget-wrapper -->
-
-						</div><!-- end of .col-300 fit -->
-					</div><!-- end of #widgets -->
-
-					<div class="grid col-300 copyright">
-						&copy; 2013 <a href="http://idealogy.ca/dev/pls2013wp/" title="People&#8217;s Law School">People&#8217;s Law School</a>
-					</div><!-- end of .copyright -->
-
-					<div class="grid col-300 scroll-top">
-						<a href="#scroll-top" title="scroll to top">&uarr;</a>
-					</div>
-
-					<div class="grid col-300 fit powered">
-						<a href="http://www.webteam.vcn.bc.ca/" title="Web Design &amp; Marketing for non-profits by VCN Webteam" target="_blank">Web Design &amp; Marketing for non-profits by VCN Webteam</a>
-					</div><!-- end .powered -->
-
-				</div><!-- end #footer-wrapper -->
-
-			</div><!-- end <div> footer -->
-
-		</footer>
 
 	</div><!-- end of #container -->
+
+	{% block wide_centralpart %}
+	{% endblock %}
+
+	<footer>
+		<div id="footer" class="clearfix">
+			<div id="footer-wrapper">
+				<div id="legal-notice" class="grid col-940">
+					<div class="text-padding">
+						<b>The People’s Law School does not provide legal advice.</b>
+						<br/>We provide public legal education and information,
+						resources, and referral services to the public and community agencies.
+					</div>
+				</div>
+
+				<div id="footer-nav" class="grid col-940">
+					{% page_menu "pages/menus/footer.html" %}
+				</div><!-- end of foote-nav -->
+
+				<div id="colophon-widget" class="grid col-940">
+					<div class="grid col-300">
+
+						<div class="widget-wrapper">
+
+							<div class="widget-title-home">
+								<h4>Connect and Share</h4>
+							</div>
+							<div class="textwidget">
+
+								<div id="social-icon">
+									<a href="https://twitter.com/PLSBC" target="_blank"><img src="/static/img/social-media-icon-tw.png" alt="Our Twitter Page" /></a>
+									<a href="https://www.facebook.com/peopleslawschool" target="_blank"><img src="/static/img/social-media-icon-fb.png" alt="Our Facebook Page" /></a>
+									<a href="http://www.linkedin.com/company/2024453?trk=tyah" target="_blank"><img src="/static/img/social-media-icon-li.png" alt="Our LinkedIn Page" /></a>
+									<a href="http://www.youtube.com/user/plsbc" target="_blank"><img src="/static/img/social-media-icon-yt.png" alt="Our You Tube Page" /></a>
+								</div>
+
+								<div id="social-caption">
+									<p>
+										Let’s Tweet on the Twitterverse!
+									</p>
+									<p>
+										We’re always around for a face to face!
+									</p>
+									<p>
+										To link or not to link - no question - we’re linked!
+									</p>
+									<p>
+										Our channel’s up 24 hours a day, 7 days a week!
+									</p>
+								</div>
+
+							</div>
+
+						</div><!-- end of .widget-wrapper -->
+
+					</div><!-- end of .col-300 -->
+
+					<div class="grid col-300">
+
+						<div class="widget-wrapper">
+
+							<div class="widget-title-home">
+								<h4>Peolple’s Law School</h4>
+							</div>
+							<div class="textwidget center-widget col-940">
+
+								<a href="http://www.publiclegaled.bc.ca/pls_ask"><img src="/static/img/pls-ask-logo-footer.png" alt="Pls Ask Logo" /></a>
+								<p>
+									We’re just a question away. PLS ask us how we can help you or visit our FAQ page for more info.
+								</p>
+								<a href="http://www.publiclegaled.bc.ca/"><img src="/static/img/pls-logo-footer.png" alt="People's Law School Logo" /></a>
+
+							</div>
+
+						</div><!-- end of .widget-wrapper -->
+
+					</div><!-- end of .col-300 -->
+
+					<div class="grid col-300 fit">
+
+						<div class="widget-wrapper">
+
+							<div class="widget-title-home">
+								<h4>Get Involved</h4>
+							</div>
+							<div class="textwidget">
+
+								<div id="getinvolved-icon">
+
+									<a href="http://www.publiclegaled.bc.ca/volunteer"><img src="/static/img/volunteer-icon.png" alt="Volunteer Icon" /></a>
+									<a href="http://www.publiclegaled.bc.ca/donate"><img src="/static/img/donate-icon.png" alt="Donate Icon" /></a>
+
+								</div>
+
+								<div id="getinvolved-caption">
+									<p>
+										Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ut lectus ligula.
+									</p>
+									<p>
+										<a href="http://www.publiclegaled.bc.ca/volunteer"><img src="/static/img/footer-buttons-volunteer.png" alt="Click to Volunteer" /></a>
+									</p>
+									<p>
+										Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+									</p>
+									<p>
+										<a href="http://www.publiclegaled.bc.ca/donate"><img src="/static/img/footer-buttons-donate.png" alt="Click to Donate" /></a>
+									</p>
+								</div>
+
+							</div>
+
+						</div><!-- end of .widget-wrapper -->
+
+					</div><!-- end of .col-300 fit -->
+				</div><!-- end of #widgets -->
+
+				<div class="grid col-300 copyright">
+					&copy; 2013 <a href="http://idealogy.ca/dev/pls2013wp/" title="People&#8217;s Law School">People&#8217;s Law School</a>
+				</div><!-- end of .copyright -->
+
+				<div class="grid col-300 scroll-top">
+					<a href="#scroll-top" title="scroll to top">&uarr;</a>
+				</div>
+
+				<div class="grid col-300 fit powered">
+					<a href="http://www.webteam.vcn.bc.ca/" title="Web Design &amp; Marketing for non-profits by VCN Webteam" target="_blank">Web Design &amp; Marketing for non-profits by VCN Webteam</a>
+				</div><!-- end .powered -->
+
+			</div><!-- end #footer-wrapper -->
+
+		</div><!-- end <div> footer -->
+
+	</footer>
+
 
 {% include "includes/footer_scripts.html" %}
 
