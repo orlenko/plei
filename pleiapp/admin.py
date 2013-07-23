@@ -38,6 +38,11 @@ class ResourceAdmin(DisplayableAdmin, OwnableAdmin):
     list_filter = resource_list_filter
     filter_horizontal = ("categories", "types", "topics", "related_resources", "related_dictionary", "related_faqs")
 
+    class Media:
+        css = {
+             'all': ('/static/css/admin.css',)
+        }
+
     def save_form(self, request, form, change):
         """
         Super class ordering is important here - user must get saved first.
