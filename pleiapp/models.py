@@ -22,7 +22,7 @@ class Resource(Displayable, Ownable, RichText, AdminThumbMixin):
                                    blank=True, related_name="resources")
     author = models.CharField(max_length=1024, blank=True, default='')
     featured_image = FileField(verbose_name=_("Featured Image"),
-        upload_to=upload_to("pleiapp.Resource.featured_image", "resource/images"),
+        upload_to=upload_to("pleiapp.Resource.featured_image", "images"),
         format="Image", max_length=255, null=True, blank=True)
     related_resources = models.ManyToManyField("self",
                                  verbose_name=_("Related resources"),
@@ -33,7 +33,8 @@ class Resource(Displayable, Ownable, RichText, AdminThumbMixin):
     related_faqs = models.ManyToManyField("Faq",
                                  verbose_name=_("Related FAQ Entries"),
                                  blank=True)
-    video_url = models.CharField("Video", max_length=1024, blank=True, default='', null=True)
+    video_url = models.URLField("Video", max_length=1024, blank=True, default='', null=True)
+    link_url = models.URLField("Web Link", max_length=1024, blank=True, default='', null=True)
     audio_file = FileField("Audio",
         upload_to=upload_to("pleiapp.Resource.audio_file", "resource/audio"),
         extensions=['.mp3','.mp4','.wav','.aiff','.midi','.m4p'],
@@ -42,7 +43,7 @@ class Resource(Displayable, Ownable, RichText, AdminThumbMixin):
         blank=True)
     attached_document = FileField('Downloadable Document',
         upload_to=upload_to("pleiapp.Resource.attachment_file", "resource/document"),
-        extensions=['.doc','.pdf','.rtf','.txt','.odf','.docx', '.xls', '.xlsx'],
+        extensions=['.doc','.pdf','.rtf','.txt','.odf','.docx', '.xls', '.xlsx', '.ppt', '.pptx'],
         max_length=255,
         null=True,
         blank=True)
@@ -74,7 +75,7 @@ class Faq(Displayable, Ownable, RichText, AdminThumbMixin):
                                    blank=True, related_name="faqs")
     author = models.CharField(max_length=1024, blank=True, default='')
     featured_image = FileField(verbose_name=_("Featured Image"),
-        upload_to=upload_to("blog.BlogPost.featured_image", "blog"),
+        upload_to=upload_to("pleiapp.Faq.featured_image", "images"),
         format="Image", max_length=255, null=True, blank=True)
     related_faqs = models.ManyToManyField("self",
                                  verbose_name=_("Related FAQ Entries"),
@@ -114,7 +115,7 @@ class Dictionary(Displayable, Ownable, RichText, AdminThumbMixin):
                                    blank=True, related_name="dicts")
     author = models.CharField(max_length=1024, blank=True, default='')
     featured_image = FileField(verbose_name=_("Featured Image"),
-        upload_to=upload_to("blog.BlogPost.featured_image", "blog"),
+        upload_to=upload_to("pleiapp.Dictionary.featured_image", "images"),
         format="Image", max_length=255, null=True, blank=True)
     related_dictionary = models.ManyToManyField("self",
                                  verbose_name=_("Related Dictionary Definition"),
@@ -158,10 +159,13 @@ class FrontPageItem(models.Model, AdminThumbMixin):
     url = models.URLField()
     order = models.IntegerField(default=0)
     featured_image = FileField(verbose_name=_("Featured Image"),
-        upload_to=upload_to("blog.BlogPost.featured_image", "blog"),
+        upload_to=upload_to("pleiapp.FeaturedItem.featured_image", "images"),
         format="Image", max_length=255, null=True, blank=True)
     admin_thumb_field = "featured_image"
     visible = models.NullBooleanField(null=True, default=True)
+
+    def __unicode__(self):
+        return self.title
 
 
 class Category(Slugged):

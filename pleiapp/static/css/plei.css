@@ -2062,6 +2062,10 @@ ul.menu > li:hover {
 	position: relative;
 }
 
+#featured-carousel img {
+	max-width: none;
+}
+
 #featured-carousel #prev, #featured-carousel #next {
 	display: block;
 	position: absolute;
@@ -2126,9 +2130,12 @@ ul.menu > li:hover {
 	color:#FFF;
 	font-size:18px;
 	text-align:left;
-	padding: 16px 20px;
+	padding: 16px 20px 0 20px;
+	margin: 0 0 16px 0;
 	height:105px;
 	width: 260px;
+	white-space: normal;
+	overflow: hidden;
 }
 .featured-button {
 	text-align:center;
