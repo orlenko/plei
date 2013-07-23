@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from mezzanine.core.fields import FileField
+from mezzanine.core.fields import FileField, RichTextField
 from mezzanine.core.models import Displayable, Ownable, RichText, Slugged
 from mezzanine.utils.models import AdminThumbMixin, upload_to
 import datetime
@@ -13,40 +13,59 @@ class Resource(Displayable, Ownable, RichText, AdminThumbMixin):
 
     categories = models.ManyToManyField("Category",
                                         verbose_name=_("Personas"),
-                                        blank=True, related_name="resources")
+                                        blank=True, related_name="resources",
+        help_text='Personas applicable to this resource')
     topics = models.ManyToManyField("Topic",
                                     verbose_name=_("Topics"),
-                                    blank=True, related_name="resources")
+                                    blank=True, related_name="resources",
+        help_text='Topics related to this resource')
     types = models.ManyToManyField("Type",
                                    verbose_name=_("Types"),
-                                   blank=True, related_name="resources")
-    author = models.CharField(max_length=1024, blank=True, default='')
+                                   blank=True, related_name="resources",
+        help_text='Resource types applicable to this resource')
+    author = models.CharField(max_length=1024, blank=True, default='',
+        help_text='Name of the person (or names of the people) who created this resource')
     featured_image = FileField(verbose_name=_("Featured Image"),
         upload_to=upload_to("pleiapp.Resource.featured_image", "images"),
-        format="Image", max_length=255, null=True, blank=True)
+        format="Image", max_length=255, null=True, blank=True,
+        help_text='The image that will appear with this resource on the category pages')
     related_resources = models.ManyToManyField("self",
                                  verbose_name=_("Related resources"),
-                                 blank=True)
+                                 blank=True,
+                                 help_text='Other resources related to this one')
     related_dictionary = models.ManyToManyField("Dictionary",
                                  verbose_name=_("Related Dictionary Definition"),
-                                 blank=True)
+                                 blank=True,
+                                 help_text='Dictionary entries related to this resource')
     related_faqs = models.ManyToManyField("Faq",
                                  verbose_name=_("Related FAQ Entries"),
-                                 blank=True)
-    video_url = models.URLField("Video", max_length=1024, blank=True, default='', null=True)
-    link_url = models.URLField("Web Link", max_length=1024, blank=True, default='', null=True)
+                                 blank=True,
+                                 help_text='FAQ entries related to this resource')
+    video_url = models.URLField("Video", max_length=1024, blank=True, default='', null=True,
+        help_text='Paste a YouTube URL here. '
+            'Example: http://www.youtube.com/watch?v=6Bm7DVqJTHo')
+    link_url = models.URLField("Web Link", max_length=1024, blank=True, default='', null=True,
+        help_text='A link to a web resource. '
+            'The address must start with http:// or https://. '
+            'For example: http://plei.publiclegaled.bc.ca')
     audio_file = FileField("Audio",
         upload_to=upload_to("pleiapp.Resource.audio_file", "resource/audio"),
         extensions=['.mp3','.mp4','.wav','.aiff','.midi','.m4p'],
         max_length=255,
         null=True,
-        blank=True)
+        blank=True,
+        help_text='You can upload an audio file. '
+            'Acceptable file types: .mp3, .mp4, .wav, .aiff, .m4p.')
     attached_document = FileField('Downloadable Document',
         upload_to=upload_to("pleiapp.Resource.attachment_file", "resource/document"),
         extensions=['.doc','.pdf','.rtf','.txt','.odf','.docx', '.xls', '.xlsx', '.ppt', '.pptx'],
         max_length=255,
         null=True,
-        blank=True)
+        blank=True,
+        help_text='You can upload an office document or a PDF file. '
+            'Acceptable file types: .doc, .pdf, .rtf, .txt, .odf, .docx, .xls, .xlsx, .ppt, .pptx.')
+    toc = RichTextField('Table of Contents', blank=True, null=True,
+        help_text='Paste the Table of Contents here')
 
     admin_thumb_field = "featured_image"
 

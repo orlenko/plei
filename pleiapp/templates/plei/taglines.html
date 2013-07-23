@@ -3,9 +3,11 @@
 		<div id="Stage_Rectangle" class="Stage_Rectangle_id"></div>
 		<div class="cycle-slideshow taglines"
 				style=""
-				data-cycle-fx="scrollHorz"
-				data-cycle-timeout="5000"
+				data-cycle-fx="shuffleFromLeft"
+				data-cycle-sync="false"
+				data-cycle-timeout="6000"
 				data-cycle-easing="easeInBack"
+				data-cycle-speed="800"
 				data-cycle-slides="> div">
 			{% for tagline in taglines %}
 				<div class="tagline">{{tagline.text}}</div>

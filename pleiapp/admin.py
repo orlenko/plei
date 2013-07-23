@@ -21,7 +21,7 @@ resource_fieldsets[0][1]["fields"].insert(1, "types")
 resource_fieldsets[0][1]["fields"].insert(1, "topics")
 resource_fieldsets[0][1]["fields"].insert(1, "author")
 resource_fieldsets[0][1]["fields"].extend(["content", ])
-resource_fieldsets[0][1]["fields"].extend(["video_url","audio_file","attached_document",])
+resource_fieldsets[0][1]["fields"].extend(["toc","video_url","audio_file","link_url","attached_document",])
 resource_list_display = ["title", "user", "status", "admin_link"]
 resource_fieldsets[0][1]["fields"].insert(-2, "featured_image")
 resource_list_display.insert(0, "admin_thumb")
