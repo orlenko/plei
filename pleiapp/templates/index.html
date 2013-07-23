@@ -3,36 +3,41 @@
 
 {% block meta_title %}{% trans "Home" %}{% endblock %}
 {% block title %}{% endblock %}
-
-{% block extra_css %}
-
-{% endblock %}
-
+{% block extra_css %}{% endblock %}
 {% block breadcrumb_menu %}{% endblock %}
 
 {% block wide_centralpart %}
 
 <section id="featured-carousel">
-
-    <div id="featured-slides">
-        <ul>
-			{% for item in front_page_items %}
-				<li>
-					<div class="featured-title title-{{item.item_type}}"><h4>{{item.title}}</h4></div>
-					{% if item.featured_image %}
-						<div class="featured-image"><img src="{{ MEDIA_URL }}{% thumbnail item.featured_image 300 0 %}"/></div>
-					{% endif %}
-					{% if not item.featured_image %}
-						<div class="featured-image"><img src="/static/img/featured-placeholder-image.jpg" alt="PLEI Logo" /></div>
-					{% endif %}
-					<div class="featured-text-wrapper">
-						<div class="featured-text">{{item.text}}</div>
-                		<div class="featured-button"><a href="{{item.url}}"><img src="/static/img/button-readmore.png" alt="Read More" /></a></div>
-                	</div>
-				</li>
-			{% endfor %}
-		</ul>
+	<div class="cycle-slideshow"
+	    data-cycle-fx="carousel"
+	    data-cycle-timeout="0"
+	    data-cycle-carousel-visible="5"
+	    data-cycle-carousel-fluid="false"
+	    data-cycle-next="#next"
+	    data-cycle-prev="#prev"
+	    data-cycle-slides="> div" >
+	    {% for item in front_page_items %}
+	    <div class="featured-item">
+		    <div class="featured-title title-{{item.item_type}}"><h4>{{item.title}}</h4></div>
+			{% if item.featured_image %}
+				<div class="featured-image"><img src="{{ MEDIA_URL }}{% thumbnail item.featured_image 300 0 %}"/></div>
+			{% endif %}
+			{% if not item.featured_image %}
+				<div class="featured-image"><img src="/static/img/featured-placeholder-image.jpg" alt="PLEI Logo" /></div>
+			{% endif %}
+			<div class="featured-text-wrapper">
+				<div class="featured-text">{{item.text}}</div>
+	    		<div class="featured-button"><a href="{{item.url}}"><img src="/static/img/button-readmore.png" alt="Read More" /></a></div>
+	    	</div>
+	    </div>
+	    {% endfor %}
 	</div>
-</section><!-- end of section #featured-carousel -->
+
+	<div class="buttons">
+	    <a href="" id="prev"></a>
+	    <a href="" id="next"></a>
+	</div>
+</section>
 
 {% endblock %}
