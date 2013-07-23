@@ -21,21 +21,22 @@ resource_fieldsets[0][1]["fields"].insert(1, "types")
 resource_fieldsets[0][1]["fields"].insert(1, "topics")
 resource_fieldsets[0][1]["fields"].insert(1, "author")
 resource_fieldsets[0][1]["fields"].extend(["content", ])
+resource_fieldsets[0][1]["fields"].extend(["video_url","audio_file","attached_document",])
 resource_list_display = ["title", "user", "status", "admin_link"]
 resource_fieldsets[0][1]["fields"].insert(-2, "featured_image")
 resource_list_display.insert(0, "admin_thumb")
 resource_fieldsets = list(resource_fieldsets)
+resource_list_filter = deepcopy(DisplayableAdmin.list_filter) + ("categories", "types", "topics", )
 resource_fieldsets.insert(1, (_("Related"), {
     "classes": ("collapse-closed",),
     "fields": ("related_resources","related_faqs","related_dictionary",)}))
-resource_list_filter = deepcopy(DisplayableAdmin.list_filter) + ("categories", "types", "topics",)
 
 
 class ResourceAdmin(DisplayableAdmin, OwnableAdmin):
     fieldsets = resource_fieldsets
     list_display = resource_list_display
     list_filter = resource_list_filter
-    filter_horizontal = ("categories", "types", "topics", )
+    filter_horizontal = ("categories", "types", "topics", "related_resources", "related_dictionary", "related_faqs")
 
     def save_form(self, request, form, change):
         """
@@ -61,7 +62,7 @@ class FaqAdmin(DisplayableAdmin, OwnableAdmin):
     fieldsets = faq_fieldsets
     list_display = resource_list_display
     list_filter = resource_list_filter
-    filter_horizontal = ("categories", "types", "topics", )
+    filter_horizontal = ("categories", "types", "topics", "related_resources","related_faqs","related_dictionary")
 
     def save_form(self, request, form, change):
         """
@@ -87,7 +88,7 @@ class DictionaryAdmin(DisplayableAdmin, OwnableAdmin):
     fieldsets = dictionary_fieldsets
     list_display = resource_list_display
     list_filter = resource_list_filter
-    filter_horizontal = ("categories", "types", "topics", )
+    filter_horizontal = ("categories", "types", "topics", "related_resources","related_faqs","related_dictionary")
 
     def save_form(self, request, form, change):
         """

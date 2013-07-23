@@ -12,7 +12,7 @@ class Resource(Displayable, Ownable, RichText, AdminThumbMixin):
     '''
 
     categories = models.ManyToManyField("Category",
-                                        verbose_name=_("Categories"),
+                                        verbose_name=_("Personas"),
                                         blank=True, related_name="resources")
     topics = models.ManyToManyField("Topic",
                                     verbose_name=_("Topics"),
@@ -22,7 +22,7 @@ class Resource(Displayable, Ownable, RichText, AdminThumbMixin):
                                    blank=True, related_name="resources")
     author = models.CharField(max_length=1024, blank=True, default='')
     featured_image = FileField(verbose_name=_("Featured Image"),
-        upload_to=upload_to("blog.BlogPost.featured_image", "blog"),
+        upload_to=upload_to("pleiapp.Resource.featured_image", "resource/images"),
         format="Image", max_length=255, null=True, blank=True)
     related_resources = models.ManyToManyField("self",
                                  verbose_name=_("Related resources"),
@@ -33,6 +33,19 @@ class Resource(Displayable, Ownable, RichText, AdminThumbMixin):
     related_faqs = models.ManyToManyField("Faq",
                                  verbose_name=_("Related FAQ Entries"),
                                  blank=True)
+    video_url = models.CharField("Video", max_length=1024, blank=True, default='', null=True)
+    audio_file = FileField("Audio",
+        upload_to=upload_to("pleiapp.Resource.audio_file", "resource/audio"),
+        extensions=['.mp3','.mp4','.wav','.aiff','.midi','.m4p'],
+        max_length=255,
+        null=True,
+        blank=True)
+    attached_document = FileField('Downloadable Document',
+        upload_to=upload_to("pleiapp.Resource.attachment_file", "resource/document"),
+        extensions=['.doc','.pdf','.rtf','.txt','.odf','.docx', '.xls', '.xlsx'],
+        max_length=255,
+        null=True,
+        blank=True)
 
     admin_thumb_field = "featured_image"
 
@@ -51,7 +64,7 @@ class Faq(Displayable, Ownable, RichText, AdminThumbMixin):
     '''
 
     categories = models.ManyToManyField("Category",
-                                        verbose_name=_("Categories"),
+                                        verbose_name=_("Personas"),
                                         blank=True, related_name="faqs")
     topics = models.ManyToManyField("Topic",
                                     verbose_name=_("Topics"),
@@ -91,7 +104,7 @@ class Dictionary(Displayable, Ownable, RichText, AdminThumbMixin):
     '''
 
     categories = models.ManyToManyField("Category",
-                                        verbose_name=_("Categories"),
+                                        verbose_name=_("Personas"),
                                         blank=True, related_name="dicts")
     topics = models.ManyToManyField("Topic",
                                     verbose_name=_("Topics"),
@@ -155,8 +168,8 @@ class Category(Slugged):
     visible = models.NullBooleanField(null=True, default=True)
 
     class Meta:
-        verbose_name = _("Resource Category")
-        verbose_name_plural = _("Resource Categories")
+        verbose_name = _("Persona")
+        verbose_name_plural = _("Personas")
         ordering = ("title",)
 
     @models.permalink
