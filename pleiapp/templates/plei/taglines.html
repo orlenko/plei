@@ -1,5 +1,14 @@
-{% for tagline in taglines %}
-	<div class="edgeLoad-EDGE-181606677" id="Stage_Line{{forloop.counter}}_id">
-		{{tagline.text}}
+<div id="animation">
+	<div id="Stage" style="position: relative; -webkit-transform: translateZ(0); background-color: rgba(255, 255, 255, 0); overflow: hidden; height: 182px; width: 440px;">
+		<div id="Stage_Rectangle" class="Stage_Rectangle_id" style="position: absolute; margin: 0px; left: 0px; top: 37px; height: 108px; right: auto; bottom: auto; border: 1px solid rgb(255, 255, 255); background-color: rgba(255, 255, 255, 0); -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></div>
+		<div class="cycle-slideshow"
+				style="margin: 30px 0 0 20px;width: 413px;height: 200px;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);font-family: 'open Sans';font-size: 22px;color: rgb(252, 252, 252);font-weight: normal;text-decoration: none;font-style: normal;text-align: left;"
+				data-cycle-fx="scrollHorz"
+				data-cycle-timeout="5000"
+				data-cycle-slides="> div">
+			{% for tagline in taglines %}
+				<div class="tagline" style="width: 413px;height: 200px;">{{tagline.text}}</div>
+		    {% endfor %}
+		</div>
 	</div>
-{% endfor %}
+</div>

@@ -23,17 +23,12 @@
 	<script src="{% static "js/jquery-1.10.2.min.js" %}"></script>
 	<script src="{% static "js/responsive-modernizr.js" %}"></script>
 	<script src="{% static "js/responsive-scripts.js" %}"></script>
+	<script src="{% static "js/jquery.cycle2.min.js" %}"></script>
+	<script src="{% static "js/jquery.cycle2.caption2.min.js" %}"></script>
 	<script src="{% static "js/plei.js" %}"></script>
 {% block extra_js %}{% endblock %}
 {% endcompress %}
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,300italic,700,700italic' rel='stylesheet' type='text/css'>
-<!--Adobe Edge Runtime-->
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"></script>
-    <script type="text/javascript" charset="utf-8" src="{% static "js/edge_edgePreload.js" %}"></script>
-    <style>
-        .edgeLoad-EDGE-181606677 { visibility:hidden; }
-    </style>
-<!--Adobe Edge Runtime End-->
 {% block extra_head %}{% endblock %}
 </head>
 
@@ -44,7 +39,7 @@
 				<a href="/"><img src="{% static "img/plei-logo.png" %}" alt="Public Legal Eductaion Information for Non-Profits" /></a>
 			</div><!-- end of #logo -->
 
-			<div id="animation">
+			<!-- <div id="animation">
 				<div id="Stage" class="EDGE-181606677">
 					<div id="Stage_Rectangle" class="edgeLoad-EDGE-181606677"></div>
 					<div id="Stage_Line1" class="edgeLoad-EDGE-181606677">
@@ -57,7 +52,8 @@
 						Our efforts and results are focused on a BC where everyone is legally literate and has the capacity to exercise their legal rights and responsibilities.
 					</div>
 				</div>
-			</div>
+			</div> -->
+			{% plei_taglines %}
 
 			<div class="main-nav">
 				{% plei_top_menu %}

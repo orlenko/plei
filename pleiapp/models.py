@@ -193,3 +193,6 @@ class Topic(Slugged):
 
 class Tagline(models.Model):
     text = models.TextField()
+
+    def __unicode__(self):
+        return self.text
