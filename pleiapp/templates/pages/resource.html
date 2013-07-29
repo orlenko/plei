@@ -4,8 +4,218 @@
 
 {% block main %}{{ block.super }}
 
-{% editable page.resource.content %}
-{{ page.resource.content|richtext_filter|safe }}
-{% endeditable %}
+<div id="wrapper" class="clearfix">
+	<section id="content-full" class="grid col-620">
+		<div class="breadcrumb-list">
+			<span typeof="v:Breadcrumb">
+				<a rel="v:url" property="v:title" href="/">Home</a>
+			</span>
+			<span class="chevron">&#8250;</span>
+			{% if page.resource.topics.count() %}
+				<span typeof="v:Breadcrumb">
+					<a rel="v:url" property="v:title" 
+						href="{{page.resource.topics.all.0.get_absolute_url}}">{{page.resource.topics.all.0.title}}</a>
+				</span>
+			<span class="breadcrumb-current">{{page.resource.title}}</span>
+		</div>
+		<div class="page">                
+			<h1 class="page-icon-resource">{{page.resource.title}}</h1>                 
+                <div class="date-author"><b>Date Created:</b> {{page.resource.publish_date}}</div>
+                <div class="date-author"><b>Author(s):</b> {{page.resource.author}}</div>
+                
+                <article class="resource-content">
+                <img width="172" height="122" src="{{ MEDIA_URL }}{% thumbnail res.featured_image 300 0 %}" class="wp-post-image" alt="Resource Image" /> 
+
+				{% editable page.resource.content %}
+					{{ page.resource.content|richtext_filter|safe }}
+				{% endeditable %}
+                
+                <aside id="extra" class="grid col-940">
+                	<ul class="grid col-940">
+                    	<li><a href="#">Table of Contents</a></li>
+                        <li><a href="#">Watch Video</a></li>
+                        <li><a href="#">Listen to Audio</a></li>
+                        <li><a href="#">Web Link</a></li>
+                        <li><a href="#">Download PDF</a></li>
+                    </ul>
+                </aside>
+                
+                <aside id="recomendations" class="grid col-940">
+                
+                
+                 <ul class="grid col-940 category-list">
+                 	<h5>Recommendations:</h5>           
+               
+						
+                    <li class="grid">      
+                        
+                        <div class="post-entry">
+                            <div class="grid col-940 category-image">
+                                <a href="#" title="test Society Act"><img width="172" height="122" src="http://idealogy.ca/dev/pls2013wp/wp-content/uploads/2013/07/law-school-172x122.jpg" class=" wp-post-image" alt="law-school" /></a>
+                            </div>
+                            
+                            <div class="grid col-940 category-post-title">
+                                <h5><a href="#" title="#">test Society Act</a></h5>
+                            </div>
+                            
+                            <div class="grid col-940 category-text"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vitae enim lectus. Proin laoreet aliquam leo, a gravida diam posuere<span class="ellipsis">&hellip;</span>
+                            
+                                <div class="triangle-cat grid col-940">
+                                <span class="item-type">Type Here</span><div class="read-more"><a href="#">more</a></div>
+                                </div>
+                            </div>
+                            
+                            
+                        </div><!-- end of .post-entry -->
+                        
+        
+                    </li>
+                    
+                    <li class="grid">      
+                        
+                        <div class="post-entry">
+                            <div class="grid col-940 category-image">
+                                <a href="#" title="test Society Act"><img width="172" height="122" src="http://idealogy.ca/dev/pls2013wp/wp-content/uploads/2013/07/law-school-172x122.jpg" class=" wp-post-image" alt="law-school" /></a>
+                            </div>
+                            
+                            <div class="grid col-940 category-post-title">
+                                <h5><a href="#" title="#">test Society Act</a></h5>
+                            </div>
+                            
+                            <div class="grid col-940 category-text"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vitae enim lectus. Proin laoreet aliquam leo, a gravida diam posuere<span class="ellipsis">&hellip;</span>
+                            
+                                <div class="triangle-cat grid col-940">
+                                <span class="item-type">Type Here</span><div class="read-more"><a href="#">more</a></div>
+                                </div>
+                            </div>
+                            
+                            
+                        </div><!-- end of .post-entry -->
+                        
+        
+                    </li>
+                           
+                    
+                    <li class="grid">      
+                        
+                        <div class="post-entry">
+                            <div class="grid col-940 category-image">
+                                <a href="#" title="test Society Act"><img width="172" height="122" src="http://idealogy.ca/dev/pls2013wp/wp-content/uploads/2013/07/law-school-172x122.jpg" class=" wp-post-image" alt="law-school" /></a>
+                            </div>
+                            
+                            <div class="grid col-940 category-post-title">
+                                <h5><a href="#" title="#">test Society Act</a></h5>
+                            </div>
+                            
+                            <div class="grid col-940 category-text"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vitae enim lectus. Proin laoreet aliquam leo, a gravida diam posuere<span class="ellipsis">&hellip;</span>
+                            
+                                <div class="triangle-cat grid col-940">
+                                <span class="item-type">Type Here</span><div class="read-more"><a href="#">more</a></div>
+                                </div>
+                            </div>
+                            
+                            
+                        </div><!-- end of .post-entry -->
+                        
+        
+                    </li>
+                    
+                    <li class="grid">      
+                        
+                        <div class="post-entry">
+                            <div class="grid col-940 category-image">
+                                <a href="#" title="test Society Act"><img width="172" height="122" src="http://idealogy.ca/dev/pls2013wp/wp-content/uploads/2013/07/law-school-172x122.jpg" class=" wp-post-image" alt="law-school" /></a>
+                            </div>
+                            
+                            <div class="grid col-940 category-post-title">
+                                <h5><a href="#" title="#">test Society Act</a></h5>
+                            </div>
+                            
+                            <div class="grid col-940 category-text"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vitae enim lectus. Proin laoreet aliquam leo, a gravida diam posuere<span class="ellipsis">&hellip;</span>
+                            
+                                <div class="triangle-cat grid col-940">
+                                <span class="item-type">Type Here</span><div class="read-more"><a href="#">more</a></div>
+                                </div>
+                            </div>
+                            
+                            
+                        </div><!-- end of .post-entry -->
+                        
+        
+                    </li>         
+                    
+                    <li class="grid">      
+                        
+                        <div class="post-entry">
+                            <div class="grid col-940 category-image">
+                                <a href="#" title="test Society Act"><img width="172" height="122" src="http://idealogy.ca/dev/pls2013wp/wp-content/uploads/2013/07/law-school-172x122.jpg" class=" wp-post-image" alt="law-school" /></a>
+                            </div>
+                            
+                            <div class="grid col-940 category-post-title">
+                                <h5><a href="#" title="#">test Society Act</a></h5>
+                            </div>
+                            
+                            <div class="grid col-940 category-text"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vitae enim lectus. Proin laoreet aliquam leo, a gravida diam posuere<span class="ellipsis">&hellip;</span>
+                            
+                                <div class="triangle-cat grid col-940">
+                                <span class="item-type">Type Here</span><div class="read-more"><a href="#">more</a></div>
+                                </div>
+                            </div>
+                            
+                            
+                        </div><!-- end of .post-entry -->
+                        
+        
+                    </li>
+                    
+                    <li class="grid">      
+                        
+                        <div class="post-entry">
+                            <div class="grid col-940 category-image">
+                                <a href="#" title="test Society Act"><img width="172" height="122" src="http://idealogy.ca/dev/pls2013wp/wp-content/uploads/2013/07/law-school-172x122.jpg" class=" wp-post-image" alt="law-school" /></a>
+                            </div>
+                            
+                            <div class="grid col-940 category-post-title">
+                                <h5><a href="#" title="#">test Society Act</a></h5>
+                            </div>
+                            
+                            <div class="grid col-940 category-text"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vitae enim lectus. Proin laoreet aliquam leo, a gravida diam posuere<span class="ellipsis">&hellip;</span>
+                            
+                                
+                                <div class="triangle-cat grid col-940">
+                                <span class="item-type">Type Here</span><div class="read-more"><a href="#">more</a></div>
+                                </div>
+                                
+                            </div>
+                            
+                            
+                        </div><!-- end of .post-entry -->
+                        
+        
+                    </li> 
+        
+              
+            		</ul>
+               
+                
+                <div id="small-controls">
+    
+                    <div id="small-arrow-left"><a href="#"><img src="assets/img/small-arrow-left.png" alt="previous" /></a></div>
+                
+                    <div id="small-arrow-right"><a href="#"><img src="assets/img/small-arrow-right.png" alt="next" /></a></div>
+    
+   				 </div>
+                
+                
+                </aside>
+				               
+				      
+			</div><!-- end of .page --> 			                        
+          
+      
+		</section><!-- end of #content-full -->
+</div>
+
+
 
 {% endblock %}

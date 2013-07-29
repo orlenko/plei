@@ -137,14 +137,14 @@ def plei_thumbnail(image_url, width, height, quality=95):
         return image_url
     # Set dimensions.
     if width and height:
-        print 'Both dimensions of %s are specified' % image_url
+        #print 'Both dimensions of %s are specified' % image_url
         if float(height) / width < float(image.size[1]) / image.size[0]:
-            print 'Original image is tall and slim, will resize by width only'
+            #print 'Original image is tall and slim, will resize by width only'
             height = 0
         else:
-            print 'Original image is wide and short, will resize by height only'
-            print 'Because %s is less than %s' % (float(image.size[1]) / image.size[0],
-                float(height) / width)
+            #print 'Original image is wide and short, will resize by height only'
+            #print 'Because %s is less than %s' % (float(image.size[1]) / image.size[0],
+            #    float(height) / width)
             width = 0
     if not width:
         width = int(round(float(image.size[0]) * height / image.size[1]))
@@ -167,11 +167,11 @@ def plei_thumbnail(image_url, width, height, quality=95):
         # If an error occurred, a corrupted image may have been saved,
         # so remove it, otherwise the check for it existing will just
         # return the corrupted image next time it's requested.
-        print 'Failed to convert image! Error: %s' %  traceback.format_exc()
+        #print 'Failed to convert image! Error: %s' %  traceback.format_exc()
         try:
             os.remove(thumb_path)
         except Exception:
-            print 'Failed to remove thumbnail! Error: %s' %  traceback.format_exc()
+            #print 'Failed to remove thumbnail! Error: %s' %  traceback.format_exc()
             pass
         return image_url
     return thumb_url
