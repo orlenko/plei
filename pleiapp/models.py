@@ -7,9 +7,17 @@ from mezzanine.utils.models import AdminThumbMixin, upload_to
 import datetime
 
 
-class Resource(Displayable, Ownable, RichText, AdminThumbMixin):
+class RelatedMixin(object):
+    @property
+    def has_related(self):
+        return self.related_resources.count() or self.related_faqs.count()
+
+
+class Resource(Displayable, Ownable, RichText, AdminThumbMixin, RelatedMixin):
     '''Resource content type.
     '''
+
+    item_type = 'Resource'
 
     categories = models.ManyToManyField("Category",
                                         verbose_name=_("Personas"),
@@ -79,9 +87,11 @@ class Resource(Displayable, Ownable, RichText, AdminThumbMixin):
         return ('resource', (), {"slug": self.slug})
 
 
-class Faq(Displayable, Ownable, RichText, AdminThumbMixin):
+class Faq(Displayable, Ownable, RichText, AdminThumbMixin, RelatedMixin):
     '''FAQ entry content type.
     '''
+
+    item_type = 'FAQ'
 
     categories = models.ManyToManyField("Category",
                                         verbose_name=_("Personas"),

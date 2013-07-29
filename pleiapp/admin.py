@@ -78,9 +78,6 @@ class FaqAdmin(DisplayableAdmin, OwnableAdmin):
 
 
 dictionary_fieldsets = deepcopy(DisplayableAdmin.fieldsets)
-dictionary_fieldsets[0][1]["fields"].insert(1, "categories")
-dictionary_fieldsets[0][1]["fields"].insert(1, "types")
-dictionary_fieldsets[0][1]["fields"].insert(1, "topics")
 dictionary_fieldsets[0][1]["fields"].extend(["content", ])
 dictionary_fieldsets[0][1]["fields"].insert(-2, "featured_image")
 dictionary_fieldsets = list(dictionary_fieldsets)
@@ -92,8 +89,8 @@ dictionary_fieldsets.insert(1, (_("Related"), {
 class DictionaryAdmin(DisplayableAdmin, OwnableAdmin):
     fieldsets = dictionary_fieldsets
     list_display = resource_list_display
-    list_filter = resource_list_filter
-    filter_horizontal = ("categories", "types", "topics", "related_resources","related_faqs","related_dictionary")
+    list_filter = deepcopy(DisplayableAdmin.list_filter)
+    filter_horizontal = ("related_resources","related_faqs","related_dictionary")
 
     def save_form(self, request, form, change):
         """

@@ -14,65 +14,17 @@
 		<div class="page">
 			<h1 class="page-icon-faq">{{group.title}}</h1>
 			<ul class="grid col-940 category-list">
-				{% if group.resources.count %}
-				{% for res in group.resources.all %}
+				{% for item in group.resources.all %}
 				<li class="grid">
-					<div class="post-entry">
-						<div class="grid col-940 category-image">
-							{% if res.featured_image %}
-							<a href="{{res.get_absolute_url}}" title="{{res.title}}"><img width="172" height="122" src="{{ MEDIA_URL }}{% thumbnail res.featured_image 172 0 %}" class="wp-post-image" alt="law-school" /></a>
-							{% endif %}
-						</div>
-
-						<div class="grid col-940 category-post-title">
-							<h5><a href="{{res.get_absolute_url}}" title="{{res.title}}">{{res.title}}</a></h5>
-						</div>
-
-						<div class="grid col-940 category-text">
-							<p>
-								{{res.content|richtext_filter|truncatewords:20|safe}}
-							</p>
-							<div class="triangle-cat grid col-940">
-								<span class="item-type">Resource</span>
-								<div class="read-more">
-									<a href="{{res.get_absolute_url}}">more</a>
-								</div>
-							</div>
-						</div>
-					</div>
+					{% include "plei/resource_widget.html" %}
 				</li>
 				{% endfor %}
-				{% endif %}
 
-				{% if group.faqs.count %}
-				{% for res in group.faqs.all %}
+				{% for item in group.faqs.all %}
 				<li class="grid">
-					<div class="post-entry">
-						<div class="grid col-940 category-image">
-							{% if res.featured_image %}
-							<a href="{{res.get_absolute_url}}" title="{{res.title}}"><img width="172" height="122" src="{{ MEDIA_URL }}{% thumbnail res.featured_image 172 0 %}" class="wp-post-image" alt="law-school" /></a>
-							{% endif %}
-						</div>
-
-						<div class="grid col-940 category-post-title">
-							<h5><a href="{{res.get_absolute_url}}" title="{{res.title}}">{{res.title}}</a></h5>
-						</div>
-
-						<div class="grid col-940 category-text">
-							<p>
-								{{res.content|richtext_filter|truncatewords:20|safe}}
-							</p>
-							<div class="triangle-cat grid col-940">
-								<span class="item-type">FAQ</span>
-								<div class="read-more">
-									<a href="{{res.get_absolute_url}}">more</a>
-								</div>
-							</div>
-						</div>
-					</div>
+					{% include "plei/resource_widget.html" %}
 				</li>
 				{% endfor %}
-				{% endif %}
 
 			</ul>
 			<div class="navigation">

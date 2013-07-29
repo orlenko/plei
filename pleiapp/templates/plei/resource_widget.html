@@ -1,0 +1,28 @@
+{% load mezzanine_tags staticfiles plei_tags %}
+<div class="post-entry resource-widget">
+    <div class="grid col-940 category-image">
+        <a href="{{ item.get_absolute_url }}" title="{{ item.title }}">
+        	{% if item.featured_image %}
+        		<img src="{{ MEDIA_URL }}{% plei_thumbnail item.featured_image 172 122 %}"
+        			class=" wp-post-image"
+        			alt="{{ item.title }}" />
+        	{% endif %}
+        	{% if not item.featured_image %}
+        		<img src="/static/img/featured-placeholder-image.jpg"
+        		class="wp-post-image"
+        		alt="{{ item.title }}" />
+        	{% endif %}
+        </a>
+    </div>
+
+    <div class="grid col-940 category-post-title">
+        <h5><a href="{{ item.get_absolute_url }}" title="{{ item.title }}">{{ item.title }}</a></h5>
+    </div>
+
+    <div class="grid col-940 category-text">
+		<p class="content">{{ item.content|striptags|truncatewords:20 }}</p>
+        <div class="triangle-cat grid col-940">
+        <span class="item-type">{{ item.item_type }}</span><div class="read-more"><a href="{{ item.get_absolute_url }}">more</a></div>
+        </div>
+    </div>
+</div>

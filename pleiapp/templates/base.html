@@ -15,7 +15,9 @@
 <link rel="shortcut icon" href="{% static "img/favicon.ico" %}">
 
 {% compress css %}
-	<link rel="stylesheet" href="{% static "css/plei.css" %}">
+	<!-- Magnific Popup core CSS file -->
+	<link rel="stylesheet" href="{% static "js/magnific-popup/magnific-popup.css" %}" />
+	<link rel="stylesheet" href="{% static "css/plei.css" %}" />
 	{% block extra_css %}{% endblock %}
 {% endcompress %}
 

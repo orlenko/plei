@@ -996,7 +996,7 @@ form div {
     margin-top: 121px;
     position: absolute;
     width: 630px;
-    z-index: 9999;
+    z-index: 999;
 }
 #small-arrow-left {
 	float:left;
@@ -2280,6 +2280,96 @@ ul.menu > li:hover {
 	clear: both;
 }
 
+
+/* Resource/FAQ widget */
+.resource-widget {
+	width: 172px;
+	height: 300px;
+}
+
+.resource-widget .category-image {
+	width: 172px;
+	height: 122px;
+	overflow: hidden;
+}
+
+.resource-widget .category-post-title {
+	width: 172px;
+	height: 24px;
+	overflow: hidden;
+}
+
+.resource-widget .category-text {
+	width: 172px;
+	height: 100px;
+}
+
+.resource-widget .category-text .content {
+	width: 172px;
+	height: 60px;
+	overflow: hidden;
+}
+
+
+
+#recomendations {
+	overflow: hidden;
+	width: 99%;
+}
+
+
+/* Pop-up box */
+
+/* text-based popup styling */
+.white-popup {
+  position: relative;
+  background: #FFF;
+  padding: 25px;
+  width:auto;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+/*
+
+====== Zoom effect ======
+
+*/
+.mfp-zoom-in .mfp-with-anim {
+    opacity: 0;
+    transition: all 0.2s ease-in-out;
+    transform: scale(0.8);
+}
+
+
+.mfp-zoom-in.mfp-bg {
+    opacity: 0;
+    transition: all 0.3s ease-out;
+}
+
+/* animate in */
+.mfp-zoom-in.mfp-ready .mfp-with-anim {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.mfp-zoom-in.mfp-ready.mfp-bg {
+    opacity: 0.8;
+}
+
+/* animate out */
+.mfp-zoom-in.mfp-removing .mfp-with-anim {
+    transform: scale(0.8);
+    opacity: 0;
+}
+
+.mfp-zoom-in.mfp-removing.mfp-bg {
+    opacity: 0;
+}
+
+
+
+
 /* =Begin bidirectionality settings (do not change)
 -------------------------------------------------------------- */
 BDO[DIR="ltr"] {
@@ -2763,4 +2853,3 @@ BDO[DIR="rtl"] {
 		display: block;
 	}
 }
-
