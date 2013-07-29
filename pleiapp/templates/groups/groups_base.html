@@ -74,35 +74,6 @@
 				{% endfor %}
 				{% endif %}
 
-				{% if group.dicts.count %}
-				{% for res in group.dicts.all %}
-				<li class="grid">
-					<div class="post-entry">
-						<div class="grid col-940 category-image">
-							{% if res.featured_image %}
-							<a href="{{res.get_absolute_url}}" title="{{res.title}}"><img width="172" height="122" src="{{ MEDIA_URL }}{% thumbnail res.featured_image 172 0 %}" class="wp-post-image" alt="law-school" /></a>
-							{% endif %}
-						</div>
-
-						<div class="grid col-940 category-post-title">
-							<h5><a href="{{res.get_absolute_url}}" title="{{res.title}}">{{res.title}}</a></h5>
-						</div>
-
-						<div class="grid col-940 category-text">
-							<p>
-								{{res.content|richtext_filter|truncatewords:20|safe}}
-							</p>
-							<div class="triangle-cat grid col-940">
-								<span class="item-type">???</span>
-								<div class="read-more">
-									<a href="{{res.get_absolute_url}}">more</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</li>
-				{% endfor %}
-				{% endif %}
 			</ul>
 			<div class="navigation">
 				<a href="#">Pagination</a>
