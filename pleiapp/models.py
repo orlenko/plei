@@ -122,16 +122,6 @@ class Faq(Displayable, Ownable, RichText, AdminThumbMixin):
 class Dictionary(Displayable, Ownable, RichText, AdminThumbMixin):
     '''Dictionary Definition content type.
     '''
-
-    categories = models.ManyToManyField("Category",
-                                        verbose_name=_("Personas"),
-                                        blank=True, related_name="dicts")
-    topics = models.ManyToManyField("Topic",
-                                    verbose_name=_("Topics"),
-                                    blank=True, related_name="dicts")
-    types = models.ManyToManyField("Type",
-                                   verbose_name=_("Types"),
-                                   blank=True, related_name="dicts")
     author = models.CharField(max_length=1024, blank=True, default='')
     featured_image = FileField(verbose_name=_("Featured Image"),
         upload_to=upload_to("pleiapp.Dictionary.featured_image", "images"),
