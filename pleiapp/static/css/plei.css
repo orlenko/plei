@@ -1176,7 +1176,7 @@ footer .widget-wrapper {
 }
 .page h1 {
 	color: #F15A23;
-    height: 45px;
+    /*height: 45px;*/
     line-height: 45px;
     padding-left: 120px;
 }
