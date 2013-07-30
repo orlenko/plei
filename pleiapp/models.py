@@ -5,12 +5,44 @@ from mezzanine.core.fields import FileField, RichTextField
 from mezzanine.core.models import Displayable, Ownable, RichText, Slugged
 from mezzanine.utils.models import AdminThumbMixin, upload_to
 import datetime
+import string
+from django.utils.html import strip_tags
+import logging
+
+log = logging.getLogger(__name__)
+
+
+STOPWORDS = ['all', 'just', 'being', 'over', 'both', 'through', 'yourselves',
+             'its', 'before', 'herself', 'had', 'should', 'to', 'only', 'under',
+             'ours', 'has', 'do', 'them', 'his', 'very', 'they', 'not', 'during',
+             'now', 'him', 'nor', 'did', 'this', 'she', 'each', 'further',
+             'where', 'few', 'because', 'doing', 'some', 'are', 'our',
+             'ourselves', 'out', 'what', 'for', 'while', 'does', 'above',
+             'between', 't', 'be', 'we', 'who', 'were', 'here', 'hers', 'by',
+             'on', 'about', 'of', 'against', 's', 'or', 'own', 'into',
+             'yourself', 'down', 'your', 'from', 'her', 'their', 'there',
+             'been', 'whom', 'too', 'themselves', 'was', 'until', 'more',
+             'himself', 'that', 'but', 'don', 'with', 'than', 'those', 'he',
+             'me', 'myself', 'these', 'up', 'will', 'below', 'can', 'theirs',
+             'my', 'and', 'then', 'is', 'am', 'it', 'an', 'as', 'itself',
+             'at', 'have', 'in', 'any', 'if', 'again', 'no', 'when', 'same',
+             'how', 'other', 'which', 'you', 'after', 'most', 'such', 'why', 'a',
+             'off', 'i', 'yours', 'so', 'the', 'having', 'once', 'im', 'its',
+             ]
 
 
 class RelatedMixin(object):
     @property
     def has_related(self):
         return self.related_resources.count() or self.related_faqs.count()
+
+    def update_searchable_text(self):
+        self.searchable_text = ' '.join([
+            clean_text(self.title),
+            clean_text(strip_tags(self.content)),
+            clean_text(strip_tags(getattr(self, 'toc', '')))])
+        log.debug('Updated searchable text for %s: %s' % (self, self.searchable_text))
+
 
 
 class Resource(Displayable, Ownable, RichText, AdminThumbMixin, RelatedMixin):
@@ -74,6 +106,8 @@ class Resource(Displayable, Ownable, RichText, AdminThumbMixin, RelatedMixin):
             'Acceptable file types: .doc, .pdf, .rtf, .txt, .odf, .docx, .xls, .xlsx, .ppt, .pptx.')
     toc = RichTextField('Table of Contents', blank=True, null=True,
         help_text='Paste the Table of Contents here')
+    detect_automatically = models.NullBooleanField(default=False, null=True)
+    searchable_text = models.TextField(null=True, blank=True)
 
     admin_thumb_field = "featured_image"
 
@@ -85,6 +119,31 @@ class Resource(Displayable, Ownable, RichText, AdminThumbMixin, RelatedMixin):
     @models.permalink
     def get_absolute_url(self):
         return ('resource', (), {"slug": self.slug})
+
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+        self.update_searchable_text()
+        return super(Resource, self).save(force_insert, force_update, using, update_fields)
+
+    def detect_related(self):
+        log.debug('Detecting related to %s' % self)
+        words = self.searchable_text.split()
+        log.debug('%s words' % len(words))
+        pairs = set()
+        for index in range(len(words) - 1):
+            pairs.add(' '.join([words[index], words[index+1]]))
+        log.debug('%s word pairs' % len(pairs))
+        for pair in pairs:
+            log.debug('Looking for records containing %r' % pair)
+            for faq in Faq.objects.filter(searchable_text__contains=pair):
+                log.debug('Related FAQ: %s' % faq)
+                self.related_faqs.add(faq)
+            for dictionary in Dictionary.objects.filter(searchable_text__contains=pair):
+                log.debug('Related Dictionary entry: %s' % dictionary)
+                self.related_dictionary.add(dictionary)
+            for resource in Resource.objects.filter(searchable_text__contains=pair):
+                if resource.pk != self.pk:
+                    log.debug('Related Resource: %s' % resource)
+                    self.related_resources.add(resource)
 
 
 class Faq(Displayable, Ownable, RichText, AdminThumbMixin, RelatedMixin):
@@ -116,6 +175,8 @@ class Faq(Displayable, Ownable, RichText, AdminThumbMixin, RelatedMixin):
                                  verbose_name=_("Related Resources"),
                                  blank=True,
                                  through=Resource.related_faqs.through)
+    detect_automatically = models.NullBooleanField(default=False, null=True)
+    searchable_text = models.TextField(null=True, blank=True)
 
     admin_thumb_field = "featured_image"
 
@@ -128,8 +189,26 @@ class Faq(Displayable, Ownable, RichText, AdminThumbMixin, RelatedMixin):
     def get_absolute_url(self):
         return ('faq', (), {"slug": self.slug})
 
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+        self.update_searchable_text()
+        return super(Faq, self).save(force_insert, force_update, using, update_fields)
 
-class Dictionary(Displayable, Ownable, RichText, AdminThumbMixin):
+    def detect_related(self):
+        words = self.searchable_text.split()
+        pairs = set()
+        for index in range(len(words) - 1):
+            pairs.add(' '.join([words[index], words[index+1]]))
+        for pair in pairs:
+            for faq in Faq.objects.filter(searchable_text__contains=pair):
+                if faq.pk != self.pk:
+                    self.related_faqs.add(faq)
+            for dictionary in Dictionary.objects.filter(searchable_text__contains=pair):
+                self.related_dictionary.add(dictionary)
+            for resource in Resource.objects.filter(searchable_text__contains=pair):
+                self.related_resources.add(resource)
+
+
+class Dictionary(Displayable, Ownable, RichText, AdminThumbMixin, RelatedMixin):
     '''Dictionary Definition content type.
     '''
     author = models.CharField(max_length=1024, blank=True, default='')
@@ -148,6 +227,7 @@ class Dictionary(Displayable, Ownable, RichText, AdminThumbMixin):
                                  blank=True,
                                  through=Faq.related_dictionary.through)
     admin_thumb_field = "featured_image"
+    searchable_text = models.TextField(null=True, blank=True)
 
     class Meta:
         verbose_name = _("Dictionary Definition")
@@ -157,6 +237,10 @@ class Dictionary(Displayable, Ownable, RichText, AdminThumbMixin):
     @models.permalink
     def get_absolute_url(self):
         return ('dictionary', (), {"slug": self.slug})
+
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+        self.update_searchable_text()
+        return super(Dictionary, self).save(force_insert, force_update, using, update_fields)
 
 
 FRONT_PAGE_ITEM_TYPES = (
@@ -232,3 +316,8 @@ class Tagline(models.Model):
 
     def __unicode__(self):
         return self.text
+
+
+def clean_text(text):
+    text = text.encode('utf8').translate(None, string.punctuation)
+    return ' '.join([x for x in text.lower().split() if 2 < len(x) and x not in STOPWORDS])
