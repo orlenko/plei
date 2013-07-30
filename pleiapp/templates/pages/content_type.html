@@ -117,6 +117,20 @@
 	</section>
 
 	<section id="widgets" class="grid col-300 fit">
+
+		{% if page.related_dictionary.count %}
+			<div class="widget-wrapper">
+				<div class="widget-title">
+					Dictionary Terms
+				</div>
+				<ul>
+					{% for term in page.related_dictionary.all %}
+						<li><a href="{{term.get_absolute_url}}" title="{{term.content|striptags}}">{{term.title}}</a></li>
+					{% endfor %}
+				</ul>
+			</div>
+		{% endif %}
+
 		{% plei_side_menu %}
 	</section><!-- end of #widgets -->
 </div>
