@@ -1,28 +1,33 @@
-<ul class="sidemenu">
-	<li>
-		<div class="sidemenusectionhead">Browse by Topic</div>
-		<ul>
-			{% for topic in topics %}
+
+<div class="widget-wrapper">
+	<div class="widget-title">
+		Topics
+	</div>
+	<ul>
+		{% for topic in topics %}
 			<li><a href="{{topic.get_absolute_url}}">{{topic.title}}</a></li>
-			{% endfor %}
-		</ul>
-	</li>
+		{% endfor %}
+	</ul>
+</div>
 
-	<li>
-		<div class="sidemenusectionhead">Browse by Resource Type</div>
-		<ul>
-			{% for restype in types %}
+<div class="widget-wrapper">
+	<div class="widget-title">
+		Resource Types
+	</div>
+	<ul>
+		{% for restype in types %}
 			<li><a href="{{restype.get_absolute_url}}">{{restype.title}}</a></li>
-			{% endfor %}
-		</ul>
-	</li>
+		{% endfor %}
+	</ul>
+</div>
 
-	<li>
-		<div class="sidemenusectionhead">Browse by What You Do</div>
-		<ul>
-			{% for category in categories %}
+<div class="widget-wrapper">
+	<div class="widget-title">
+		What You Do
+	</div>
+	<ul>
+		{% for category in categories %}
 			<li><a href="{{category.get_absolute_url}}">{{category.title}}</a></li>
-			{% endfor %}
-		</ul>
-	</li>
-</ul>
+		{% endfor %}
+	</ul>
+</div>
