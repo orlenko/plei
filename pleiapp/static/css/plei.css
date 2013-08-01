@@ -905,26 +905,25 @@ form div {
 .category-list li{
 	width:172px;
 	padding-right:38px;
-	padding-bottom: 30px;
+	padding-bottom: 20px;
 }
 .category-image img {
 	border:solid 1px #F15A23;
 }
 .category-post-title h5 {
 	font-size: 14px;
-    margin: 0;
-    padding-top: 10px;
+	margin: 0;
+	padding-top: 10px;
 	text-transform:capitalize;
-
 }
 .category-text {
 	font-size:12px;
 	line-height: 14px;
 }
 .category-list .read-more {
-    float: right;
-    padding: 6px 28px 0 0;
-    text-transform: uppercase;
+	float: right;
+	padding: 6px 28px 0 0;
+	text-transform: uppercase;
 	clear:none;
 }
 .item-type {
@@ -2285,6 +2284,7 @@ ul.menu > li:hover {
 .resource-widget {
 	width: 172px;
 	height: 300px;
+	position: relative;
 }
 
 .resource-widget .category-image {
@@ -2295,21 +2295,26 @@ ul.menu > li:hover {
 
 .resource-widget .category-post-title {
 	width: 172px;
-	height: 24px;
-	overflow: hidden;
 }
 
 .resource-widget .category-text {
 	width: 172px;
-	height: 100px;
+	position: absolute;
+	bottom: 0;
+	left: 0;
 }
 
 .resource-widget .category-text .content {
 	width: 172px;
-	height: 60px;
+	height: 120px;
 	overflow: hidden;
 }
 
+.resource-widget .category-text .triangle-cat {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+}
 
 
 #recomendations {
