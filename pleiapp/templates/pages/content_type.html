@@ -123,11 +123,9 @@
 				<div class="widget-title">
 					Dictionary Terms
 				</div>
-				<ul>
-					{% for term in page.related_dictionary.all %}
-						<li><a href="{{term.get_absolute_url}}" title="{{term.content|striptags}}">{{term.title}}</a></li>
-					{% endfor %}
-				</ul>
+				{% for term in page.related_dictionary.all %}
+					<a href="{{term.get_absolute_url}}" title="{{term.content|striptags}}">{{term.title}}</a>{% if not forloop.last %},{% endif %}
+				{% endfor %}
 			</div>
 		{% endif %}
 
