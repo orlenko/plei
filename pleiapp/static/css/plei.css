@@ -2293,15 +2293,18 @@ ul.menu > li:hover {
 	overflow: hidden;
 }
 
+.resource-widget .flexible-content-wrapper {
+	width: 172px;
+	height: 158px;
+	overflow: hidden;
+}
+
 .resource-widget .category-post-title {
 	width: 172px;
 }
 
 .resource-widget .category-text {
 	width: 172px;
-	position: absolute;
-	bottom: 0;
-	left: 0;
 }
 
 .resource-widget .category-text .content {
@@ -2310,10 +2313,13 @@ ul.menu > li:hover {
 	overflow: hidden;
 }
 
-.resource-widget .category-text .triangle-cat {
+.resource-widget .triangle-cat {
+	width: 172px;
 	position: absolute;
 	bottom: 0;
 	left: 0;
+	font-size: 12px;
+	line-height: 14px;
 }
 
 

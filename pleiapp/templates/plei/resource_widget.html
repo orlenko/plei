@@ -15,14 +15,16 @@
         </a>
     </div>
 
-    <div class="grid col-940 category-post-title">
-        <h5><a href="{{ item.get_absolute_url }}" title="{{ item.title }}">{{ item.title }}</a></h5>
-    </div>
+	<div class="grid col-940 flexible-content-wrapper">
+	    <div class="category-post-title">
+	        <h5><a href="{{ item.get_absolute_url }}" title="{{ item.title }}">{{ item.title }}</a></h5>
+	    </div>
 
-    <div class="grid col-940 category-text">
-		<p class="content">{{ item.content|striptags|truncatewords:30 }}</p>
-        <div class="triangle-cat grid col-940">
-        <span class="item-type">{{ item.item_type }}</span><div class="read-more"><a href="{{ item.get_absolute_url }}">more</a></div>
-        </div>
-    </div>
+	    <div class="category-text">
+			<p class="content">{{ item.content|striptags|truncatewords:30 }}</p>
+	    </div>
+	 </div>
+	 <div class="triangle-cat">
+    	<span class="item-type">{{ item.item_type }}</span><div class="read-more"><a href="{{ item.get_absolute_url }}">more</a></div>
+     </div>
 </div>
