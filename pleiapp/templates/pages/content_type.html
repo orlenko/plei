@@ -36,7 +36,9 @@
 
                 <aside id="extra" class="grid col-940">
                 	<ul class="grid col-940 has_lighbox_popups">
-                		<li><a class="lightbox" href="#toc" data-effect="mfp-zoom-in">Table of Contents</a></li>
+                		{% if page.toc %}
+                			<li><a class="lightbox" href="#toc" data-effect="mfp-zoom-in">Table of Contents</a></li>
+                		{% endif %}
 
                 		{% if page.video_url %}
                         	<li><a class="popup-youtube" href="{{ page.video_url }}">Watch Video</a></li>
