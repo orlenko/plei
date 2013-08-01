@@ -36,6 +36,10 @@ class RelatedMixin(object):
     def has_related(self):
         return self.related_resources.count() or self.related_faqs.count()
 
+    @property
+    def many_related(self):
+        return 3 < self.related_resources.count() + self.related_faqs.count()
+
     def update_searchable_text(self):
         self.searchable_text = ' '.join([
             clean_text(self.title),
@@ -50,6 +54,8 @@ class Resource(Displayable, Ownable, RichText, AdminThumbMixin, RelatedMixin):
     '''
 
     item_type = 'Resource'
+    show_date = True
+    show_author = True
 
     categories = models.ManyToManyField("Category",
                                         verbose_name=_("Personas"),
@@ -151,6 +157,8 @@ class Faq(Displayable, Ownable, RichText, AdminThumbMixin, RelatedMixin):
     '''
 
     item_type = 'FAQ'
+    show_date = True
+    show_author = False
 
     categories = models.ManyToManyField("Category",
                                         verbose_name=_("Personas"),
@@ -211,6 +219,10 @@ class Faq(Displayable, Ownable, RichText, AdminThumbMixin, RelatedMixin):
 class Dictionary(Displayable, Ownable, RichText, AdminThumbMixin, RelatedMixin):
     '''Dictionary Definition content type.
     '''
+
+    show_date = False
+    show_author = False
+
     author = models.CharField(max_length=1024, blank=True, default='')
     featured_image = FileField(verbose_name=_("Featured Image"),
         upload_to=upload_to("pleiapp.Dictionary.featured_image", "images"),
