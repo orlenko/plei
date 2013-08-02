@@ -12,7 +12,7 @@
 			<span class="breadcrumb-current">{{group.title}}</span>
 		</div>
 		<div class="page">
-			<h1 class="page-icon-faq">{{group.title}}</h1>
+			<h1 class="page-icon-{% block page-class %}{% endblock %}">{{group.title}}</h1>
 			<ul class="grid col-940 category-list">
 				{% for item in group.resources.all %}
 				<li class="grid">

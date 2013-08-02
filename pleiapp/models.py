@@ -219,7 +219,7 @@ class Faq(Displayable, Ownable, RichText, AdminThumbMixin, RelatedMixin):
 class Dictionary(Displayable, Ownable, RichText, AdminThumbMixin, RelatedMixin):
     '''Dictionary Definition content type.
     '''
-
+    item_type = 'directory'
     show_date = False
     show_author = False
 
