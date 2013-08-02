@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load mezzanine_tags keyword_tags plei_tags %}
+
+{% block meta_title %}{{ page.meta_title }}{% endblock %}
+
+{% block meta_keywords %}{% metablock %}
+{% keywords_for page as keywords %}
+{% for keyword in keywords %}
+    {% if not forloop.first %}, {% endif %}
+    {{ keyword }}
+{% endfor %}
+{% endmetablock %}{% endblock %}
+
+{% block meta_description %}{% metablock %}
+{{ page.description }}
+{% endmetablock %}{% endblock %}
+
+{% block title %}{{ page.title }}{% endblock %}
+
+{% block breadcrumb_menu %}{% endblock %}
+
+{% block main %}
+<div id="wrapper" class="clearfix blue-page">
+	<section id="content-full" class="grid col-620">
+		<div class="breadcrumb-list">
+			{% plei_page_breadcrumbs page %}
+		</div>
+		<div class="page">
+			<h1 class="page-icon-plei">{{page.title}}</h1>
+
+				<article class="resource-content">
+					{{ page.richtextpage.content|richtext_filter|safe }}
+                </article>
+
+			</div><!-- end of .page -->
+
+
+		</section><!-- end of #content-full -->
+
+	<section id="share" class="grid col-300 fit">
+    	<!-- AddThis Button BEGIN -->
+		<div class="addthis_toolbox addthis_default_style">
+			<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+			<a class="addthis_button_tweet"></a>
+			<a class="addthis_counter addthis_pill_style"></a>
+		</div>
+		<script type="text/javascript">
+			var addthis_config = {
+				"data_track_addressbar" : true
+			};
+		</script>
+		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-51b625b9399cfa6a"></script>
+		<!-- AddThis Button END -->
+
+	</section>
+
+	<section id="widgets" class="grid col-300 fit">
+
+		{% plei_side_menu %}
+	</section><!-- end of #widgets -->
+</div>
+
+{% endblock %}

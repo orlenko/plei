@@ -9,6 +9,7 @@ import logging
 import traceback
 
 from pleiapp import models
+from django.core.files.base import File
 
 # Try to import PIL in either of the two ways it can end up installed.
 try:
@@ -72,12 +73,13 @@ def plei_taglines(context, token):
     t = get_template('plei/taglines.html')
     return t.render(Context(context))
 
+
 @register.simple_tag
 def plei_thumbnail(image_url, width, height, quality=95):
     """
     Given the URL to an image, resizes the image using the given width and
     height on the first time it is requested, and returns the URL to the new
-    resized image. 
+    resized image.
 
     Aspect ratio is always preserved - so, if width/height do not match original aspect ratio,
     the image will be resized so that one side is equal to the target dimention, and the other will be larger.
@@ -175,3 +177,20 @@ def plei_thumbnail(image_url, width, height, quality=95):
             pass
         return image_url
     return thumb_url
+
+
+@register.render_tag
+def plei_page_breadcrumbs(context, token):
+    parts = token.split_contents()[1:]
+    page = Variable(parts[0]).resolve(context)
+    context['page'] = page
+    links = []
+    if page.parent:
+        links.append((page.parent.get_absolute_url(), page.parent.title))
+        for child in page.parent.children.all():
+            links.append((child.get_absolute_url(), child.title))
+    else:
+        for child in page.children.all():
+            links.append((child.get_absolute_url(), child.title))
+    context['links'] = links
+    return get_template('plei/page_breadcrumbs.html').render(Context(context))
