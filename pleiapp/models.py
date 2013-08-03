@@ -116,6 +116,7 @@ class Resource(Displayable, Ownable, RichText, AdminThumbMixin, RelatedMixin):
     searchable_text = models.TextField(null=True, blank=True)
 
     admin_thumb_field = "featured_image"
+    search_fields = ('title', 'content', 'searchable_text')
 
     class Meta:
         verbose_name = _("Resource")
@@ -189,6 +190,7 @@ class Faq(Displayable, Ownable, RichText, AdminThumbMixin, RelatedMixin):
         help_text='Detailed, long version of the question')
 
     admin_thumb_field = "featured_image"
+    search_fields = ('title', 'question_details', 'content', 'searchable_text')
 
     class Meta:
         verbose_name = _("FAQ Entry")
@@ -249,6 +251,7 @@ class Dictionary(Displayable, Ownable, RichText, AdminThumbMixin, RelatedMixin):
                                  through=Faq.related_dictionary.through)
     admin_thumb_field = "featured_image"
     searchable_text = models.TextField(null=True, blank=True)
+    search_fields = ('title', 'content', 'searchable_text')
 
     class Meta:
         verbose_name = _("Dictionary Definition")
