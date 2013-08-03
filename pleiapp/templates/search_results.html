@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% load i18n future mezzanine_tags plei_tags %}
+
+{% block meta_title %}{% trans "Search Results" %}{% endblock %}
+{% block title %}{% trans "Search Results" %}{% endblock %}
+
+{% block breadcrumb_menu %}{% endblock %}
+
+{% block main %}
+
+
+<div id="wrapper" class="clearfix">
+	<section id="content-full" class="grid col-620">
+		<div class="breadcrumb-list">
+			<span typeof="v:Breadcrumb">
+				<a rel="v:url" property="v:title" href="/">Home</a>
+			</span>
+			<span class="chevron">&#8250;</span>
+			<span class="breadcrumb-current">Search Results</span>
+		</div>
+		<div class="page">
+			<p>
+				{% if results.paginator.count == 0 %}
+					{% blocktrans %}
+						No results were found in {{ search_type }} matching your query: {{ query }}
+					{% endblocktrans %}
+				{% else %}
+					{% blocktrans with start=results.start_index end=results.end_index total=results.paginator.count %}
+						Showing {{ start }} to {{ end }} of {{ total }} results in {{ search_type }} matching your query: {{ query }}
+					{% endblocktrans %}
+				{% endif %}
+			</p>
+
+			<div id="search-results">
+			    {% for result in results.object_list %}
+				    <h5>{{ forloop.counter0|add:results.start_index }})
+				        <a href="{{ result.get_absolute_url }}">{{ result }}</a></h5>
+				    <p>{{ result.description|truncatewords_html:20|safe }}</p>
+				    <a href="{{ result.get_absolute_url }}">{% trans "read more" %}</a>
+			    {% endfor %}
+			</div>
+
+			{% pagination_for results %}
+
+		</div><!-- end of .page -->
+
+
+	</section><!-- end of #content-full -->
+
+	{% include "share.html" %}
+
+	<section id="widgets" class="grid col-300 fit">
+		{% plei_side_menu %}
+	</section><!-- end of #widgets -->
+</div>
+
+{% endblock %}
