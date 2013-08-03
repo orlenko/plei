@@ -204,10 +204,13 @@ def plei_resource_breadcrumbs(context, token):
     request = context['request']
     last_topic_id = request.session.get('last-topic')
     topic = None
-    for t in page.topics.all():
-        if not topic:
-            topic = t
-        if t.pk == last_topic_id:
-            topic = t
+    try:
+        for t in page.topics.all():
+            if not topic:
+                topic = t
+            if t.pk == last_topic_id:
+                topic = t
+    except:
+        pass
     context['topic'] = topic
     return get_template('plei/resource_breadcrumbs.html').render(Context(context))
