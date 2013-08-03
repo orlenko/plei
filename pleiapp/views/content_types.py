@@ -12,7 +12,7 @@ def resource(request, slug):
 
 def faq(request, slug):
     page = get_object_or_404(models.Faq, slug=slug)
-    return render_to_response('pages/content_type.html', {},
+    return render_to_response('pages/faq.html', {},
                               context_instance=RequestContext(request, locals()))
 
 

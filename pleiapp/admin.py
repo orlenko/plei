@@ -64,7 +64,7 @@ faq_fieldsets = deepcopy(DisplayableAdmin.fieldsets)
 faq_fieldsets[0][1]["fields"].insert(1, "categories")
 faq_fieldsets[0][1]["fields"].insert(1, "types")
 faq_fieldsets[0][1]["fields"].insert(1, "topics")
-faq_fieldsets[0][1]["fields"].extend(["content", ])
+faq_fieldsets[0][1]["fields"].extend(["question_details", "content", ])
 faq_fieldsets[0][1]["fields"].insert(-2, "featured_image")
 faq_fieldsets = list(faq_fieldsets)
 faq_fieldsets.insert(1, (_("Related"), {

@@ -194,3 +194,20 @@ def plei_page_breadcrumbs(context, token):
             links.append((child.get_absolute_url(), child.title))
     context['links'] = links
     return get_template('plei/page_breadcrumbs.html').render(Context(context))
+
+
+@register.render_tag
+def plei_resource_breadcrumbs(context, token):
+    parts = token.split_contents()[1:]
+    page = Variable(parts[0]).resolve(context)
+    context['page'] = page
+    request = context['request']
+    last_topic_id = request.session.get('last-topic')
+    topic = None
+    for t in page.topics.all():
+        if not topic:
+            topic = t
+        if t.pk == last_topic_id:
+            topic = t
+    context['topic'] = topic
+    return get_template('plei/resource_breadcrumbs.html').render(Context(context))

@@ -1,0 +1,17 @@
+{% extends "pages/content_type.html" %}
+
+{% load mezzanine_tags staticfiles plei_tags %}
+
+
+
+{% block rich_content %}
+	<div class="clearfix faq_section">
+		<h3>Question:</h3>
+		{{ page.question_details|richtext_filter|safe }}
+	</div>
+
+	<div class="clearfix faq_section">
+		<h3>Answer:</h3>
+		{{ page.content|richtext_filter|safe }}
+	</div>
+{% endblock %}

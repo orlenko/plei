@@ -1,0 +1,12 @@
+<span typeof="v:Breadcrumb">
+	<a rel="v:url" property="v:title" href="/">Home</a>
+</span>
+<span class="chevron">&#8250;</span>
+{% if topic %}
+	<span typeof="v:Breadcrumb">
+		<a rel="v:url" property="v:title"
+			href="{{topic.get_absolute_url}}">{{topic.title}}</a>
+	</span>
+	<span class="chevron">&#8250;</span>
+{% endif %}
+<span class="breadcrumb-current">{{page.title}}</span>

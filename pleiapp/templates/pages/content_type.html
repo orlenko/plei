@@ -9,18 +9,7 @@
 <div id="wrapper" class="clearfix">
 	<section id="content-full" class="grid col-620">
 		<div class="breadcrumb-list">
-			<span typeof="v:Breadcrumb">
-				<a rel="v:url" property="v:title" href="/">Home</a>
-			</span>
-			<span class="chevron">&#8250;</span>
-			{% if page.topics.count %}
-				<span typeof="v:Breadcrumb">
-					<a rel="v:url" property="v:title"
-						href="{{page.topics.all.0.get_absolute_url}}">{{page.topics.all.0.title}}</a>
-				</span>
-				<span class="chevron">&#8250;</span>
-			{% endif %}
-			<span class="breadcrumb-current">{{page.title}}</span>
+			{% plei_resource_breadcrumbs page %}
 		</div>
 		<div class="page">
 			<h1 class="page-icon-{{page.item_type|lower}}">{{page.title}}</h1>
@@ -35,7 +24,9 @@
 					{% if page.featured_image %}
 	                <img src="{{ MEDIA_URL }}{% thumbnail page.featured_image 300 0 %}" alt="Resource Image">
 	                {% endif %}
-					{{ page.content|richtext_filter|safe }}
+	                {% block rich_content %}
+						{{ page.content|richtext_filter|safe }}
+					{% endblock %}
                 </article>
 
                 <aside id="extra" class="grid col-940">

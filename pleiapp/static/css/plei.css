@@ -2329,6 +2329,19 @@ ul.menu > li:hover {
 	width: 99%;
 }
 
+/* FAQ Page specific style */
+.faq_section {
+	border-bottom: 1px solid #F15A23;
+}
+
+.faq_section h3 {
+	float: left;
+	margin: 0 0 0px 0;
+	padding: 0 10px 0 0;
+	line-height: 40px;
+	vertical-align: bottom;
+}
+
 
 /* Pop-up box */
 

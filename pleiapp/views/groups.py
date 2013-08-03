@@ -17,5 +17,6 @@ def resource_type(request, slug):
 
 def topic(request, slug):
     group = get_object_or_404(models.Topic, slug=slug)
+    request.session['last-topic'] = group.pk
     context = RequestContext(request, locals())
     return render_to_response('groups/topic.html', locals(), context_instance=context)

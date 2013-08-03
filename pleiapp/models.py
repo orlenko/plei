@@ -185,6 +185,8 @@ class Faq(Displayable, Ownable, RichText, AdminThumbMixin, RelatedMixin):
                                  through=Resource.related_faqs.through)
     detect_automatically = models.NullBooleanField(default=False, null=True)
     searchable_text = models.TextField(null=True, blank=True)
+    question_details = RichTextField('Question', blank=True, null=True,
+        help_text='Detailed, long version of the question')
 
     admin_thumb_field = "featured_image"
 
@@ -214,6 +216,13 @@ class Faq(Displayable, Ownable, RichText, AdminThumbMixin, RelatedMixin):
                 self.related_dictionary.add(dictionary)
             for resource in Resource.objects.filter(searchable_text__contains=pair):
                 self.related_resources.add(resource)
+
+    def update_searchable_text(self):
+        self.searchable_text = ' '.join([
+            clean_text(self.title),
+            clean_text(strip_tags(self.question_details)),
+            clean_text(strip_tags(self.content))])
+        log.debug('Updated searchable text for %s: %s' % (self, self.searchable_text))
 
 
 class Dictionary(Displayable, Ownable, RichText, AdminThumbMixin, RelatedMixin):
