@@ -1,28 +1,14 @@
-/* Theme Name: Responsive People's Law School Child Theme Description: Responsive Theme is a flexible foundation with fluid grid system that adapts your website to mobile devices and the desktop or any other viewing environment.
+/* 
+Theme Name: Responsive People's Law School PLEI Theme 
+Description: Responsive Theme is a flexible foundation with fluid grid system that adapts your website to mobile devices and the desktop or any other viewing environment.
 
-Template: responsive
-Version: 1.0.0
-Author: VCN webteam
+Author: VCN webteam 
 Author URI: http://www.webteam.vcn.bc.ca
 
 
 License: GNU General Public License
-License URI: license.txt
+License URI: license.txt 
 
-Responsive WordPress Theme, Copyright (C) 2003-2012 Emil Uzelac
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 
@@ -442,27 +428,17 @@ fieldset {
 }
 
 .main-search-bar input[type="text"] {
-	-moz-box-sizing: border-box;
-	-moz-border-radius: 8px;
-	-webkit-box-sizing: border-box;
-	-webkit-border-radius: 8px;
-	/*-webkit-box-shadow: 0 1px 0 #fff, inset 0 1px 1px rgba(0, 0, 0, 0.2);
-	-moz-box-shadow: 0 1px 0 #fff, inset 0 1px 1px rgba(0, 0, 0, 0.2);
-	box-shadow: 0 1px 0 #fff, inset 0 1px 1px rgba(0, 0, 0, 0.2);*/
-	background-color: #fff;
-	border:solid 1px #F15A23;
-	/*box-sizing: border-box;
-	border: 1px solid #aaa;
-	border-bottom-color: #ccc;*/
-	border-radius: 8px;
-	margin: 0;
-	outline: none;
-	padding: 6px 8px;
-	vertical-align: middle;
-	width: 238px;
-	color: #F15A23;
+    background-color: transparent;
+    background-image: url(../img/footer-main-form.png);
+    background-position: left top;
+    background-repeat: no-repeat;
+    border: medium none;
+    color: #0099FF;
     font-size: 12px;
-    font-style: italic;
+    height: 33px;
+    padding: 0;
+    text-align: center;
+    width: 238px;
 }
 
 select {
@@ -520,32 +496,23 @@ input[type='password'] {
 
 /* =Buttons
 -------------------------------------------------------------- */
-.main-search-bar input[type='submit'] {
-
-	background-image:url(/static/img/search-hammer.png);
-	background-position:top center;
-	background-repeat:no-repeat;
-	cursor: pointer;
-	display: inline-block;
-	line-height: 20px;
-	margin: 0;
-	width:50px;
-	padding: 4px 10px;
-	vertical-align: middle;
-	border:none;
-	-moz-border-radius: 8px;
-	-webkit-border-radius: 8px;
-	background-color: #0099FF;
-	border-radius: 8px;
-
-
-
+.main-search-bar input[type="submit"] {
+    background-color: transparent;
+    background-image: url("../img/search-hammer.png"), url("../img/footer-main-button.png");
+    background-position: center center, left top;
+    background-repeat: no-repeat, no-repeat;
+    border: medium none;
+    cursor: pointer;
+    float: right;
+    height: 33px;
+    text-align: center;
+    width: 62px;
 }
 
 .main-search-bar input[type='submit']:hover {
-	background-image:url(/static/img/search-hammer-b.png);
-	background-position:top center;
-	background-repeat:no-repeat;
+	background-image:url(../img/search-hammer-b.png), url(../img/footer-main-button.png) ;
+	background-position:center, left top;
+	background-repeat:no-repeat, no-repeat;
 
 }
 
@@ -1235,9 +1202,6 @@ footer .widget-wrapper {
 .blue-page .widget-title {
 	color:#106397;
 }
-.blue-page .widget-wrapper {
-	background-image: url("../img/triangle-blue.png");
-}
 .blue-page #widgets {
 	border-left-color:#106397;
 }
@@ -1370,9 +1334,6 @@ footer .widget-wrapper {
 .widget-wrapper {
 	margin: 0 0 20px;
 	padding: 0 20px;
-	background-image: url("../img/triangle-orange.png");
-    background-position: right bottom;
-    background-repeat: no-repeat;
 }
 
 .widget-wrapper select,
@@ -2121,7 +2082,7 @@ ul.menu > li:hover {
 	margin-top: 10px;
 	color:#FFF;
 	font-weight:normal;
-	padding: 0px 0 0 75px;
+	 padding: 4px 0 0 76px;
     	text-shadow: 1px 0 0 #FFFFFF, 2px 1px 1px #000000;
 	text-transform:uppercase;
 
@@ -2132,9 +2093,8 @@ ul.menu > li:hover {
 	overflow: hidden;
 }
 .featured-text-wrapper {
-	background-image: url(/static/img/triangle-orange.png), url(/static/img/blue-stripe-bg.jpg);
-	background-position: right bottom;
-	background-repeat: no-repeat, repeat;
+	background-image: url(/static/img/blue-stripe-bg.jpg);
+	background-repeat:repeat;
 }
 .featured-text {
 	color:#FFF;
@@ -2470,17 +2430,59 @@ BDO[DIR="rtl"] {
 
 	body {}
 
-	.grid,
+	.grid {
+		float:left;
+	}
 	.grid-right {
-		float: none;
+		float:right;
 	}
 
+	#animation {
+		width: 290px;
+		line-height: 22px;
+	}
+
+	#Stage {
+	position: relative;
+	-webkit-transform: translateZ(0);
+	background-color: rgba(255, 255, 255, 0);
+	overflow: hidden;
+	height: 182px;
+	width: 290px;
+	}
+	.col-300 {
+    width: 31.459%;
+	}
+	
+	.cycle-slideshow.taglines {
+	
+	font-family: 'open Sans';
+	font-size: 18px;
+	
+	}
+	
+	.tagline {
+	width: 280px;
+	height: 200px;
+	padding-left: 20px;
+	}
+	.main-search-bar input[type="text"] {
+
+    width: 188px;
+	}
+
+	
+	
+	
+	
 	.copyright,
 	.scroll-top,
 	.powered {
 		float: left;
 	}
-
+	.menu a {
+		font-size: 14px;
+	}
 	#featured-image .fluid-width-video-wrapper {
 		margin: 20px 0 0 0;
 	}
@@ -2501,7 +2503,48 @@ BDO[DIR="rtl"] {
 	.show-980 {
 		display: block;
 	}
+		#colophon-widget {
+		background:none;
+}
 
+}
+
+@media screen and (max-width: 800px) {
+	
+#Stage {
+	position: relative;
+	-webkit-transform: translateZ(0);
+	background-color: rgba(255, 255, 255, 0);
+	overflow: hidden;
+	height: 182px;
+	width: 200px;
+	}
+	.col-300 {
+    width: 31.459%;
+	}
+	.menu a {
+		font-size: 12px;
+	}
+	.cycle-slideshow.taglines {
+	
+	font-family: 'open Sans';
+	font-size: 13px;
+	
+	}
+	#animation {
+		width: 200px;
+		line-height: 22px;
+	}
+	.tagline {
+	width: 180px;
+	height: 200px;
+	padding-left: 20px;
+	}
+	.main-search-bar input[type="text"] {
+
+    width: 155px;
+	}
+	
 }
 
 @media screen and (max-width: 650px) {
@@ -2513,7 +2556,18 @@ BDO[DIR="rtl"] {
 	#wrapper{
 		padding: 20px;
 	}
+		/*#animation {
+		float:none;
+		width:0 !important;
+		height:0 !important;
+		overflow:hidden;
+	}*/
+	
+.category-list li {
+    padding-left: 38px;
+	padding-right:0;
 
+}
 	#logo {
 		float: none;
 		margin: 0;
@@ -2528,17 +2582,9 @@ BDO[DIR="rtl"] {
 	.main-search-bar {
 		text-align:left;
 	}
+	.main-search-bar input[type="text"] {
 
-
-	#animation {
-		float:none;
-		width:0 !important;
-		height:0 !important;
-		overflow:hidden;
-	}
-
-	#topics ul {
-		padding:20px !important;
+    width: 238px;
 	}
 
 	#featured-controls {
@@ -2559,8 +2605,9 @@ BDO[DIR="rtl"] {
 	#featured-carousel #next {
 		right: 0.5%;
 	}
-	.page h1 {
-    font-size: 16px;
+	.page-core-h1, .page h1 {
+		font-size:16px;
+		line-height:20px;
 	}
 	.date-author {
     font-size: 10px;
