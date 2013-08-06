@@ -6,18 +6,21 @@ from pleiapp import models
 
 def resource(request, slug):
     page = get_object_or_404(models.Resource, slug=slug)
+    current_item = page.title
     return render_to_response('pages/content_type.html', {},
                               context_instance=RequestContext(request, locals()))
 
 
 def faq(request, slug):
     page = get_object_or_404(models.Faq, slug=slug)
+    current_item = page.title
     return render_to_response('pages/faq.html', {},
                               context_instance=RequestContext(request, locals()))
 
 
 def dictionary(request, slug):
     page = get_object_or_404(models.Dictionary, slug=slug)
+    current_item = page.title
     return render_to_response('pages/content_type.html', {},
                               context_instance=RequestContext(request, locals()))
 
