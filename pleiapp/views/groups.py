@@ -6,12 +6,14 @@ from django.template.context import RequestContext
 def category(request, slug):
     group = get_object_or_404(models.Category, slug=slug)
     context = RequestContext(request, locals())
+    current_item = group.title
     return render_to_response('groups/category.html', locals(), context_instance=context)
 
 
 def resource_type(request, slug):
     group = get_object_or_404(models.Type, slug=slug)
     context = RequestContext(request, locals())
+    current_item = group.title
     return render_to_response('groups/restype.html', locals(), context_instance=context)
 
 
@@ -19,4 +21,5 @@ def topic(request, slug):
     group = get_object_or_404(models.Topic, slug=slug)
     request.session['last-topic'] = group.pk
     context = RequestContext(request, locals())
+    current_item = group.title
     return render_to_response('groups/topic.html', locals(), context_instance=context)

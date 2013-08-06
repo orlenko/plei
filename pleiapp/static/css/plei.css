@@ -1230,13 +1230,13 @@ footer .widget-wrapper {
 	color:#106397;
 }
 .blue-page ul {
-	list-style-image: url("../img/triangle-list-blue.png");
+	list-style-image: url(/static/img/triangle-list-blue.png);
 }
 .blue-page .widget-title {
 	color:#106397;
 }
 .blue-page .widget-wrapper {
-	background-image: url("../img/triangle-blue.png");
+	background-image: url(/static/img/triangle-blue.png);
 }
 .blue-page #widgets {
 	border-left-color:#106397;
@@ -1370,7 +1370,7 @@ footer .widget-wrapper {
 .widget-wrapper {
 	margin: 0 0 20px;
 	padding: 0 20px;
-	background-image: url("../img/triangle-orange.png");
+	background-image: url(/static/img/triangle-orange.png);
     background-position: right bottom;
     background-repeat: no-repeat;
 }
@@ -2635,6 +2635,7 @@ BDO[DIR="rtl"] {
 
 	.js .main-nav .menu li a {
 		color: #444;
+		background-image: none;
 		font-size: 13px;
 		font-weight: normal;
 		height: 45px;
@@ -2721,12 +2722,12 @@ BDO[DIR="rtl"] {
 		height: 30px;
 		width: 23px;
 		margin-left: -30px;
-		background: url('../img/select-icons.png') 0 5px no-repeat;
+		background: url(/static/img/select-icons.png) 0 5px no-repeat;
 		cursor: pointer;
 	}
 
 	.js .main-nav a#responsive_menu_button.responsive-toggle-open {
-		background: url('../img/select-icons.png') 0 -46px no-repeat;
+		background: url(/static/img/select-icons.png) 0 -46px no-repeat;
 	}
 
 
