@@ -44,29 +44,17 @@
 				<a href="/"><img src="{% static "img/plei-logo.png" %}" alt="Public Legal Eductaion Information for Non-Profits" /></a>
 			</div><!-- end of #logo -->
 
-			<!-- <div id="animation">
-				<div id="Stage" class="EDGE-181606677">
-					<div id="Stage_Rectangle" class="edgeLoad-EDGE-181606677"></div>
-					<div id="Stage_Line1" class="edgeLoad-EDGE-181606677">
-						The People’s Law School is a non-profit charitable society providing public legal education and information to British Columbians since 1972.
-					</div>
-					<div id="Stage_Line2" class="edgeLoad-EDGE-181606677">
-						Our mandate is to facilitate and promote the development and distribution of public legal education and information for people in BC.
-					</div>
-					<div id="Stage_Line3" class="edgeLoad-EDGE-181606677">
-						Our efforts and results are focused on a BC where everyone is legally literate and has the capacity to exercise their legal rights and responsibilities.
-					</div>
-				</div>
-			</div> -->
+
 			{% plei_taglines %}
 
 			<div class="main-nav">
+            <div id="browse">BROWSE BY:</div>
 				{% plei_top_menu %}
 			</div>
 			<div class="main-search-bar form-fill grid-right col-300 fit">
 				<form method="get" id="searchform" action="/search/">
 					<input type="hidden" name="type" value="" />
-					<input type="text" class="field" name="q" id="q" placeholder="Open item Search or Dictionary" />
+					<input type="text" class="field" name="q" id="q" placeholder="Search by Keyword" />
 					<input type="submit" class="submit" name="submit" id="searchsubmit" value=""  />
 				</form>
 			</div>
@@ -86,9 +74,19 @@
 	{% block wide_centralpart %}
 	{% endblock %}
 
+<div id="credit-logos" class="grid col-940 orange clearfix">
+                	<div id="credit-logos-wrap">
+                	<div id="clicklaw"><p>Find other PLEI</p><a href="http://clicklaw.bc.ca/" target="_blank"><img src="/static/img/clicklaw-logo.jpg" alt="Go to Clicklaw.bc.ca" /></a></div>
+                    <div id="lawfoundation"><p>Project was made possible by</p><a href="http://www.lawfoundation.on.ca/" target="_blank"><img src="/static/img/law_foundation_ontario-logo.jpg" alt="Go to lawfoundation.on.ca" /></a></div>
+                	</div>
+                </div>
+
+
 	<footer>
 		<div id="footer" class="clearfix">
 			<div id="footer-wrapper">
+            	
+            
 				<div id="legal-notice" class="grid col-940">
 					<div class="text-padding">
 						<b>The People’s Law School does not provide legal advice.</b>
@@ -144,7 +142,7 @@
 						<div class="widget-wrapper">
 
 							<div class="widget-title-home">
-								<h4>Peolple’s Law School</h4>
+								<h4>People’s Law School</h4>
 							</div>
 							<div class="textwidget center-widget col-940">
 

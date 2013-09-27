@@ -36,8 +36,10 @@
 			    {% for result in results.object_list %}
 				    <div class="search-result">
 					    <h1 class="page-icon-{{result.item_type|lower}}"><a href="{{ result.get_absolute_url }}">{{ result }}</a></h1>
-					    <p>{{ result.description|truncatewords_html:20|safe }}</p>
+					    <div class="search-result-text">
+                        <p>{{ result.description|truncatewords_html:20|safe }}</p>
 					    <a href="{{ result.get_absolute_url }}">{% trans "read more" %}</a>
+                        </div>
 					</div>
 			    {% endfor %}
 			</div>
