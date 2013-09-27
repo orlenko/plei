@@ -7,14 +7,14 @@
 			{% endfor %}
         </ul>
     </li>
-	<li class="menu-item"><a href="#">Resource Type<img src="/static/img/main-nav-icon-w-triangle.png" alt="Select" /></a>
+	<li class="menu-item"><a href="#">Type<img src="/static/img/main-nav-icon-w-triangle.png" alt="Select" /></a>
 		<ul class="sub-main-nav">
         	{% for restype in types %}
 			<li class="menu-item"><a href="{{restype.get_absolute_url}}">{{restype.title}}</a></li>
 			{% endfor %}
         </ul>
 	</li>
-	<li class="menu-item"><a href="#">What You Do<img src="/static/img/main-nav-icon-w-triangle.png" alt="Select" /></a>
+	<li class="menu-item"><a href="#">Role<img src="/static/img/main-nav-icon-w-triangle.png" alt="Select" /></a>
 		<ul class="sub-main-nav">
         	{% for category in categories %}
 			<li class="menu-item"><a href="{{category.get_absolute_url}}">{{category.title}}</a></li>

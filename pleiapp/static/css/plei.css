@@ -433,7 +433,8 @@ fieldset {
     background-position: left top;
     background-repeat: no-repeat;
     border: medium none;
-    color: #0099FF;
+    color: #000;
+	text-transform:uppercase;
     font-size: 12px;
     height: 33px;
     padding: 0;
@@ -622,7 +623,7 @@ input[type='password'] {
 th,
 td,
 table {
-	border: 1px solid #ddd;
+	/*border: 1px solid #ddd;*/
 }
 
 table {
@@ -659,25 +660,25 @@ h1, h2, h3, h4, h5, h6, h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
 }
 
 h1 {
-    font-size: 2.625em; /* = 42px */
+    font-size: 36px; 
     margin-bottom: .5em;
     margin-top: .5em;
 }
 
 h2 {
-    font-size: 2.250em; /* = 36px */
+    font-size: 30px;
     margin-bottom: .75em;
     margin-top: .75em;
 }
 
 h3 {
-    font-size: 1.875em; /* = 30px */
+    font-size: 28px;
     margin-bottom: .857em;
     margin-top: .857em;
 }
 
 h4 {
-    font-size: 1.500em; /* = 24px */
+    font-size: 24px;
     margin-bottom: 1em;
     margin-top: 1em;
 	color:#FFF;
@@ -686,13 +687,13 @@ h4 {
 }
 
 h5 {
-    font-size: 1.125em; /* = 18px */
+    font-size: 18px;
     margin-bottom: 1.125em;
     margin-top: 1.125em;
 }
 
 h6 {
-    font-size: 1.000em; /* = 16px */
+    font-size: 16px;
     margin-bottom: 1.285em;
     margin-top: 1.285em;
 }
@@ -707,7 +708,7 @@ form,
 table,
 address,
 blockquote {
-	margin: 0.8em 0;
+	margin: 0.61em 0;
 }
 
 th, td {
@@ -985,6 +986,7 @@ footer {
 	background-image:url(/static/img/background-footer.png);
 	background-position:top;
 	background-repeat:repeat-x;
+	margin-top: 144px;
 }
 footer .widget-wrapper {
 	background:none;
@@ -1005,6 +1007,25 @@ footer .widget-wrapper {
     margin-top: 22px;
 	text-align:right;
 }
+
+#credit-logos {
+	text-align:center;
+	background:url(../img/orange-divider.jpg) center center no-repeat;
+}
+#credit-logos-wrap {
+	width:680px; 
+	margin: 0 auto;
+}
+#clicklaw {
+	float:left;
+	width:auto;
+}
+#lawfoundation {
+	float:right;
+	width:auto;
+}
+
+
 #legal-notice {
 	text-align:center;
 	margin-top:10px;
@@ -1026,7 +1047,7 @@ footer .widget-wrapper {
 }
 #social-caption p {
 	font-size: 14px;
-    padding: 6px 0 2px 10px;
+    padding: 13px 0 2px 10px;
 }
 .center-widget {
 	text-align:center;
@@ -1133,6 +1154,12 @@ footer .widget-wrapper {
 	width: 413px;
 	height: 200px;
 	padding-left: 20px;
+}
+#browse {
+	font-size:16px;
+	color:#FFF;
+	padding:14px 22px 0 0;
+	float:left;
 }
 
 /* =Content
@@ -1539,7 +1566,7 @@ footer .widget-wrapper {
 .menu {
 	background-color: #F15A23;
 	border-top:solid 3px #FFFFFF;
-	clear: both;
+	/*clear: both;*/
 	margin: 0 auto;
 }
 
@@ -1627,16 +1654,15 @@ footer .widget-wrapper {
 	color: #fff;
 	cursor: pointer;
 	display: block;
-	font-size: 13px;
+	font-size: 16px;
 	font-weight: 700;
 	height: 45px;
 	line-height: 45px;
 	margin: 0;
-	padding: 0 4px 0 60px;
+	padding: 0 20px 0 70px;
 	position: relative;
 	font-weight:bold;
 	text-transform:uppercase;
-	font-size:18px;
 	text-decoration: none;
 	white-space: nowrap;
 }
@@ -2051,18 +2077,22 @@ ul.menu > li:hover {
 }
 
 #featured-carousel #prev:hover, #featured-carousel #next:hover {
-	opacity: 0.8;
-	filter:alpha(opacity=80);
+	opacity: 1.0;
+	filter:alpha(opacity=100);
 }
 
 #featured-carousel #prev {
 	background-image: url(/static/img/featured-arrow-left.png);
-	left: 18.5%;
+	left: 2.5%;
+	opacity: 0.6;
+	filter:alpha(opacity=60);
 }
 
 #featured-carousel #next {
 	background-image: url(/static/img/featured-arrow-right.png);
-	right: 18.5%;
+	right: 2.5%;
+	opacity: 0.6;
+	filter:alpha(opacity=60);
 }
 
 .featured-item {
@@ -2081,11 +2111,11 @@ ul.menu > li:hover {
 }
 
 .featured-title h4 {
-	font-size: 24px;
+	font-size: 18px;
 	margin-top: 10px;
 	color:#FFF;
 	font-weight:normal;
-	 padding: 4px 0 0 76px;
+	 padding: 8px 0 0 76px;
     	text-shadow: 1px 0 0 #FFFFFF, 2px 1px 1px #000000;
 	text-transform:uppercase;
 
@@ -2319,6 +2349,9 @@ ul.menu > li:hover {
 .search-result {
 	margin-bottom: 35px;
 }
+.search-result-text {
+	padding-left:119px;
+}
 
 
 /* Pop-up box */
@@ -2456,6 +2489,9 @@ BDO[DIR="rtl"] {
 	.col-300 {
     width: 31.459%;
 	}
+	#browse {
+		font-size:12px;
+	}
 	
 	.cycle-slideshow.taglines {
 	
@@ -2526,9 +2562,16 @@ BDO[DIR="rtl"] {
     width: 31.459%;
 	}
 	.menu a {
-		font-size: 12px;
+		font-size: 10px;
+		padding: 0 4px 0 54px;
 	}
+	#small-controls {
+    width: 485px;
+	}
+
+	
 	.cycle-slideshow.taglines {
+		
 	
 	font-family: 'open Sans';
 	font-size: 13px;
@@ -2589,6 +2632,11 @@ BDO[DIR="rtl"] {
 
     width: 238px;
 	}
+	#browse {
+		height:0;
+		width:0;
+		overflow:hidden;
+	}
 
 	#featured-controls {
 	margin-left:2%;
@@ -2611,6 +2659,7 @@ BDO[DIR="rtl"] {
 	.page-core-h1, .page h1 {
 		font-size:16px;
 		line-height:20px;
+		height:45px;
 	}
 	.date-author {
     font-size: 10px;
@@ -2825,6 +2874,7 @@ BDO[DIR="rtl"] {
 	}
 	footer {
 		background:none;
+		margin-top:0;
 	}
 	#footer {
 		text-align: center;
@@ -2836,6 +2886,27 @@ BDO[DIR="rtl"] {
 	}
 	#colophon-widget {
 		background:none;
+		}
+	#credit-logos {
+		text-align:center;
+		background:none;
+		padding:10px 0 0;
+	}
+	#credit-logos-wrap {
+		width:100%; 
+		background:#FFF;
+		padding:10px 0;
+	}
+	#clicklaw {
+		text-align:center;
+		float:none;
+		width:auto;
+	}
+	#lawfoundation {
+		text-align:center;
+		float:none;
+		width:auto;
+	}		
 }
 
 @media screen and (max-width: 480px) {
