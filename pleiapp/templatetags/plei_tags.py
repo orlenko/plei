@@ -10,6 +10,7 @@ import traceback
 
 from pleiapp import models
 from django.core.files.base import File
+import string
 
 # Try to import PIL in either of the two ways it can end up installed.
 try:
@@ -214,3 +215,11 @@ def plei_resource_breadcrumbs(context, token):
         pass
     context['topic'] = topic
     return get_template('plei/resource_breadcrumbs.html').render(Context(context))
+
+
+
+@register.render_tag
+def plei_dictionary_index(context, token):
+    index = string.uppercase
+    context['index'] = index
+    return get_template('plei/dictionary_index.html').render(Context(context))

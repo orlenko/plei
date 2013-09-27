@@ -37,6 +37,9 @@ urlpatterns = patterns("",
     ("^admin/", include(admin.site.urls)),
     url("^$", "pleiapp.views.home.homepage", {}, name="home"),
 
+    url('^dictionary/$', 'pleiapp.views.dictionary.full_list', {}, name='dictionary-full'),
+    url('^dictionary/(?P<letter>.)/$', 'pleiapp.views.dictionary.dictionary_letter', {}, name='dictionary-letter'),
+
     group_url('category'),
     group_url('resource_type'),
     group_url('topic'),

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load i18n staticfiles mezzanine_tags plei_tags %}
+
+{% block breadcrumb_menu %}{% endblock %}
+
+{% block centralpart %}
+<div id="wrapper" class="clearfix">
+	<section id="content-archive" class="grid col-620">
+		<div class="breadcrumb-list">
+			<span typeof="v:Breadcrumb"><a rel="v:url" property="v:title" href="/">Home</a></span>
+			<span class="chevron">&#8250;</span>
+			<span class="breadcrumb-current">PLEI Dictionary</span>
+		</div>
+		<div class="page">
+			<h1 class="page-icon-dictionary">PLEI Dictionary</h1>
+			{% plei_dictionary_index %}
+
+			<h2>Top 5 most viewed definitions</h2>
+			<ul class="grid col-940 category-list dictionary">
+				{% for letter, items in tops %}
+				<li class="grid">
+					<div class="post-entry resource-widget">
+				    	<h3><a href="/dictionary/{{letter}}">{{letter}}</a></h3>
+						<ul>
+							{% for item in items %}
+								<li><a href="{{ item.get_absolute_url }}">{{item.title}}</a></li>
+							{% endfor %}
+						</ul>
+					</div>
+				</li>
+				{% endfor %}
+			</ul>
+		</div>
+	</section>
+
+	{% include "share.html" %}
+
+	<section id="widgets" class="grid col-300 fit">
+		{% plei_side_menu %}
+	</section>
+</div>
+{% endblock %}

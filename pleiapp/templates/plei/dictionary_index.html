@@ -1,0 +1,11 @@
+<div class="index">
+	<div class="label">Index:</div>
+	<div class="letters">
+	{% for letter in index %}
+		<a href="/dictionary/{{letter}}/">{{letter}}</a>
+		{% if not forloop.last %}
+			|
+		{% endif %}
+	{% endfor %}
+	</div>
+</div>

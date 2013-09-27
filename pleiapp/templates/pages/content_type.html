@@ -13,47 +13,50 @@
 		</div>
 		<div class="page">
 			<h1 class="page-icon-{{page.item_type|lower}}">{{page.title}}</h1>
-				{% if page.show_date %}
-                	<div class="date-author"><b>Date Created:</b> {{page.publish_date|date:'F jS, Y'}}</div>
+			{% if page.item_type == 'directory' %}
+				{% plei_dictionary_index %}
+			{% endif %}
+			{% if page.show_date %}
+            	<div class="date-author"><b>Date Created:</b> {{page.publish_date|date:'F jS, Y'}}</div>
+            {% endif %}
+            {% if page.show_author %}
+            	<div class="date-author"><b>Author(s):</b> {{page.author}}</div>
+            {% endif %}
+
+			<article class="resource-content">
+				{% if page.featured_image %}
+                <img src="{{ MEDIA_URL }}{% thumbnail page.featured_image 300 0 %}" alt="Resource Image">
                 {% endif %}
-                {% if page.show_author %}
-                	<div class="date-author"><b>Author(s):</b> {{page.author}}</div>
-                {% endif %}
+                {% block rich_content %}
+					{{ page.content|richtext_filter|safe }}
+				{% endblock %}
+            </article>
 
-				<article class="resource-content">
-					{% if page.featured_image %}
-	                <img src="{{ MEDIA_URL }}{% thumbnail page.featured_image 300 0 %}" alt="Resource Image">
-	                {% endif %}
-	                {% block rich_content %}
-						{{ page.content|richtext_filter|safe }}
-					{% endblock %}
-                </article>
+            <aside id="extra" class="grid col-940">
+            	<ul class="grid col-940 has_lighbox_popups">
+            		{% if page.toc %}
+            			<li><a class="lightbox" href="#toc" data-effect="mfp-zoom-in">Table of Contents</a></li>
+            		{% endif %}
 
-                <aside id="extra" class="grid col-940">
-                	<ul class="grid col-940 has_lighbox_popups">
-                		{% if page.toc %}
-                			<li><a class="lightbox" href="#toc" data-effect="mfp-zoom-in">Table of Contents</a></li>
-                		{% endif %}
+            		{% if page.video_url %}
+                    	<li><a class="popup-youtube" href="{{ page.video_url }}">Watch Video</a></li>
+                    {% endif %}
 
-                		{% if page.video_url %}
-                        	<li><a class="popup-youtube" href="{{ page.video_url }}">Watch Video</a></li>
-                        {% endif %}
+                    {% if page.audio_file %}
+                    	<li><a class="popup-audio" href="{{ MEDIA_URL }}{{ page.audio_file }}">Listen to Audio</a></li>
+                    {% endif %}
 
-                        {% if page.audio_file %}
-                        	<li><a class="popup-audio" href="{{ MEDIA_URL }}{{ page.audio_file }}">Listen to Audio</a></li>
-                        {% endif %}
+                    {% if page.link_url %}
+                    	<li><a target="_blank" href="{{ page.link_url }}">Web Link</a></li>
+                    {% endif %}
 
-                        {% if page.link_url %}
-                        	<li><a target="_blank" href="{{ page.link_url }}">Web Link</a></li>
-                        {% endif %}
+                    {% if page.attached_document %}
+                    	<li><a target="_blank" href="{{ MEDIA_URL }}{{ page.attached_document }}">Download Document</a></li>
+                    {% endif %}
+                </ul>
+            </aside>
 
-                        {% if page.attached_document %}
-                        	<li><a target="_blank" href="{{ MEDIA_URL }}{{ page.attached_document }}">Download Document</a></li>
-                        {% endif %}
-                    </ul>
-                </aside>
-
-                {% if page.has_related %}
+            {% if page.has_related %}
                 <aside id="recomendations" class="grid col-940">
 
                 <h5>Recommendations:</h5>
@@ -91,14 +94,14 @@
 
                 </aside>
 
-				{% endif %}
+			{% endif %}
 
-			</div><!-- end of .page -->
+		</div><!-- end of .page -->
 
 
-		</section><!-- end of #content-full -->
+	</section><!-- end of #content-full -->
 
-		{% include "share.html" %}
+	{% include "share.html" %}
 
 	<section id="widgets" class="grid col-300 fit">
 

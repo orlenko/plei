@@ -934,6 +934,29 @@ form div {
 	padding-top:6px;
 }
 
+/*  Special case for dictionary index page */
+
+.index {
+	font-size: 16pt;
+	line-height: 26pt;
+}
+
+.index .label {
+	float: left;
+	margin-right: 20px;
+}
+
+.index .letters {
+}
+
+.category-list.dictionary .resource-widget ul {
+	margin: 0;
+	padding: 0;
+}
+.category-list.dictionary .resource-widget ul li {
+	display: block;
+}
+
 /* =Resource Template
 -------------------------------------------------------------- */
 .date-author {
@@ -1251,6 +1274,11 @@ footer .widget-wrapper {
 /* =Page Title Icons
 -------------------------------------------------------------- */
 
+.page-icon-dictionary {
+	background-image:url(/static/img/page-icon-dictionary.png);
+	background-position:left top;
+	background-repeat:no-repeat;
+}
 .page-icon-plei {
 	background-image:url(/static/img/page-icon-plei.png);
 	background-position:left top;
