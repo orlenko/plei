@@ -13,9 +13,6 @@
 		</div>
 		<div class="page">
 			<h1 class="page-icon-{{page.item_type|lower}}">{{page.title}}</h1>
-			{% if page.item_type == 'directory' %}
-				{% plei_dictionary_index %}
-			{% endif %}
 			{% if page.show_date %}
             	<div class="date-author"><b>Date Created:</b> {{page.publish_date|date:'F jS, Y'}}</div>
             {% endif %}
@@ -30,6 +27,17 @@
                 {% block rich_content %}
 					{{ page.content|richtext_filter|safe }}
 				{% endblock %}
+                         
+                
+                {% if page.item_type == 'directory' %}
+                <br><br>
+			<hr style=" background-color:#F15A23;" class="orange"><br>
+				{% plei_dictionary_index %}
+                <br>
+			<hr style=" background-color:#F15A23;" class="orange">
+				{% endif %}
+                
+            
             </article>
 
             <aside id="extra" class="grid col-940">
@@ -55,6 +63,9 @@
                     {% endif %}
                 </ul>
             </aside>
+			
+            
+
 
             {% if page.has_related %}
                 <aside id="recomendations" class="grid col-940">

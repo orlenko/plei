@@ -16,7 +16,8 @@
 		<div class="page">
 			<h1 class="page-icon-dictionary">Dictionary Index</h1>
 			{% plei_dictionary_index %}
-
+            <br>
+			<hr style=" background-color:#F15A23;" class="orange"><br>
 			{% for item in records %}
 				<p>
 					<a href="{{ item.get_absolute_url }}">{{item.title}}</a>

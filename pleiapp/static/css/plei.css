@@ -451,15 +451,13 @@ area,
 textarea {
 	-moz-box-sizing: border-box;
 	-webkit-box-sizing: border-box;
-	-webkit-border-radius: 8px;
 	-webkit-box-shadow: 0 1px 0 #fff, inset 0 1px 1px rgba(0, 0, 0, 0.2);
 	-moz-box-shadow: 0 1px 0 #fff, inset 0 1px 1px rgba(0, 0, 0, 0.2);
 	background-color: #fff;
 	box-shadow: 0 1px 0 #fff, inset 0 1px 1px rgba(0, 0, 0, 0.2);
 	box-sizing: border-box;
 	border: 1px solid #aaa;
-	border-bottom-color: #ccc;
-	border-radius: 8px;
+	border-bottom-color: #ccc;;
 	height: auto;
 	overflow: auto;
 	margin: 0;
