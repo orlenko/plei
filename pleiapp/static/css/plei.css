@@ -482,6 +482,25 @@ input[type='password'] {
 	cursor: text;
 }
 
+
+/* An ugly hack to make "share with us" form appear decent  */
+select#id_field_4, select#id_field_10 {
+	display: none;
+}
+
+label[for=id_field_4], label[for=id_field_10] {
+	font-size: 18px;
+	font-weight: normal;
+	margin-top: 20px;
+}
+
+.control-group.error {
+	border: 1px solid red;
+	padding: 5px;
+	margin: 5px;
+	background-color: pink;
+}
+
 /* =IE Forms
 -------------------------------------------------------------- */
 .ie7 area,
