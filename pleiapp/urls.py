@@ -46,6 +46,8 @@ urlpatterns = patterns("",
     content_url('resource'),
     content_url('faq'),
     content_url('dictionary'),
+	
+    ("^captcha/", include('captcha.urls')), # Slap it in before the catch-all ("^", include("mezzanine.urls")),
 
     ("^", include("mezzanine.urls")),
 )

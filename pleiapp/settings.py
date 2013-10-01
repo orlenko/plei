@@ -126,6 +126,8 @@ USE_I18N = False
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = "%(SECRET_KEY)s"
 
+NEVERCACHE_KEY = 'lkjfOIUbnLsa75(#njgf-034578'
+
 # Tuple of IP addresses, as strings, that:
 #   * See debug comments, when DEBUG is true
 #   * Receive x-headers
@@ -229,11 +231,13 @@ INSTALLED_APPS = (
     "django.contrib.sites",
     "django.contrib.sitemaps",
     "django.contrib.staticfiles",
+    "captcha",
     "mezzanine.boot",
     "mezzanine.conf",
     "mezzanine.core",
     "mezzanine.generic",
     "mezzanine.blog",
+    "mezzacaptcha",
     "mezzanine.forms",
     "mezzanine.pages",
     "mezzanine.galleries",
