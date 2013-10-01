@@ -290,6 +290,7 @@ class FrontPageItem(models.Model, AdminThumbMixin):
         format="Image", max_length=255, null=True, blank=True)
     admin_thumb_field = "featured_image"
     visible = models.NullBooleanField(null=True, default=True)
+    button_text = models.CharField(max_length=255, null=True, blank=True, default='Read More')
 
     def __unicode__(self):
         return self.title

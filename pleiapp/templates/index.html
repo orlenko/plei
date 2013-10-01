@@ -28,7 +28,7 @@
 			{% endif %}
 			<div class="featured-text-wrapper">
 				<div class="featured-text">{{item.text}}</div>
-	    		<div class="featured-button"><a href="{{item.url}}"><img src="/static/img/button-readmore.png" alt="Read More" /></a></div>
+	    		<div class="featured-button"><a href="{{item.url}}">{{item.button_text|default:'Read More'}}</a></div>
 	    	</div>
 	    </div>
 	    {% endfor %}

@@ -855,6 +855,23 @@ form div {
 	padding: 0;
 }
 
+.featured-item .featured-button {
+	text-align: center;
+}
+
+.featured-item .featured-button a  {
+	display: block;
+	padding-top: 5px;
+	height: 27px;
+	background: url(/static/img/button-readmore-blank.png) center top no-repeat;
+	margin-bottom: 10px;
+	font-size: 17px;
+	/*font-weight: bold;*/
+	color: white;
+	text-transform: uppercase;
+	text-decoration: none;
+}
+
 #header {
 	margin: 0;
 	/*background-image:url(/static/img/blue-stripe-bg.jpg);
