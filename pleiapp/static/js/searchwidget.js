@@ -1,0 +1,10 @@
+var el = getElementById('plei-search');
+var html = ('<div class="PLEI-orange-box" style="color: #000; font-family: ' + "'Open Sans'" + ', sans-serif; font-size: 16px; line-height: 1.5em;     background: #F15A23; width: 282px; height: 45px;">' + 
+    '<div class="PLEI-spacing" style="padding: 6px;">' + 
+    '<form method="get" class="PLEI-search-bar" action="http://plei.publiclegaled.bc.ca/search/" _lpchecked="1" style="display: block; background-color: #0099FF; margin: 0; width: 271px; height: 33px;">' + 
+    '<input type="hidden" name="type" value="" style=" font-size: 100%; overflow: visible; margin: 0; vertical-align: baseline; width: auto; padding: .3em .4em .15em;">' + 
+    '<input type="text" class="field" name="q" id="q" placeholder="SEARCH PLEI FOR NON-PROFITS" style="background-color: transparent; background-image: url(http://plei.publiclegaled.bc.ca/static/img/PLEI-main-form.png); background-position: left top; background-repeat: no-repeat; border: medium none; color: #000; text-transform: uppercase; font-size: 12px; height: 33px; padding: 0; text-align: center; width: 205px;">' + 
+    '<input type="submit" class="submit" name="submit" id="searchsubmit" value="" style="padding: .3em .4em .15em; background-color: transparent; background-image: url(http://plei.publiclegaled.bc.ca/static/img/search-plei.png), url(http://plei.publiclegaled.bc.ca/static/img/PLEI-main-button.png); background-position: center center, left top; background-repeat: no-repeat, no-repeat; border: medium none; cursor: pointer; float: right; height: 33px; text-align: center; width: 62px;">' + 
+    '</form> </div> </div>');
+el.innerHTML = html;
+
