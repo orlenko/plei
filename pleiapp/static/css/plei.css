@@ -100,7 +100,7 @@ body {
 	background-repeat:repeat-x;
 	color: #000;
 	font-family: 'Open Sans', sans-serif;
-	font-size: 14px;
+	font-size: 16px;
 	font-smoothing: antialiased;
 	line-height: 1.5em;
 	text-rendering: optimizeLegibility;
@@ -484,11 +484,11 @@ input[type='password'] {
 
 
 /* An ugly hack to make "share with us" form appear decent  */
-select#id_field_4, select#id_field_10 {
+select#id_field_4, select#id_field_10, select#id_field_19 {
 	display: none;
 }
 
-label[for=id_field_4], label[for=id_field_10] {
+label[for=id_field_4], label[for=id_field_10], label[for=id_field_19] {
 	font-size: 18px;
 	font-weight: normal;
 	margin-top: 20px;
@@ -880,8 +880,8 @@ form div {
 
 .featured-item .featured-button a  {
 	display: block;
-	padding-top: 5px;
-	height: 27px;
+	padding-top: 3px;
+	height: 29px;
 	background: url(/static/img/button-readmore-blank.png) center top no-repeat;
 	margin-bottom: 10px;
 	font-size: 17px;
@@ -1104,7 +1104,7 @@ footer .widget-wrapper {
 }
 #social-caption p {
 	font-size: 14px;
-    padding: 13px 0 2px 10px;
+    padding: 14px 0 2px 10px;
 }
 .center-widget {
 	text-align:center;
@@ -1127,6 +1127,20 @@ footer .widget-wrapper {
 	width:50%;
 	float:left;
 }
+
+.social-icon-caption {
+	padding: 4px 0;
+	width:100%;
+	float:left;
+	text-align:left;
+}
+.social-icon-caption img {
+	float:left;
+}
+.social-icon-caption p {
+	font-size:14px;
+}
+
 
 /* =Header
 -------------------------------------------------------------- */
@@ -1426,6 +1440,7 @@ footer .widget-wrapper {
 .widget-wrapper {
 	margin: 0 0 20px;
 	padding: 0 20px;
+	font-size:14px;
 }
 
 .widget-wrapper select,
@@ -2194,6 +2209,7 @@ ul.menu > li:hover {
 .featured-text {
 	color:#FFF;
 	font-size:18px;
+	line-height: 21px;
 	text-align:left;
 	padding: 16px 20px 0 20px;
 	margin: 0 0 16px 0;
@@ -2524,7 +2540,7 @@ BDO[DIR="rtl"] {
 /* =Responsive (Mobile) Design
 -------------------------------------------------------------- */
 
-@media screen and (max-width: 980px) {
+@media screen and (max-width: 1080px) {
 
 	body {}
 
@@ -2610,7 +2626,7 @@ BDO[DIR="rtl"] {
 
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 925px) {
 
 #Stage {
 	position: relative;
@@ -2655,7 +2671,7 @@ BDO[DIR="rtl"] {
 
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 765px) {
 
 	body {
 		background-image:url(/static/img/blue-stripe-bg.jpg);
@@ -2679,7 +2695,7 @@ BDO[DIR="rtl"] {
 	#logo {
 		float: none;
 		margin: 0;
-		width:300px;
+		width:100%;
 		text-align:center;
 	}
 	#logo img {
@@ -2692,14 +2708,25 @@ BDO[DIR="rtl"] {
 	}
 	.main-search-bar input[type="text"] {
 
-    width: 238px;
+    width: 228px;
 	}
 	#browse {
 		height:0;
 		width:0;
 		overflow:hidden;
 	}
+	.main-search-bar form {
 
+	
+	width:300px;
+	background: url(/static/img/main-form-bg.png) bottom right no-repeat; 
+	}
+	#Stage, #animation {
+	position: static;
+	width:0 !important;
+	height:0 !important;
+	visibility:hidden !important;
+	}
 	#featured-controls {
 	margin-left:2%;
 	width:98%;
@@ -2772,8 +2799,8 @@ BDO[DIR="rtl"] {
 		background-color: #F15A23;
 		clear: both;
 		margin: 0 auto;
-		width:300px;
-		margin-bottom:20px;
+		width:100%;
+		margin-bottom:10px;
 	}
 
 	.js .main-nav .menu {
@@ -2927,12 +2954,12 @@ BDO[DIR="rtl"] {
 
 	#footer-nav {
 		background-color:#F15A23;
-		padding-top:10px;
-		padding-bottom:10px;
+		padding: 4px 0;
 	}
 
 	#footer-nav ul, #footer-nav ol  {
 		margin:0;
+		padding: 10px;
 	}
 	footer {
 		background:none;
@@ -2968,6 +2995,31 @@ BDO[DIR="rtl"] {
 		text-align:center;
 		float:none;
 		width:auto;
+	}
+		.reveal-modal {
+		left:0%;
+		margin-left:0;
+		width: auto;
+
+	}
+	.reveal-message img {
+		margin-bottom:30px;	
+	}
+	.reveal-modal h1 {
+		font-size:18px;
+	}
+	.reveal-modal p {
+		font-size:12px;
+	}
+	.reveal-modal h1 {
+		font-size:18px;
+	}
+	
+	.reveal-buttons {
+    	margin-top: 15px;
+	}
+	.reveal-buttons img {
+		padding: 4px;
 	}
 }
 

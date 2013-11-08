@@ -1,4 +1,4 @@
-var el = getElementById('plei-search');
+var el = document.getElementById('plei-search');
 var html = ('<div class="PLEI-orange-box" style="color: #000; font-family: ' + "'Open Sans'" + ', sans-serif; font-size: 16px; line-height: 1.5em;     background: #F15A23; width: 282px; height: 45px;">' + 
     '<div class="PLEI-spacing" style="padding: 6px;">' + 
     '<form method="get" class="PLEI-search-bar" action="http://plei.publiclegaled.bc.ca/search/" _lpchecked="1" style="display: block; background-color: #0099FF; margin: 0; width: 271px; height: 33px;">' + 

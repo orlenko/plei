@@ -13,13 +13,13 @@ $(function() {$('.middle :input:visible:enabled:first').focus();});
 {% block breadcrumb_menu %}{% endblock %}
 
 {% block main %}
-<div id="wrapper" class="clearfix">
+<div id="wrapper" class="clearfix blue-page">
 	<section id="content-full" class="grid col-620">
 		<div class="breadcrumb-list">
 			{% plei_resource_breadcrumbs page %}
 		</div>
 		<div class="page">
-			<h1 class="page-icon-{{page.item_type|lower}}">{{page.title}}</h1>
+			<h1 class="page-icon-plei">{{page.title}}</h1>
 
 {% if request.GET.sent %}
     {% editable page.form.response %}

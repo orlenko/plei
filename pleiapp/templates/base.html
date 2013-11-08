@@ -18,6 +18,8 @@
 	<!-- Magnific Popup core CSS file -->
 	<link rel="stylesheet" href="{% static "js/magnific-popup/magnific-popup.css" %}" />
 	<link rel="stylesheet" href="{% static "css/plei.css" %}" />
+    <link rel="stylesheet" href="{% static "css/popup.css" %}" />
+
 	{% block extra_css %}{% endblock %}
 {% endcompress %}
 
@@ -31,10 +33,25 @@
 	<script src="{% static "js/jquery.cycle2.carousel.min.js" %}"></script>
 	<script src="{% static "js/magnific-popup/jquery.magnific-popup.min.js" %}"></script>
 	<script src="{% static "js/plei.js" %}"></script>
+    <script src="{% static "js/popup/jquery.cookie.js" %}"></script>
+    <script src="{% static "js/popup/jquery.reveal.js" %}"></script>
 {% block extra_js %}{% endblock %}
 {% endcompress %}
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,300italic,700,700italic' rel='stylesheet' type='text/css'>
 {% block extra_head %}{% endblock %}
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-4834957-3', 'publiclegaled.bc.ca');
+  ga('send', 'pageview');
+
+</script>
+
+
 </head>
 
 <body id="{% block body_id %}body{% endblock %}">
@@ -109,27 +126,42 @@
 							</div>
 							<div class="textwidget">
 
-								<div id="social-icon">
-									<a href="https://twitter.com/PLSBC" target="_blank"><img src="/static/img/social-media-icon-tw.png" alt="Our Twitter Page" /></a>
-									<a href="https://www.facebook.com/peopleslawschool" target="_blank"><img src="/static/img/social-media-icon-fb.png" alt="Our Facebook Page" /></a>
-									<a href="http://www.linkedin.com/company/2024453?trk=tyah" target="_blank"><img src="/static/img/social-media-icon-li.png" alt="Our LinkedIn Page" /></a>
-									<a href="http://www.youtube.com/user/plsbc" target="_blank"><img src="/static/img/social-media-icon-yt.png" alt="Our You Tube Page" /></a>
-								</div>
+								
 
-								<div id="social-caption">
-									<p>
-										Let’s Tweet on the Twitterverse!
-									</p>
-									<p>
-										We’re always around for a face to face!
-									</p>
-									<p>
-										To link or not to link - no question - we’re linked!
-									</p>
-									<p>
-										Our channel’s up 24 hours a day, 7 days a week!
-									</p>
-								</div>
+
+
+
+
+
+<div class="social-icon-caption"> 
+                  <a href="https://twitter.com/PLSBC" target="_blank"><img src="http://www.publiclegaled.bc.ca/wp-content/themes/responsive-pls/images/social-media-icon-tw.png" alt="Our Twitter Page" /></a>
+                  
+                  <p>Let’s Tweet on the Twitterverse!</p>
+                  
+                  </div>
+                  
+                  
+<div class="social-icon-caption">                  
+                  <a href="https://www.facebook.com/peopleslawschool" target="_blank"><img src="http://www.publiclegaled.bc.ca/wp-content/themes/responsive-pls/images/social-media-icon-fb.png" alt="Our Facebook Page" /></a>
+                  
+                  <p>We’re always around for a face to face!</p>
+                  
+                  </div>
+                  
+ <div class="social-icon-caption">                 
+                  <a href="http://www.linkedin.com/company/2024453?trk=tyah" target="_blank"><img src="http://www.publiclegaled.bc.ca/wp-content/themes/responsive-pls/images/social-media-icon-li.png" alt="Our LinkedIn Page" /></a>
+                  
+                 <p>To link or not to link - no question - we’re linked!</p>
+                  
+                  </div>
+                  
+ <div class="social-icon-caption">                 
+                  <a href="http://www.youtube.com/user/plsbc" target="_blank"><img src="http://www.publiclegaled.bc.ca/wp-content/themes/responsive-pls/images/social-media-icon-yt.png" alt="Our You Tube Page" /></a>
+                  
+                  <p>Our channel’s up 24 hours a day, 7 days a week!</p>
+                  
+                  </div>
+
 
 							</div>
 
@@ -176,13 +208,13 @@
 
 								<div id="getinvolved-caption">
 									<p>
-										Share you ideas on how to improve the development and distribution of PLEI in BC.
+										Share your ideas! Help improve the development & distribution of PLEI in BC. 
 									</p>
 									<p>
 										<a href="http://www.publiclegaled.bc.ca/volunteer"><img src="/static/img/footer-buttons-volunteer.png" alt="Click to Volunteer" /></a>
 									</p>
 									<p>
-										Thank you for supporting us so we can continue to provide accessible and plain language PLEI to the people of BC.
+										Thank you for helping make plain language PLEI accessible in BC.
 									</p>
 									<p>
 										<a href="http://www.publiclegaled.bc.ca/donate"><img src="/static/img/footer-buttons-donate.png" alt="Click to Donate" /></a>
@@ -217,6 +249,55 @@
 
 {% include "includes/footer_scripts.html" %}
 
-<script src="http://www.surveymonkey.com/jsPop.aspx?sm=TS_2buJbmBxC9uNtaXfl7tBQ_3d_3d"> </script>
+<!-- Popup Survey -->
+ <script type="text/javascript">
+	
+	$(document).ready(function() {
+		if($.cookie("rtc")==null) {
+		setTimeout(function(){
+		$('#myModal').reveal();
+		}, 1000);
+		}
+		// Use 'on' or 'bind'
+		// 'live' is not longer used since jQuery 1.9
+		$(".close-reveal-modal").on("click", function () {
+			console.log("x button");
+		$.cookie("rtc", 'no-show', { expires: 5, path: '/' });
+		});
+		$(".modal-control").on("click", function() {
+		var id = $(this).attr("id");
+		if(id === "survey-btn") { // Does not popup for 2 weeks
+		$.cookie("rtc", "no-show", { expires: 30, path: '/' });
+		} else if(id === "not-now-btn") { // Does not popup for 48 hours
+		$.cookie("rtc","no-show", { expires: 1, path: '/' });
+		} else if(id === "dont-show-btn") { // "never" expires
+		$.cookie("rtc", "no-show", {expires: 30, path: '/' });
+		}
+		$("#myModal").trigger("reveal:close");
+		});
+});
+	
+    </script>
+
+
+
+<div id="myModal" class="reveal-modal">
+			<div class="reveal-message">
+            <img src="/static/img/popup/popup-logo-plei.png" alt="PLS Logo" />
+			<h1>EVALUATE OUR SITE</h1>
+			<p>Please take the time to let us know about your experience.</p>
+			</div>
+		<div class="reveal-buttons">
+        <a href="http://www.surveymonkey.com/s/S9T2NGV" target="_blank" class="modal-control" id="survey-btn"><img src="/static/img/popup/go-o.png" alt="Got to Survey" /></a>
+		<a href="#" class="modal-control" id="not-now-btn"><img src="/static/img/popup/maybe-o.png" alt="Maybe Later" /></a>
+		<a href="#" class="modal-control" id="dont-show-btn"><img src="/static/img/popup/no-thanks-o.png" alt="No Thanks" /></a>
+			</div>
+		<a class="close-reveal-modal">&#215;</a>
+	  </div>
+<!-- End of Popup Survey -->
+
+
+
+
 </body>
 </html>
