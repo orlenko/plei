@@ -8,6 +8,10 @@ from django.utils.translation import ugettext_lazy as _
 
 from mezzanine.conf import settings
 from mezzanine.core.models import Orderable
+from django.template.loader import render_to_string
+from django.forms.util import flatatt
+from django.utils.html import conditional_escape
+from bleach.encoding import force_unicode
 
 
 class Html5Mixin(object):
@@ -53,6 +57,25 @@ class TinyMceWidget(forms.Textarea):
     def __init__(self, *args, **kwargs):
         super(TinyMceWidget, self).__init__(*args, **kwargs)
         self.attrs["class"] = "mceEditor"
+
+
+class CKEditorWidget(forms.Textarea):
+    class Media:
+        js = (
+            settings.STATIC_URL + 'ckeditor/ckeditor.js',
+            settings.STATIC_URL + 'ckeditor_admin_filebrowser.js',
+        )
+
+    def render(self, name, value, attrs=None):
+        attrs = attrs or {}
+        final_attrs = self.build_attrs(attrs, name=name)
+        return mark_safe(render_to_string('ckeditor/widget.html', {
+            'final_attrs': flatatt(final_attrs),
+            'value': conditional_escape(force_unicode(value)),
+            'id': final_attrs['id']
+        }))
+
+
 
 
 class OrderWidget(forms.HiddenInput):
